@@ -1,0 +1,37 @@
+{
+  "name": "visual-core",
+  "version": "0.0.1",
+  "description": "可视化核心",
+  "main": "dist/index.js",
+  "repository": "git@git.horsecoder.com:visual-core/visual-core.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lint": "elint lint \"(src|demo)/**/*.(js|jsx|ts|tsx)\" --prettier",
+    "lint:fix": "yarn lint --fix",
+    "lint:commit": "yarn lint && elint lint commit"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "npm run lint:commit"
+    }
+  },
+  "devDependencies": {
+    "@commitlint/config-angular": "^12.0.1",
+    "@types/react": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "elint": "^2.0.1",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^4.3.8",
+    "react": "^16.14.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.2"
+  },
+  "peerDependencies": {
+    "react": "^16.14.0"
+  }
+}
