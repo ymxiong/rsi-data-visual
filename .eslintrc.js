@@ -32,6 +32,7 @@ module.exports = {
     'react/sort-comp': 0,
     'react/react-in-jsx-scope': 0,
     'react/jsx-one-expression-per-line': 0,
+    'react/self-closing-comp': 0,
     'generator-star-spacing': 0,
     'function-paren-newline': 0,
     'import/no-unresolved': 0,
