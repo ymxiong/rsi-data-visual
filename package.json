@@ -3,13 +3,21 @@
   "version": "0.0.1",
   "description": "可视化核心",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "repository": "git@git.horsecoder.com:visual-core/visual-core.git",
   "license": "MIT",
   "private": true,
   "scripts": {
     "lint": "elint lint \"(src|demo)/**/*.(js|jsx|ts|tsx)\" --prettier",
     "lint:fix": "yarn lint --fix",
-    "lint:commit": "yarn lint && elint lint commit"
+    "lint:commit": "yarn lint && elint lint commit",
+    "build": "yarn clean:lib && yarn build:lib",
+    "build:lib": "rollup -c",
+    "clean:lib": "rimraf dist"
   },
   "husky": {
     "hooks": {
@@ -18,6 +26,7 @@
   },
   "devDependencies": {
     "@commitlint/config-angular": "^12.0.1",
+    "@rollup/plugin-json": "^4.1.0",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
     "@types/styled-components": "^5.1.7",
@@ -32,6 +41,11 @@
     "react": "^16.14.0",
     "react-dom": "^17.0.1",
     "rimraf": "^3.0.2",
+    "rollup": "^2.40.0",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "tslib": "^2.1.0",
     "typescript": "^4.2.2"
   },
   "peerDependencies": {
