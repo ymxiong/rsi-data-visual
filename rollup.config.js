@@ -1,6 +1,8 @@
 import { resolve } from 'path';
 import json from '@rollup/plugin-json';
 import ts from 'rollup-plugin-typescript2';
+import { babel } from '@rollup/plugin-babel';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 import { terser } from 'rollup-plugin-terser';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 
@@ -23,10 +25,8 @@ const configs = ['cjs', 'esm'].map((format, index) => {
       freeze: false,
       esModule: true,
       sourcemap: true,
-      globals: {
-        react: 'React',
-      },
     },
+    external: ['react', 'styled-components'],
     plugins: [
       json({
         namedExports: false,
@@ -45,6 +45,23 @@ const configs = ['cjs', 'esm'].map((format, index) => {
           },
           exclude: ['**/test', 'demo'],
         },
+      }),
+      babel({
+        extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx'],
+        babelHelpers: 'bundled',
+        presets: [
+          [
+            '@babel/preset-env',
+            {
+              modules: false,
+              targets: {
+                browsers: '> 1%, IE 11, not op_mini all, not dead',
+              },
+              useBuiltIns: 'usage',
+              corejs: { version: '3.9' },
+            },
+          ],
+        ],
       }),
       sourceMaps(),
       terser({
