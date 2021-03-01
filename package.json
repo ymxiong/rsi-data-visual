@@ -12,12 +12,16 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "start": "parcel demo/index.html",
     "lint": "elint lint \"(src|demo)/**/*.(js|jsx|ts|tsx)\" --prettier",
     "lint:fix": "yarn lint --fix",
     "lint:commit": "yarn lint && elint lint commit",
     "build": "yarn clean:lib && yarn build:lib",
     "build:lib": "rollup -c",
-    "clean:lib": "rimraf dist"
+    "clean": "yarn clean:demo && yarn clean:lib",
+    "clean:demo": "rimraf .cache",
+    "clean:lib": "rimraf dist",
+    "prepublishOnly": "yarn build"
   },
   "husky": {
     "hooks": {
@@ -43,6 +47,7 @@
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.8",
+    "parcel": "^1.12.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",

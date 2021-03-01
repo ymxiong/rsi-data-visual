@@ -32,5 +32,6 @@ screenshot
 .firebase
 .eslintcache
 
+.cache
 build
 dist
