@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import Canvas from './Canvas';
 import { visualViewTemplate } from '../entity/VisualView';
-import { CustomComponents } from 'src/diagram/Diagram';
+import { CustomComponents } from '../diagram/Diagram';
 
 type CanvasContainerProps = {
   customComponents: CustomComponents;

@@ -1,3 +1,3 @@
-import DemoComponent from './DemoComponent';
+import App from './App';
 
-export default DemoComponent;
+export default App;

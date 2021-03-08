@@ -1,10 +1,9 @@
-import React, { ComponentType, FunctionComponentElement } from 'react';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import reducer from './reducer';
+import React, { ComponentType, FunctionComponentElement, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Store } from '../store';
+import { updateId } from '../store/diagram/actions';
+// import reducer from './reducer';
 import CanvasContainer from '../canvas/CanvasContainer';
-
-export const store = createStore(reducer);
 
 export type CustomComponents = {
   [type: string]: {
@@ -18,10 +17,18 @@ export type CustomComponents = {
 
 type DiagramProps = { customComponents: CustomComponents };
 
-const Diagram = (props: DiagramProps) => (
-  <Provider store={store}>
-    <CanvasContainer customComponents={props.customComponents} />
-  </Provider>
-);
+const Diagram = (props: DiagramProps) => {
+  const id = useSelector((state: Store) => state.diagram.id);
+
+  const dispatch = useDispatch();
+
+  const handleUpdate = () => {
+    dispatch(updateId('test'));
+  };
+
+  // return <div onClick={handleUpdate}>{`当前id:${id}`}</div>;
+
+  return <CanvasContainer customComponents={props.customComponents} />;
+};
 
 export default Diagram;

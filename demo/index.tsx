@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Diagram from '../src/diagram/Diagram';
+import Diagram from '../src';
 import taskIcon from './icon';
 
 const App = () => (
