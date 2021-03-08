@@ -62,6 +62,19 @@ module.exports = {
     // 'operator-linebreak': 0,
     // 'eslint-comments/no-unlimited-disable': 0,
     'no-param-reassign': 2,
+    '@typescript-eslint/comma-dangle': [
+      'error',
+      {
+        arrays: 'always-multiline',
+        objects: 'always-multiline',
+        imports: 'always-multiline',
+        exports: 'always-multiline',
+        functions: 'always-multiline',
+        enums: 'always-multiline',
+        generics: 'always-multiline',
+        tuples: 'always-multiline',
+      },
+    ],
     // 'space-before-function-paren': 0,
   },
   settings: {
