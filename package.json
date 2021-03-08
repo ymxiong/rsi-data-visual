@@ -34,8 +34,10 @@
     "@commitlint/config-angular": "^12.0.1",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-json": "^4.1.0",
+    "@types/antd": "^1.0.0",
     "@types/react": "^16.14.4",
     "@types/react-dom": "^16.9.11",
+    "@types/react-redux": "^7.1.16",
     "@types/styled-components": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
@@ -48,7 +50,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^4.3.8",
     "parcel": "^1.12.4",
-    "react": "^16.14.0",
+    "react": "^16.8.3 || ^17",
     "react-dom": "^16.14.0",
     "rimraf": "^3.0.2",
     "rollup": "^2.40.0",
@@ -62,8 +64,12 @@
     "react": "^16.14.0"
   },
   "dependencies": {
+    "demo": "^0.1.10",
     "mobx": "^6.1.7",
     "mobx-react-lite": "^3.2.0",
+    "react-redux": "^7.2.2",
+    "redux": "^2.0.0 || ^3.0.0 || ^4.0.0-0",
+    "src": "^1.1.2",
     "styled-components": "^5.2.1"
   }
 }
