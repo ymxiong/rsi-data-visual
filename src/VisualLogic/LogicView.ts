@@ -1,16 +1,16 @@
-import LogicComponent from './LogicComponent';
+import LogicElement from './LogicElement';
 import LogicLink from './LogicLink';
 
 type LogicView = {
   id: string;
-  components: LogicComponent[];
+  elements: LogicElement[];
   links: LogicLink[];
 };
 
 const logicViewTemplate = (): LogicView => {
   return {
     id: '',
-    components: [
+    elements: [
       {
         id: '1',
         name: 'test1',

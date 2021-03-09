@@ -1,8 +1,5 @@
 import { Reducer } from 'redux';
-import {
-  LogicView,
-  logicViewTemplate,
-} from '../../../VisualLogic/LogicView/LogicView';
+import { LogicView, logicViewTemplate } from '../../../VisualLogic/LogicView';
 import { CanvasAction } from './types';
 
 export interface CanvasState {

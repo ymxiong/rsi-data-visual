@@ -1,4 +1,4 @@
-import { LogicView } from '../../../VisualLogic/LogicView/LogicView';
+import { LogicView } from '../../../VisualLogic/LogicView';
 import { ActionShape } from '..';
 
 export type CanvasViewRefeshAction = ActionShape<

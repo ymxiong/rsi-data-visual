@@ -1,63 +1,20 @@
 import React, { ComponentType, ReactNode } from 'react';
-import LogicComponent from '../../VisualLogic/LogicView/LogicComponent';
+import LogicElement from '../../VisualLogic/LogicElement';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import styled from 'styled-components';
 import { ViewModeProps } from 'demo/Task/ViewMode';
+import { Element } from './components/Element';
 
-const ElementStyle = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  user-select: none;
-`;
-
-type ElementViewProps = {
-  component: LogicComponent;
-  children: ReactNode;
-  onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onMouseMove: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onMouseLeave: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-};
-
-const ElementView = (props: ElementViewProps) => {
-  return (
-    <ElementStyle
-      style={{
-        transform: `translate(${props.component.x}px, ${props.component.y}px)`,
-        cursor: 'pointer',
-      }}
-    >
-      <div
-        onMouseUp={props.onMouseUp}
-        onMouseDown={props.onMouseDown}
-        onMouseMove={props.onMouseMove}
-        onMouseLeave={props.onMouseLeave}
-        role="presentation"
-      >
-        {props.children}
-      </div>
-      {/* {props.isSelected && <ContextMenu actions={contextMenuActions(props)} />} */}
-    </ElementStyle>
-  );
-};
-
-export type ElementViewContainerProps = {
+export type ElementContainerProps = {
   id: string;
-  component: LogicComponent;
+  component: LogicElement;
 };
 
 export const ElementHOC = (
   SubComponent: ComponentType<ViewModeProps>,
-): React.FC<ElementViewContainerProps> => {
-  const ComponentViewContainer: React.FC<ElementViewContainerProps> = (
-    props,
-  ) => {
+): React.FC<ElementContainerProps> => {
+  const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     let moveFlag = false;
 
     const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -90,7 +47,7 @@ export const ElementHOC = (
     };
 
     return (
-      <ElementView
+      <Element
         key={props.id}
         component={props.component}
         onMouseDown={onMouseDown}
@@ -99,8 +56,8 @@ export const ElementHOC = (
         onMouseLeave={onMouseLeave}
       >
         <SubComponent {...props} />
-      </ElementView>
+      </Element>
     );
   };
-  return ComponentViewContainer;
+  return ElementContainer;
 };

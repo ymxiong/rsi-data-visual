@@ -1,4 +1,4 @@
-type LogicComponent = {
+type LogicElement = {
   id: string;
   name: string;
   color: string;
@@ -8,4 +8,4 @@ type LogicComponent = {
   y: number;
 };
 
-export default LogicComponent;
+export default LogicElement;

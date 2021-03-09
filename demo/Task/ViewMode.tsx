@@ -1,5 +1,5 @@
 import React from 'react';
-import LogicComponent from '../../src/VisualLogic/LogicView/LogicComponent';
+import LogicElement from '../../src/VisualLogic/LogicElement';
 import ModelFooter from './ModelFooter';
 import { ModelTitle } from './ModelTitle';
 
@@ -15,7 +15,7 @@ const modelStyle = {
 };
 
 export interface ViewModeProps {
-  component: LogicComponent;
+  component: LogicElement;
 }
 
 const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {

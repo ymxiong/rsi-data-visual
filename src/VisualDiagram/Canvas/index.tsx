@@ -45,9 +45,9 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
   };
 
   const testMoveComponent = () => {
-    console.log('c0', view.components[0]);
-    const y = view.components[0].y + 100;
-    view.components[0].y = y;
+    console.log('c0', view.elements[0]);
+    const y = view.elements[0].y + 100;
+    view.elements[0].y = y;
     dispatch(refreshView(view));
   };
 

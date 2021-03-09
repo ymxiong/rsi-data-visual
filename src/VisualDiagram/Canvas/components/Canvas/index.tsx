@@ -4,8 +4,8 @@ import { Store } from '../../../store';
 import { CanvasArtboard } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
 import { SvgLand } from '../SvgLand';
-import { ElementHOC, ElementViewContainerProps } from '../../../Element';
-import LogicComponent from '../../../../VisualLogic/LogicView/LogicComponent';
+import { ElementHOC, ElementContainerProps } from '../../../Element';
+import LogicElement from '../../../../VisualLogic/LogicElement';
 import ViewMode from '../../../../../demo/Task/ViewMode';
 
 type CanvasProps = {
@@ -29,8 +29,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       >
         {/* link drawer */}
         <SvgLand width="100%" height="100%"></SvgLand>
-        {view.components.map((component: LogicComponent) => {
-          const vProps: ElementViewContainerProps = {
+        {view.elements.map((component: LogicElement) => {
+          const vProps: ElementContainerProps = {
             id: component.id,
             component,
           };
