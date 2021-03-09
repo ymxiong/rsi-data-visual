@@ -1,4 +1,4 @@
-type LogicElement = {
+type ElementState = {
   id: string;
   name: string;
   color: string;
@@ -8,4 +8,4 @@ type LogicElement = {
   y: number;
 };
 
-export default LogicElement;
+export default ElementState;

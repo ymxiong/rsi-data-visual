@@ -1,8 +1,8 @@
-type LogicLink = {
+type LinkState = {
   id: string;
   name: string;
   color: string;
   points: [];
 };
 
-export default LogicLink;
+export default LinkState;

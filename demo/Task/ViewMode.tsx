@@ -1,5 +1,5 @@
 import React from 'react';
-import LogicElement from '../../src/VisualLogic/LogicElement';
+import ElementView from '../../src/VisualDiagram/logic/element/ElementView';
 import ModelFooter from './ModelFooter';
 import { ModelTitle } from './ModelTitle';
 
@@ -15,7 +15,7 @@ const modelStyle = {
 };
 
 export interface ViewModeProps {
-  component: LogicElement;
+  element: ElementView;
 }
 
 const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
@@ -33,13 +33,16 @@ const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
 
   return (
     <ul
-      style={computeStyle(props.component.width, props.component.height)}
+      style={computeStyle(
+        props.element.state.width,
+        props.element.state.height,
+      )}
       draggable="false"
     >
-      {props.component.name && (
+      {props.element.state.name && (
         <ModelTitle
-          modelTitle={props.component.name}
-          color={props.component.color}
+          modelTitle={props.element.state.name}
+          color={props.element.state.color}
         />
       )}
       {/* {Body} */}

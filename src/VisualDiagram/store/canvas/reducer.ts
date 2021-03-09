@@ -1,13 +1,14 @@
 import { Reducer } from 'redux';
-import { LogicView, logicViewTemplate } from '../../../VisualLogic/LogicView';
+import ElementView from 'src/VisualDiagram/logic/element/ElementView';
+import { View, viewTemplate } from '../../logic/View';
 import { CanvasAction } from './types';
 
 export interface CanvasState {
-  view: LogicView;
+  view: View;
 }
 
 const initialCanvasState: CanvasState = {
-  view: logicViewTemplate(),
+  view: viewTemplate(),
 };
 
 const canvasReducer: Reducer<CanvasState, CanvasAction> = (
@@ -19,6 +20,31 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       return {
         ...state,
         view: { ...action.payload },
+      };
+    }
+    case 'canvas/element/refresh': {
+      const elements: ElementView[] = state.view.elements.map(
+        (element: ElementView): ElementView => {
+          if (element.id === action.payload.id) {
+            return {
+              ...element,
+              ...action.payload,
+            };
+          }
+          return element;
+        },
+      );
+      return {
+        ...state,
+        view: {
+          ...state.view,
+          elements,
+        },
+      };
+    }
+    case 'canvas/link/refresh': {
+      return {
+        ...state,
       };
     }
     default: {

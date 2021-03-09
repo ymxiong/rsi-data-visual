@@ -1,9 +1,9 @@
 import React, { ComponentType, ReactNode } from 'react';
-import LogicElement from '../../../../VisualLogic/LogicElement';
 import { ElementStyle } from '../ElementStyle';
+import ElementView from '../../../logic/element/ElementView';
 
 type ElementProps = {
-  component: LogicElement;
+  element: ElementView;
   children: ReactNode;
   onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -15,7 +15,7 @@ export const Element = (props: ElementProps) => {
   return (
     <ElementStyle
       style={{
-        transform: `translate(${props.component.x}px, ${props.component.y}px)`,
+        transform: `translate(${props.element.state.x}px, ${props.element.state.y}px)`,
         cursor: 'pointer',
       }}
     >
