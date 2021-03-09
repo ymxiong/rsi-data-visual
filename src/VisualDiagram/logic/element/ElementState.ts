@@ -6,6 +6,7 @@ type ElementState = {
   height: number;
   x: number;
   y: number;
+  select: boolean;
 };
 
 export default ElementState;

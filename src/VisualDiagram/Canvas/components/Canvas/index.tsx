@@ -6,7 +6,8 @@ import CanvasViewport from '../CanvasViewport';
 import { SvgLand } from '../SvgLand';
 import { ElementHOC, ElementContainerProps } from '../../../Element';
 import ViewMode from '../../../../../demo/Task/ViewMode';
-import ElementView from '../../../logic/element/ElementView';
+import { ElementView } from '../../../logic/element/ElementView';
+import { keys, values } from 'lodash';
 
 type CanvasProps = {
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -29,9 +30,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       >
         {/* link drawer */}
         <SvgLand width="100%" height="100%"></SvgLand>
-        {view.elements.map((element: ElementView) => {
+
+        {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
-            id: element.id,
             element,
           };
           return ElementHOC(ViewMode)(vProps);

@@ -1,14 +1,12 @@
 import React, { ComponentType, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
-import { refreshElement } from '../store/canvas/actions';
-import styled from 'styled-components';
+import { refreshElement, selectElement } from '../store/canvas/actions';
 import { ViewModeProps } from 'demo/Task/ViewMode';
 import { Element } from './components/Element';
-import ElementView from '../logic/element/ElementView';
+import { ElementView } from '../logic/element/ElementView';
 
 export type ElementContainerProps = {
-  id: string;
   element: ElementView;
 };
 
@@ -16,44 +14,47 @@ export const ElementHOC = (
   SubComponent: ComponentType<ViewModeProps>,
 ): React.FC<ElementContainerProps> => {
   const ElementContainer: React.FC<ElementContainerProps> = (props) => {
-    const dispatch = useDispatch();
+    const element = useSelector(
+      (state: Store) => state.canvas.view.elements[props.element.id],
+    );
 
-    let moveFlag = false;
+    const dispatch = useDispatch();
 
     const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       ev.stopPropagation();
-      // console.log('entity down');
-      moveFlag = true;
+      // 按下鼠标，选择元素
+      dispatch(selectElement(element.id, true));
     };
 
     const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       ev.stopPropagation();
-      if (moveFlag) {
-        // console.log('entity up');
-        moveFlag = false;
-      }
+      // 松开鼠标，释放铆钉状态，依旧选择元素
+      dispatch(refreshElement({ ...element, anchored: false }));
     };
 
     const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       ev.stopPropagation();
-      if (moveFlag) {
-        // console.log('entity move', ev.clientX, ev.clientY);
-      }
     };
 
     const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       ev.stopPropagation();
-      if (moveFlag) {
-        moveFlag = false;
-        dispatch(
-          refreshElement({ ...props.element, x: ev.clientX, y: ev.clientY }),
-        );
+      if (element.anchored) {
+        if (ev.buttons !== 1) {
+          // 如果被铆钉但鼠标已松开，释放铆钉
+          dispatch(refreshElement({ ...element, anchored: false }));
+        } else {
+          // 如果被铆钉，计算新的x，y值
+          const refreshView = { ...element };
+          refreshView.state.x = ev.clientX - element.state.width / 2;
+          refreshView.state.y = ev.clientY - element.state.height / 2;
+          dispatch(refreshElement(refreshView));
+        }
       }
     };
 
     return (
       <Element
-        key={props.id}
+        key={props.element.id}
         element={props.element}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}

@@ -1,6 +1,6 @@
 import React, { ComponentType, ReactNode } from 'react';
 import { ElementStyle } from '../ElementStyle';
-import ElementView from '../../../logic/element/ElementView';
+import { ElementView } from '../../../logic/element/ElementView';
 
 type ElementProps = {
   element: ElementView;

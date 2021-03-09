@@ -1,5 +1,5 @@
 import React from 'react';
-import ElementView from '../../src/VisualDiagram/logic/element/ElementView';
+import { ElementView } from '../../src/VisualDiagram/logic/element/ElementView';
 import ModelFooter from './ModelFooter';
 import { ModelTitle } from './ModelTitle';
 

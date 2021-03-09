@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import Canvas from './components/Canvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
-import { refreshView } from '../store/canvas/actions';
+import { refreshView, selectElement } from '../store/canvas/actions';
 import { CustomComponents } from '..';
+import { keys, values } from 'lodash';
 
 type CanvasContainerProps = {
   customComponents: CustomComponents;
@@ -45,9 +46,9 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
   };
 
   const testMoveComponent = () => {
-    console.log('c0', view.elements[0]);
-    const y = view.elements[0].state.y + 100;
-    view.elements[0].state.y = y;
+    const element = values(view.elements)[0];
+    console.log('element', element);
+    element.state.y += 100;
     dispatch(refreshView(view));
   };
 
@@ -75,32 +76,16 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
     }
   };
 
-  let moveFlag = false;
-
-  const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log('down');
-    moveFlag = true;
-  };
+  const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
 
   const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (moveFlag) {
-      console.log('up');
-      moveFlag = false;
-    }
+    dispatch(selectElement('', false));
   };
 
-  const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (moveFlag) {
-      console.log('move', ev.clientX, ev.clientY);
-    }
-  };
+  const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
 
   const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (moveFlag) {
-      console.log('leave');
-      moveFlag = false;
-    }
-    // this.props.anchorCanvas(true);
+    dispatch(selectElement('', false));
   };
 
   useEffect(() => {

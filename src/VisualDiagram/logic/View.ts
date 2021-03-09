@@ -1,64 +1,33 @@
-import ElementView from './element/ElementView';
-import LinkView from './link/LinkView';
+import ElementState from './element/ElementState';
+import { buildFromElementState, ElementView } from './element/ElementView';
+import LinkState from './link/LinkState';
+import { buildFromLinkState, LinkView } from './link/LinkView';
+import { viewStateTemplate } from './ViewState';
 
 type View = {
   id: string;
-  elements: ElementView[];
-  links: LinkView[];
+  elements: {
+    [id: string]: ElementView;
+  };
+  links: {
+    [id: string]: LinkView;
+  };
+  selectedElementId?: string;
 };
 
 const viewTemplate = (): View => {
+  const elements: { [id: string]: ElementView } = {};
+  const links: { [id: string]: LinkView } = {};
+  viewStateTemplate.elements.forEach((element: ElementState) => {
+    elements[element.id] = buildFromElementState(element);
+  });
+  viewStateTemplate.links.forEach((link: LinkState) => {
+    links[link.id] = buildFromLinkState(link);
+  });
   return {
     id: '',
-    elements: [
-      {
-        id: '1',
-        state: {
-          id: '1',
-          name: 'test1',
-          color: '#ff7875',
-          x: 100,
-          y: 100,
-          height: 100,
-          width: 100,
-        },
-      },
-      {
-        id: '2',
-        state: {
-          id: '2',
-          name: 'test2',
-          color: '#ffc53d',
-          x: 400,
-          y: 100,
-          height: 100,
-          width: 100,
-        },
-      },
-      {
-        id: '3',
-        state: {
-          id: '3',
-          name: 'test3',
-          color: '#95de64',
-          x: 700,
-          y: 100,
-          height: 100,
-          width: 100,
-        },
-      },
-    ],
-    links: [
-      {
-        id: 'link0',
-        state: {
-          id: 'link0',
-          name: 'test-link0',
-          color: '#95de64',
-          points: [],
-        },
-      },
-    ],
+    elements,
+    links,
   };
 };
 

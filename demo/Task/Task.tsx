@@ -1,15 +1,15 @@
 import React from 'react';
-import ElementLogic from '../../src/VisualLogic/ElementLogic';
+import { ElementView } from 'src/VisualDiagram/logic/element/ElementView';
 import ViewMode from './ViewMode';
 
 type TaskProps = {
-  component: ElementLogic;
+  element: ElementView;
 };
 
 const Task: React.FC<TaskProps> = (props: TaskProps) => {
   return (
     <div onDoubleClick={() => {}}>
-      <ViewMode component={props.component} />
+      <ViewMode element={props.element} />
     </div>
   );
 };

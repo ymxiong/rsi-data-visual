@@ -1,7 +1,7 @@
 import { CanvasAction } from './types';
 import { View } from '../../logic/View';
-import ElementView from 'src/VisualDiagram/logic/element/ElementView';
-import LinkView from 'src/VisualDiagram/logic/link/LinkView';
+import { ElementView } from '../../logic/element/ElementView';
+import { LinkView } from '../../logic/link/LinkView';
 
 export const refreshView = (view: View): CanvasAction => ({
   type: 'canvas/view/refresh',
@@ -11,6 +11,17 @@ export const refreshView = (view: View): CanvasAction => ({
 export const refreshElement = (element: ElementView): CanvasAction => ({
   type: 'canvas/element/refresh',
   payload: element,
+});
+
+export const selectElement = (
+  elementId: string,
+  selected: boolean,
+): CanvasAction => ({
+  type: 'canvas/element/select',
+  payload: {
+    elementId,
+    selected,
+  },
 });
 
 export const refreshLink = (link: LinkView): CanvasAction => ({

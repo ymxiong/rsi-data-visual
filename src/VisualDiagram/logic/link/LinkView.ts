@@ -5,4 +5,11 @@ type LinkView = {
   state: LinkState;
 };
 
-export default LinkView;
+function buildFromLinkState(state: LinkState): LinkView {
+  return {
+    id: state.id,
+    state,
+  };
+}
+
+export { LinkView, buildFromLinkState };
