@@ -1,9 +1,11 @@
 import React, { ComponentType, ReactNode } from 'react';
-import Component from '../entity/Component';
+import LogicComponent from '../../VisualLogic/LogicView/LogicComponent';
+import { useDispatch, useSelector } from 'react-redux';
+import { Store } from '../store';
 import styled from 'styled-components';
 import { ViewModeProps } from 'demo/Task/ViewMode';
 
-const ComponentStyle = styled.div`
+const ElementStyle = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -14,8 +16,8 @@ const ComponentStyle = styled.div`
   user-select: none;
 `;
 
-type ComponentViewProps = {
-  component: Component;
+type ElementViewProps = {
+  component: LogicComponent;
   children: ReactNode;
   onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -23,35 +25,37 @@ type ComponentViewProps = {
   onMouseLeave: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-const ComponentView = (props: ComponentViewProps) => (
-  <ComponentStyle
-    style={{
-      transform: `translate(${props.component.x}px, ${props.component.y}px)`,
-      cursor: 'pointer',
-    }}
-  >
-    <div
-      onMouseUp={props.onMouseUp}
-      onMouseDown={props.onMouseDown}
-      onMouseMove={props.onMouseMove}
-      onMouseLeave={props.onMouseLeave}
-      role="presentation"
+const ElementView = (props: ElementViewProps) => {
+  return (
+    <ElementStyle
+      style={{
+        transform: `translate(${props.component.x}px, ${props.component.y}px)`,
+        cursor: 'pointer',
+      }}
     >
-      {props.children}
-    </div>
-    {/* {props.isSelected && <ContextMenu actions={contextMenuActions(props)} />} */}
-  </ComponentStyle>
-);
-
-export type ComponentViewContainerProps = {
-  id: string;
-  component: Component;
+      <div
+        onMouseUp={props.onMouseUp}
+        onMouseDown={props.onMouseDown}
+        onMouseMove={props.onMouseMove}
+        onMouseLeave={props.onMouseLeave}
+        role="presentation"
+      >
+        {props.children}
+      </div>
+      {/* {props.isSelected && <ContextMenu actions={contextMenuActions(props)} />} */}
+    </ElementStyle>
+  );
 };
 
-export const ComponentHOC = (
+export type ElementViewContainerProps = {
+  id: string;
+  component: LogicComponent;
+};
+
+export const ElementHOC = (
   SubComponent: ComponentType<ViewModeProps>,
-): React.FC<ComponentViewContainerProps> => {
-  const ComponentViewContainer: React.FC<ComponentViewContainerProps> = (
+): React.FC<ElementViewContainerProps> => {
+  const ComponentViewContainer: React.FC<ElementViewContainerProps> = (
     props,
   ) => {
     let moveFlag = false;
@@ -86,7 +90,7 @@ export const ComponentHOC = (
     };
 
     return (
-      <ComponentView
+      <ElementView
         key={props.id}
         component={props.component}
         onMouseDown={onMouseDown}
@@ -95,7 +99,7 @@ export const ComponentHOC = (
         onMouseLeave={onMouseLeave}
       >
         <SubComponent {...props} />
-      </ComponentView>
+      </ElementView>
     );
   };
   return ComponentViewContainer;

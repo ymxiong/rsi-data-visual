@@ -5,7 +5,7 @@ const CanvasArtboard = styled.div.attrs((props) => {
   return {
     style: {
       transform: 'translate(0px, 0px) scale(1)',
-      width: '1000px',
+      width: '100%',
       height: '1000px',
     },
   };

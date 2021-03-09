@@ -1,9 +1,9 @@
 import React from 'react';
-import Component from '../../src/entity/Component';
+import LogicComponent from '../../src/VisualLogic/LogicView/LogicComponent';
 import ViewMode from './ViewMode';
 
 type TaskProps = {
-  component: Component;
+  component: LogicComponent;
 };
 
 const Task: React.FC<TaskProps> = (props: TaskProps) => {

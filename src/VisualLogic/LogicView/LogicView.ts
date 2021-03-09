@@ -1,13 +1,13 @@
-import Component from './Component';
-import Link from './Link';
+import LogicComponent from './LogicComponent';
+import LogicLink from './LogicLink';
 
-type VisualView = {
+type LogicView = {
   id: string;
-  components: Component[];
-  links: Link[];
+  components: LogicComponent[];
+  links: LogicLink[];
 };
 
-const visualViewTemplate = (): VisualView => {
+const logicViewTemplate = (): LogicView => {
   return {
     id: '',
     components: [
@@ -44,10 +44,10 @@ const visualViewTemplate = (): VisualView => {
         id: 'link0',
         name: 'test-link0',
         color: '#95de64',
-        points: {},
+        points: [],
       },
     ],
   };
 };
 
-export { VisualView, visualViewTemplate };
+export { LogicView, logicViewTemplate };

@@ -2,8 +2,12 @@ import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 import diagramReducer from './diagram/reducer';
+import canvasReducer from './canvas/reducer';
 
-const rootReducer = combineReducers({ diagram: diagramReducer });
+const rootReducer = combineReducers({
+  diagram: diagramReducer,
+  canvas: canvasReducer,
+});
 
 export function configureStore() {
   const composeEnhancers = composeWithDevTools({});

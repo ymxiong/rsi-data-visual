@@ -1,14 +1,14 @@
 import React, { useRef } from 'react';
 import { Provider } from 'react-redux';
-import Diagram from './diagram/Diagram';
-import { configureStore } from './store';
+import VisualDiagram from './VisualDiagram';
+import { configureStore } from './VisualDiagram/store';
 
 const App: React.FC = () => {
   const storeRef = useRef(configureStore());
 
   return (
     <Provider store={storeRef.current}>
-      <Diagram></Diagram>
+      <VisualDiagram></VisualDiagram>
     </Provider>
   );
 };

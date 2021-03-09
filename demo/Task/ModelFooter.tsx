@@ -25,32 +25,32 @@ const LiStyle = {
 const ModelFooter = (props: FooterProps): JSX.Element => {
   return (
     <li style={{ ...LiStyle }}>
-      <Tooltip title="添加">
-        <Button type="text" icon={<AppstoreAddOutlined />} />
-      </Tooltip>
-      <Tooltip title="链接">
-        <Button type="text" icon={<LinkOutlined />} />
-      </Tooltip>
+      {/* <Tooltip title="添加"> */}
+      <Button type="text" icon={<AppstoreAddOutlined />} />
+      {/* </Tooltip> */}
+      {/* <Tooltip title="链接"> */}
+      <Button type="text" icon={<LinkOutlined />} />
+      {/* </Tooltip> */}
       {props.isCollapsed ? (
-        <Tooltip title="拓展">
-          <Button
-            type="text"
-            icon={<ExpandOutlined />}
-            onClick={() => props.onCollapseChange(false)}
-          />
-        </Tooltip>
+        // <Tooltip title="拓展">
+        <Button
+          type="text"
+          icon={<ExpandOutlined />}
+          onClick={() => props.onCollapseChange(false)}
+        />
       ) : (
-        <Tooltip title="收缩">
-          <Button
-            type="text"
-            icon={<CompressOutlined />}
-            onClick={() => props.onCollapseChange(true)}
-          />
-        </Tooltip>
+        // </Tooltip>
+        // <Tooltip title="收缩">
+        <Button
+          type="text"
+          icon={<CompressOutlined />}
+          onClick={() => props.onCollapseChange(true)}
+        />
+        // </Tooltip>
       )}
-      <Tooltip title="删除">
-        <Button type="text" icon={<DeleteOutlined />} />
-      </Tooltip>
+      {/* <Tooltip title="删除"> */}
+      <Button type="text" icon={<DeleteOutlined />} />
+      {/* </Tooltip> */}
     </li>
   );
 };

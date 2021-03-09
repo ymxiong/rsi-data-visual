@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 
-import Canvas from './Canvas';
-import { visualViewTemplate } from '../entity/VisualView';
-import { CustomComponents } from '../diagram/Diagram';
+import Canvas from './components/Canvas';
+import { useDispatch, useSelector } from 'react-redux';
+import { Store } from '../store';
+import { refreshView } from '../store/canvas/actions';
+import { CustomComponents } from '..';
 
 type CanvasContainerProps = {
   customComponents: CustomComponents;
@@ -24,17 +26,29 @@ type CanvasContainerProps = {
 };
 
 const CanvasContainer: React.FC<CanvasContainerProps> = () => {
+  const dispatch = useDispatch();
+
+  const view = useSelector((state: Store) => state.canvas.view);
+
   let canvasDOM: HTMLDivElement | undefined;
 
   const handleRef = (div: HTMLDivElement) => {
     canvasDOM = div;
     console.log(canvasDOM);
+    // console.log('===============');
   };
 
   const handleResize = () => {
     if (canvasDOM) {
       // this.props.configViewport();
     }
+  };
+
+  const testMoveComponent = () => {
+    console.log('c0', view.components[0]);
+    const y = view.components[0].y + 100;
+    view.components[0].y = y;
+    dispatch(refreshView(view));
   };
 
   const handleKey = (ev: KeyboardEvent) => {
@@ -48,6 +62,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
         case 'y':
           ev.preventDefault();
           console.log('press y');
+          testMoveComponent();
           // this.props.redo();
           break;
         case 's':
@@ -94,11 +109,10 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
     }
     window.document.addEventListener('keydown', handleKey);
     window.addEventListener('resize', handleResize);
-  });
+  }, []);
 
   return (
     <Canvas
-      visualView={visualViewTemplate()}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}
