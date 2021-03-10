@@ -1,6 +1,6 @@
 {
   "name": "visual-core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "可视化核心",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -9,7 +9,6 @@
   ],
   "repository": "git@git.horsecoder.com:visual-core/visual-core.git",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "start": "parcel demo/index.html",
     "lint": "elint lint \"(src|demo)/**/*.(js|jsx|ts|tsx)\" --prettier",
@@ -72,5 +71,8 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "styled-components": "^5.2.1"
+  },
+  "publishConfig": {
+    "registry": "http://www.whase.org.cn:8081/repository/npm-private-horse-code/"
   }
 }
