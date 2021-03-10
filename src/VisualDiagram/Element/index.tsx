@@ -20,6 +20,8 @@ export const ElementHOC = (
 
     const dispatch = useDispatch();
 
+    const MOVE_FREQUENCY = 2;
+
     const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
       ev.stopPropagation();
       // 按下鼠标，选择元素
@@ -32,12 +34,9 @@ export const ElementHOC = (
       dispatch(refreshElement({ ...element, anchored: false }));
     };
 
-    const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      ev.stopPropagation();
-    };
-
-    const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      ev.stopPropagation();
+    const onElementMove = (
+      ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    ) => {
       if (element.anchored) {
         if (ev.buttons !== 1) {
           // 如果被铆钉但鼠标已松开，释放铆钉
@@ -45,11 +44,26 @@ export const ElementHOC = (
         } else {
           // 如果被铆钉，计算新的x，y值
           const refreshView = { ...element };
-          refreshView.state.x = (ev.clientX - element.width / 2 + refreshView.state.x) / 2;
-          refreshView.state.y = (ev.clientY - element.height / 2 + refreshView.state.y) / 2;
+          refreshView.state.x = ev.clientX - element.width / 2;
+          refreshView.state.y = ev.clientY - element.height / 2;
           dispatch(refreshElement(refreshView));
         }
       }
+    };
+
+    let moveEventTime = 0;
+
+    const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      ev.stopPropagation();
+      if (moveEventTime > MOVE_FREQUENCY) {
+        onElementMove(ev);
+      }
+      moveEventTime += 1;
+    };
+
+    const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      ev.stopPropagation();
+      onElementMove(ev);
     };
 
     return (
