@@ -76,6 +76,7 @@ module.exports = {
       },
     ],
     // 'space-before-function-paren': 0,
+    '@typescript-eslint/no-empty-interface': 0
   },
   settings: {
     'import/resolver': {
