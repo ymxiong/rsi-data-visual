@@ -26,7 +26,14 @@ const configs = ['cjs', 'esm'].map((format, index) => {
       esModule: true,
       sourcemap: true,
     },
-    external: ['react', 'styled-components'],
+    external: [
+      'react',
+      'styled-components',
+      'redux',
+      'redux-thunk',
+      'redux-devtools-extension',
+      'core-js',
+    ],
     plugins: [
       json({
         namedExports: false,
@@ -40,7 +47,7 @@ const configs = ['cjs', 'esm'].map((format, index) => {
             module: 'esnext',
             jsx: 'react',
             ...(index === 0
-              ? { sourceMap: true, declaration: true }
+              ? { sourceMap: true, declaration: false }
               : { sourceMap: false, declaration: false }),
           },
           exclude: ['**/test', 'demo'],

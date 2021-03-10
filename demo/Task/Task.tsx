@@ -1,5 +1,5 @@
 import React from 'react';
-import { ElementView } from 'src/VisualDiagram/logic/element/ElementView';
+import { ElementView } from '../../src/VisualDiagram/logic/element/ElementView';
 import ViewMode from './ViewMode';
 
 type TaskProps = {

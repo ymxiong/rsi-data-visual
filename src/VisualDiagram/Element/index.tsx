@@ -2,7 +2,7 @@ import React, { ComponentType, ReactNode } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { refreshElement, selectElement } from '../store/canvas/actions';
-import { ViewModeProps } from 'demo/Task/ViewMode';
+import { ViewModeProps } from '../../../demo/Task/ViewMode';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 

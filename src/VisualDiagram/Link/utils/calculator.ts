@@ -1,5 +1,5 @@
-import { ElementView } from 'src/VisualDiagram/logic/element/ElementView';
-import { LinkView } from 'src/VisualDiagram/logic/link/LinkView';
+import { ElementView } from '../../../VisualDiagram/logic/element/ElementView';
+import { LinkView } from '../../../VisualDiagram/logic/link/LinkView';
 import Point from '../../logic/utils/Point';
 
 export const calcPointsBetweenElement = (

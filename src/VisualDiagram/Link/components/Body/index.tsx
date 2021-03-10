@@ -1,5 +1,5 @@
 import React from 'react';
-import Point from 'src/VisualDiagram/logic/utils/Point';
+import Point from '../../../logic/utils/Point';
 import { Line } from '../Line';
 
 type BodyProps = {

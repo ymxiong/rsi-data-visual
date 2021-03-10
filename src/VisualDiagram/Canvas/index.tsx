@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { refreshView, selectElement } from '../store/canvas/actions';
 import { CustomComponents } from '..';
-import { keys, values } from 'lodash';
+import { values } from 'lodash';
 
 type CanvasContainerProps = {
   customComponents?: CustomComponents;
