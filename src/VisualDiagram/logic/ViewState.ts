@@ -58,6 +58,28 @@ const viewStateTemplate: ViewState = {
         },
       ],
     },
+    {
+      id: 'link1',
+      name: 'test-link1',
+      color: '#ffc53d',
+      fromElementId: '2',
+      toElementId: '3',
+      points: [
+        { x: 50, y: 50 },
+        {
+          x: 50,
+          y: 100,
+        },
+        {
+          x: 100,
+          y: 100,
+        },
+        {
+          x: 100,
+          y: 50,
+        },
+      ],
+    },
   ],
 };
 

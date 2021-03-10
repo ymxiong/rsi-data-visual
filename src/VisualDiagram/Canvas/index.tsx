@@ -8,10 +8,10 @@ import { CustomComponents } from '..';
 import { keys, values } from 'lodash';
 
 type CanvasContainerProps = {
-  customComponents: CustomComponents;
+  customComponents?: CustomComponents;
   // entities: EntityState;
   // customEntities: CustomEntities;
-  // isConnecting: boolean;
+  // isConnecting: boolean;s
   // connectingLink: Links;
   // gridSize?: number;
   // artboard: { x: number; y: number; width: number; height: number };

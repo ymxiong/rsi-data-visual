@@ -12,7 +12,7 @@ export type CustomComponents = {
   };
 };
 
-type VisualDiagramProps = { customComponents: CustomComponents };
+type VisualDiagramProps = { customComponents?: CustomComponents };
 
 const VisualDiagram = (props: VisualDiagramProps) => {
   return <CanvasContainer customComponents={props.customComponents} />;
