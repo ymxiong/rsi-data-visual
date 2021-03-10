@@ -43,7 +43,9 @@ const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
         />
       )}
       {/* {Body} */}
-      <ModelFooter onCollapseChange={onChange} isCollapsed={isCollapsed} />
+      <ModelFooter />
+      {/* // onCollapseChange={onChange}
+      // isCollapsed={isCollapsed} */}
     </ul>
   );
 };
