@@ -3,11 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../store';
 import { CanvasArtboard } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
-import { SvgLand } from '../SvgLand';
+import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
 import { ElementHOC, ElementContainerProps } from '../../../Element';
 import ViewMode from '../../../../../demo/Task/ViewMode';
 import { ElementView } from '../../../logic/element/ElementView';
+import { LinkView } from '../../../logic/link/LinkView';
 import { keys, values } from 'lodash';
+import { LinkContainerProps, LinkHOC } from '../../../Link';
+import { LinkProps } from 'antd/lib/typography/Link';
 
 type CanvasProps = {
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -29,7 +32,14 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         onMouseLeave={props.onMouseLeave}
       >
         {/* link drawer */}
-        <SvgLand width="100%" height="100%"></SvgLand>
+        <CanvasLinkSvgLand width="100%" height="100%">
+          {values(view.links).map((link: LinkView) => {
+            const vProps: LinkContainerProps = {
+              link,
+            };
+            return LinkHOC(ViewMode)(vProps);
+          })}
+        </CanvasLinkSvgLand>
 
         {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {

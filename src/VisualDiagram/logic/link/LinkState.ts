@@ -5,6 +5,8 @@ type LinkState = {
   name: string;
   color: string;
   points: Point[];
+  fromElementId: string;
+  toElementId: string;
 };
 
 export default LinkState;

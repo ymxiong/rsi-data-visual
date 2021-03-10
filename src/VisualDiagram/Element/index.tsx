@@ -45,8 +45,8 @@ export const ElementHOC = (
         } else {
           // 如果被铆钉，计算新的x，y值
           const refreshView = { ...element };
-          refreshView.state.x = ev.clientX - element.state.width / 2;
-          refreshView.state.y = ev.clientY - element.state.height / 2;
+          refreshView.state.x = (ev.clientX - element.width / 2 + refreshView.state.x) / 2;
+          refreshView.state.y = (ev.clientY - element.height / 2 + refreshView.state.y) / 2;
           dispatch(refreshElement(refreshView));
         }
       }

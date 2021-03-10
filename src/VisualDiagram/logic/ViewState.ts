@@ -8,7 +8,7 @@ type ViewState = {
 };
 
 const viewStateTemplate: ViewState = {
-  id: '',
+  id: 'testView',
   elements: [
     {
       id: '1',
@@ -16,8 +16,6 @@ const viewStateTemplate: ViewState = {
       color: '#ff7875',
       x: 100,
       y: 100,
-      height: 100,
-      width: 100,
       select: false,
     },
     {
@@ -26,8 +24,6 @@ const viewStateTemplate: ViewState = {
       color: '#ffc53d',
       x: 400,
       y: 100,
-      height: 100,
-      width: 100,
       select: false,
     },
     {
@@ -36,8 +32,6 @@ const viewStateTemplate: ViewState = {
       color: '#95de64',
       x: 700,
       y: 100,
-      height: 100,
-      width: 100,
       select: false,
     },
   ],
@@ -46,7 +40,23 @@ const viewStateTemplate: ViewState = {
       id: 'link0',
       name: 'test-link0',
       color: '#95de64',
-      points: [],
+      fromElementId: '1',
+      toElementId: '2',
+      points: [
+        { x: 50, y: 50 },
+        {
+          x: 50,
+          y: 100,
+        },
+        {
+          x: 100,
+          y: 100,
+        },
+        {
+          x: 100,
+          y: 50,
+        },
+      ],
     },
   ],
 };
