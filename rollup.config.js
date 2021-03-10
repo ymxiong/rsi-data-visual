@@ -5,6 +5,8 @@ import { babel } from '@rollup/plugin-babel';
 import { DEFAULT_EXTENSIONS } from '@babel/core';
 import { terser } from 'rollup-plugin-terser';
 import sourceMaps from 'rollup-plugin-sourcemaps';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 const outputConfigs = {
   cjs: {
@@ -17,7 +19,7 @@ const outputConfigs = {
   },
 };
 
-const configs = ['cjs', 'esm'].map((format, index) => {
+const configs = ['cjs'].map((format, index) => {
   return {
     input: resolve('src/index.ts'),
     output: {
@@ -28,16 +30,18 @@ const configs = ['cjs', 'esm'].map((format, index) => {
     },
     external: [
       'react',
+      'react-dom',
       'styled-components',
       'redux',
       'redux-thunk',
       'redux-devtools-extension',
-      'core-js',
+      'reselect',
     ],
     plugins: [
       json({
         namedExports: false,
       }),
+      commonjs(),
       ts({
         check: index === 0,
         tsconfig: resolve('tsconfig.json'),
@@ -70,6 +74,7 @@ const configs = ['cjs', 'esm'].map((format, index) => {
           ],
         ],
       }),
+      nodeResolve(),
       sourceMaps(),
       terser({
         module: true,

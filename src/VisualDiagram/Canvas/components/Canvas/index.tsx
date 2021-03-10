@@ -8,7 +8,7 @@ import { ElementHOC, ElementContainerProps } from '../../../Element';
 import ViewMode from '../../../../../demo/Task/ViewMode';
 import { ElementView } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
-import { keys, values } from 'lodash';
+import { keys, values } from 'lodash-es';
 import { LinkContainerProps, LinkHOC } from '../../../Link';
 import { LinkProps } from 'antd/lib/typography/Link';
 
