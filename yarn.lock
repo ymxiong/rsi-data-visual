@@ -1183,6 +1183,14 @@
     magic-string "^0.25.7"
     resolve "^1.17.0"
 
+"@rollup/plugin-image@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.npm.taobao.org/@rollup/plugin-image/download/@rollup/plugin-image-2.0.6.tgz#2e6d7a72b25df81aa80c8c0866d45a45c1e6a265"
+  integrity sha1-Lm16crJd+BqoDIwIZtRaRcHmomU=
+  dependencies:
+    "@rollup/pluginutils" "^3.1.0"
+    mini-svg-data-uri "^1.2.3"
+
 "@rollup/plugin-json@^4.1.0":
   version "4.1.0"
   resolved "https://registry.npm.taobao.org/@rollup/plugin-json/download/@rollup/plugin-json-4.1.0.tgz#54e09867ae6963c593844d8bd7a9c718294496f3"
@@ -3522,6 +3530,11 @@ execall@^2.0.0:
   dependencies:
     clone-regexp "^2.1.0"
 
+exenv@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npm.taobao.org/exenv/download/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+  integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
+
 expand-brackets@^2.1.4:
   version "2.1.4"
   resolved "https://registry.npm.taobao.org/expand-brackets/download/expand-brackets-2.1.4.tgz#b77735e315ce30f6b6eff0f83b04151a22449622"
@@ -5256,6 +5269,11 @@ mini-store@^3.0.1:
     hoist-non-react-statics "^3.3.2"
     shallowequal "^1.0.2"
 
+mini-svg-data-uri@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.npm.taobao.org/mini-svg-data-uri/download/mini-svg-data-uri-1.2.3.tgz#e16baa92ad55ddaa1c2c135759129f41910bc39f"
+  integrity sha1-4Wuqkq1V3aocLBNXWRKfQZELw58=
+
 minimalistic-assert@^1.0.0, minimalistic-assert@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npm.taobao.org/minimalistic-assert/download/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
@@ -6855,7 +6873,7 @@ rc-textarea@^0.3.0, rc-textarea@~0.3.0:
     rc-resize-observer "^1.0.0"
     rc-util "^5.7.0"
 
-rc-tooltip@^5.0.1, rc-tooltip@~5.1.0:
+rc-tooltip@^5.0.1, rc-tooltip@^5.1.0, rc-tooltip@~5.1.0:
   version "5.1.0"
   resolved "https://registry.npm.taobao.org/rc-tooltip/download/rc-tooltip-5.1.0.tgz?cache=0&sync_timestamp=1614588639569&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frc-tooltip%2Fdownload%2Frc-tooltip-5.1.0.tgz#abb453c463c31a705aa01d268279f4ae6ae3b15f"
   integrity sha1-q7RTxGPDGnBaoB0mgnn0rmrjsV8=
@@ -6933,7 +6951,20 @@ react-dom@^16.14.0:
     prop-types "^15.6.2"
     scheduler "^0.19.1"
 
-react-is@^16.12.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
+react-from-dom@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.npm.taobao.org/react-from-dom/download/react-from-dom-0.5.1.tgz#5ab82944209059aded60dc26abf43f8989126fa2"
+  integrity sha1-WrgpRCCQWa3tYNwmq/Q/iYkSb6I=
+
+react-inlinesvg@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.npm.taobao.org/react-inlinesvg/download/react-inlinesvg-2.2.2.tgz#b43ac35ed9d0b6f60274b93049a5d091fd4384b6"
+  integrity sha1-tDrDXtnQtvYCdLkwSaXQkf1DhLY=
+  dependencies:
+    exenv "^1.2.2"
+    react-from-dom "^0.5.1"
+
+react-is@^16.12.0, react-is@^16.13.0, react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
