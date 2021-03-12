@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactNode } from 'react';
+import React, { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { refreshElement, selectElement } from '../store/canvas/actions';
@@ -9,31 +9,27 @@ import Body from './components/Body';
 
 export type LinkContainerProps = {
   link: LinkView;
+  SubComponent: ComponentType<ViewModeProps>;
 };
 
-export const LinkHOC = (
-  SubComponent: ComponentType<ViewModeProps>,
-): React.FC<LinkContainerProps> => {
-  const LinkContainer: React.FC<LinkContainerProps> = (props) => {
-    const elementFrom = useSelector(
-      (state: Store) => state.canvas.view.elements[props.link.state.fromElementId],
-    );
+export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
+  const dispatch = useDispatch();
 
-    const elementTo = useSelector(
-      (state: Store) => state.canvas.view.elements[props.link.state.toElementId],
-    );
+  const elementFrom = useSelector(
+    (state: Store) => state.canvas.view.elements[props.link.state.fromElementId],
+  );
 
-    const dispatch = useDispatch();
+  const elementTo = useSelector(
+    (state: Store) => state.canvas.view.elements[props.link.state.toElementId],
+  );
 
-    return (
-      <g key={props.link.id}>
-        {/* <SubComponent {...props} /> */}
-        <Body
-          color={props.link.state.color}
-          points={calcPointsBetweenElement(elementFrom, elementTo, props.link)}
-        />
-      </g>
-    );
-  };
-  return LinkContainer;
+  return (
+    <g key={props.link.id}>
+      {/* <SubComponent {...props} /> */}
+      <Body
+        color={props.link.state.color}
+        points={calcPointsBetweenElement(elementFrom, elementTo, props.link)}
+      />
+    </g>
+  );
 };

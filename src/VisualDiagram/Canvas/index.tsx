@@ -35,8 +35,6 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
 
   const handleRef = (div: HTMLDivElement) => {
     canvasDOM = div;
-    console.log(canvasDOM);
-    // console.log('===============');
   };
 
   const handleResize = () => {

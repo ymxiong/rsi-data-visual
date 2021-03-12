@@ -1,62 +1,39 @@
-import React, { ComponentType } from 'react';
+import React, { useEffect } from 'react';
+import { Button } from 'share';
 import { useDispatch, useSelector } from 'react-redux';
-import { ToolbarDiv } from './components/ToolbarDiv';
+import { BottomSheetButtonStyle } from './components/BottomSheetButtonStyle';
+import { ToolbarStyle } from './components/ToolbarStyle';
 
-type CanvasProps = {
-  onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onMouseMove: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  onMouseLeave: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+type CanvasToolbarProps = {
+  onCreateNewElementOnCanvas: () => void;
 };
 
-const CanvasToolbar = (props: CanvasProps): JSX.Element => {
+const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
   return (
-    <ToolbarDiv>
-      {/* <Tooltip title="保存模型">
-          <span
-            className={styles.bottomSheetDiv}
-            onClick={this.handleIntervalVisualModelUpload}
-          >
-            <CloudUploadOutlined className={styles.bottomSheetButton} />
-          </span>
-        </Tooltip>
-
-        <Tooltip title="容灾选项">
-          <span
-            className={styles.bottomSheetDiv}
-            onClick={this.handleDisasterDrawer}
-          >
-            <ClusterOutlined className={styles.bottomSheetButton} />
-          </span>
-        </Tooltip>
-
-        <Tooltip title="自动整理">
-          <span
-            className={styles.bottomSheetDiv}
-            onClick={this.handleReorganize}
-          >
-            <SyncOutlined className={styles.bottomSheetButton} />
-          </span>
-        </Tooltip>
-
-        <Tooltip title="撤销上一步(暂不支持)">
-          <span className={styles.bottomSheetDiv} onClick={this.handleDrawer}>
-            <UndoOutlined className={styles.bottomSheetButton} />
-          </span>
-        </Tooltip>
-
-        <Tooltip title="放大(暂不支持)">
-          <span className={styles.bottomSheetDiv} onClick={this.handleDrawer}>
-            <ZoomInOutlined className={styles.bottomSheetButton} />
-          </span>
-        </Tooltip>
-
-        <Tooltip title="缩小(暂不支持)">
-          <span className={styles.bottomSheetDiv} onClick={this.handleDrawer}>
-            <ZoomOutOutlined className={styles.bottomSheetButton} />
-          </span>
-        </Tooltip> */}
-    </ToolbarDiv>
+    <ToolbarStyle>
+      {/* <Tooltip title="保存模型"> */}
+      <span>
+        <div onClick={props.onCreateNewElementOnCanvas}>新增</div>
+      </span>
+      <span>
+        <div>保存</div>
+      </span>
+      <span>
+        <div>放大</div>
+      </span>
+      <span>
+        <div>缩小</div>
+      </span>
+      <span>
+        <div>整理</div>
+      </span>
+      <span>
+        <div>撤销</div>
+      </span>
+      <span>
+        <div>重做</div>
+      </span>
+    </ToolbarStyle>
   );
 };
 

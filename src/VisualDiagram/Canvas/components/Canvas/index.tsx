@@ -4,13 +4,21 @@ import { Store } from '../../../store';
 import { CanvasArtboard } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
 import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
-import { ElementHOC, ElementContainerProps } from '../../../Element';
+import { ElementContainer, ElementContainerProps } from '../../../Element';
 import ViewMode from '../../../../../demo/Task/ViewMode';
-import { ElementView } from '../../../logic/element/ElementView';
+import {
+  buildFromElementState,
+  ElementView,
+} from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
 import { keys, values } from 'lodash-es';
-import { LinkContainerProps, LinkHOC } from '../../../Link';
+import { LinkContainer, LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
+import {
+  refreshElement,
+  refreshView,
+  selectElement,
+} from '../../../store/canvas/actions';
 
 type CanvasProps = {
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -21,7 +29,22 @@ type CanvasProps = {
 };
 
 const Canvas = (props: CanvasProps): JSX.Element => {
+  const dispatch = useDispatch();
+
   const view = useSelector((state: Store) => state.canvas.view);
+
+  const onCreateNewElementOnCanvas = () => {
+    const elementView: ElementView = buildFromElementState({
+      id: 'test-new',
+      name: '测试名',
+      color: '#2f3ffa',
+      x: 100,
+      y: 100,
+      select: false,
+    });
+    view.elements[elementView.id] = elementView;
+    dispatch(refreshView(view));
+  };
 
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>
@@ -36,23 +59,22 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           {values(view.links).map((link: LinkView) => {
             const vProps: LinkContainerProps = {
               link,
+              SubComponent: ViewMode,
             };
-            return LinkHOC(ViewMode)(vProps);
+            return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}
         </CanvasLinkSvgLand>
 
         {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
             element,
+            SubComponent: ViewMode,
           };
-          return ElementHOC(ViewMode)(vProps);
+          return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}
 
         <CanvasToolbar
-          onMouseDown={props.onMouseDown}
-          onMouseUp={props.onMouseUp}
-          onMouseMove={props.onMouseMove}
-          onMouseLeave={props.onMouseLeave}
+          onCreateNewElementOnCanvas={onCreateNewElementOnCanvas}
         />
       </CanvasArtboard>
     </CanvasViewport>

@@ -1,4 +1,3 @@
-import { LinkView } from '../link/LinkView';
 import ElementState from './ElementState';
 
 type ElementView = {
