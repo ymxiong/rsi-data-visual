@@ -5,7 +5,6 @@ import { CanvasArtboard } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
 import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
 import { ElementContainer, ElementContainerProps } from '../../../Element';
-import ViewMode from '../../../../../demo/Task/ViewMode';
 import {
   buildFromElementState,
   ElementView,
@@ -19,8 +18,10 @@ import {
   refreshView,
   selectElement,
 } from '../../../store/canvas/actions';
+import { VisualDiagramComponents } from '../../../../VisualDiagram';
 
 type CanvasProps = {
+  components: VisualDiagramComponents;
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseMove: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -36,7 +37,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const onCreateNewElementOnCanvas = () => {
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
-      name: '测试名',
+      name: '新增元素',
       color: '#2f3ffa',
       x: 100,
       y: 100,
@@ -59,7 +60,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           {values(view.links).map((link: LinkView) => {
             const vProps: LinkContainerProps = {
               link,
-              SubComponent: ViewMode,
+              SubComponent: props.components.Task.elementStyle,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}
@@ -68,7 +69,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
             element,
-            SubComponent: ViewMode,
+            SubComponent: props.components.Task.elementStyle,
           };
           return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}

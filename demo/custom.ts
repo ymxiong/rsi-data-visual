@@ -1,11 +1,9 @@
-import taskIcon from './icon';
-import Task from './Task/Task';
+import ViewMode from './Task/ViewMode';
 
-const customEntities = {
-  model: {
-    component: Task,
-    icon: taskIcon,
+const components = {
+  Task: {
+    elementStyle: ViewMode,
   },
 };
 
-export { customEntities };
+export { components };

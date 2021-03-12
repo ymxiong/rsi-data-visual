@@ -1,7 +1,4 @@
 import React, { useEffect } from 'react';
-import { Button } from 'share';
-import { useDispatch, useSelector } from 'react-redux';
-import { BottomSheetButtonStyle } from './components/BottomSheetButtonStyle';
 import { ToolbarStyle } from './components/ToolbarStyle';
 
 type CanvasToolbarProps = {
@@ -13,7 +10,10 @@ const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
     <ToolbarStyle>
       {/* <Tooltip title="保存模型"> */}
       <span>
-        <div onClick={props.onCreateNewElementOnCanvas}>新增</div>
+        <div onClick={props.onCreateNewElementOnCanvas}>新增元素</div>
+      </span>
+      <span>
+        <div>新增链接</div>
       </span>
       <span>
         <div>保存</div>

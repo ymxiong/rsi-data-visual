@@ -4,14 +4,12 @@ import Canvas from './components/Canvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { refreshView, selectElement } from '../store/canvas/actions';
-import { CustomComponents } from '..';
 import { values } from 'lodash-es';
+import { VisualDiagramComponents } from '..';
 
 type CanvasContainerProps = {
-  customComponents?: CustomComponents;
-  // entities: EntityState;
-  // customEntities: CustomEntities;
-  // isConnecting: boolean;s
+  components: VisualDiagramComponents;
+  // isConnecting: boolean;
   // connectingLink: Links;
   // gridSize?: number;
   // artboard: { x: number; y: number; width: number; height: number };
@@ -26,7 +24,7 @@ type CanvasContainerProps = {
   // anchorEntity: (isAnchored: boolean, id: string) => CanvasAction;
 };
 
-const CanvasContainer: React.FC<CanvasContainerProps> = () => {
+const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   const dispatch = useDispatch();
 
   const view = useSelector((state: Store) => state.canvas.view);
@@ -96,6 +94,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = () => {
 
   return (
     <Canvas
+      components={props.components}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}

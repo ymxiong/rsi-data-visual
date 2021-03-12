@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Diagram from '../src';
-import taskIcon from './icon';
+import VisualDiagram from '../src';
+import { components } from './custom';
 
 const App = () => (
   <div>
-    <Diagram />
+    <VisualDiagram components={components} />
   </div>
 );
 

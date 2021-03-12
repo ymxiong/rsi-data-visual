@@ -1,21 +1,17 @@
-import React, { ComponentType, FunctionComponentElement } from 'react';
+import React, { ComponentType } from 'react';
 // import reducer from './reducer';
 import CanvasContainer from './Canvas';
 
-export type CustomComponents = {
+export type VisualDiagramComponents = {
   [type: string]: {
-    component: ComponentType;
-    icon: {
-      path: FunctionComponentElement<any>;
-      size: number;
-    };
+    elementStyle: ComponentType<any>;
   };
 };
 
-type VisualDiagramProps = { customComponents?: CustomComponents };
+export type VisualDiagramProps = { components: VisualDiagramComponents };
 
 const VisualDiagram = (props: VisualDiagramProps) => {
-  return <CanvasContainer customComponents={props.customComponents} />;
+  return <CanvasContainer components={props.components} />;
 };
 
 export default VisualDiagram;
