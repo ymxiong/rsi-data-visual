@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import { writeFileSync } from 'fs';
 import json from '@rollup/plugin-json';
 import ts from 'rollup-plugin-typescript2';
 import { babel } from '@rollup/plugin-babel';
@@ -8,6 +9,7 @@ import sourceMaps from 'rollup-plugin-sourcemaps';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import image from '@rollup/plugin-image';
+import analyze from 'rollup-plugin-analyzer';
 
 const outputConfigs = {
   cjs: {
@@ -34,12 +36,21 @@ const configs = ['cjs'].map((format, index) => {
       'react-dom',
       'styled-components',
       'redux',
+      'react-redux',
       'redux-thunk',
       'redux-devtools-extension',
       'reselect',
+      'rc-tooltip',
+      'react-inlinesvg',
+      'react-is',
     ],
     plugins: [
       image(),
+      analyze({
+        writeTo: (str) => {
+          writeFileSync(resolve('analyze.txt'), str);
+        },
+      }),
       json({
         namedExports: false,
       }),
@@ -61,6 +72,7 @@ const configs = ['cjs'].map((format, index) => {
       }),
       babel({
         extensions: [...DEFAULT_EXTENSIONS, 'ts', 'tsx'],
+        exclude: [/core-js/],
         babelHelpers: 'bundled',
         presets: [
           [

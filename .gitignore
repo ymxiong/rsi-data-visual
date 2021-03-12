@@ -35,3 +35,5 @@ screenshot
 .cache
 build
 dist
+/deploy
+/analyze.txt
