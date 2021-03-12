@@ -34,7 +34,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const view = useSelector((state: Store) => state.canvas.view);
 
-  const onCreateNewElementOnCanvas = () => {
+  const onCreateElement = () => {
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
       name: '新增元素',
@@ -74,9 +74,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}
 
-        <CanvasToolbar
-          onCreateNewElementOnCanvas={onCreateNewElementOnCanvas}
-        />
+        <CanvasToolbar onCreateElement={onCreateElement} />
       </CanvasArtboard>
     </CanvasViewport>
   );

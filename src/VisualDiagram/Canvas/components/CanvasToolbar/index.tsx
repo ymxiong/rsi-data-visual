@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ToolbarStyle } from './components/ToolbarStyle';
 
 type CanvasToolbarProps = {
-  onCreateNewElementOnCanvas: () => void;
+  onCreateElement: () => void;
 };
 
 const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
@@ -10,7 +10,7 @@ const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
     <ToolbarStyle>
       {/* <Tooltip title="保存模型"> */}
       <span>
-        <div onClick={props.onCreateNewElementOnCanvas}>新增元素</div>
+        <div onClick={props.onCreateElement}>新增元素</div>
       </span>
       <span>
         <div>新增链接</div>

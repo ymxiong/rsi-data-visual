@@ -26,10 +26,8 @@ export const calcPointsBetweenElement = (
     }
     targetIndex += 1;
   }
-  const FROM_ELEMENT_PADDING =
-    (fromElement.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
-  const TO_ELEMENT_PADDING =
-    (fromElement.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
+  const FROM_ELEMENT_PADDING = (fromElement.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
+  const TO_ELEMENT_PADDING = (fromElement.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
 
   const fromElementB: Point = {
     x: fromElement.state.x,
