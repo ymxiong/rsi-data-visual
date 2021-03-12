@@ -23,6 +23,8 @@ const viewTemplate = (): View => {
   });
   viewStateTemplate.links.forEach((link: LinkState) => {
     links[link.id] = buildFromLinkState(link);
+    elements[link.fromElementId].linkSourceIds.push(link.id);
+    elements[link.toElementId].linkTargetIds.push(link.id);
   });
   return {
     id: '',

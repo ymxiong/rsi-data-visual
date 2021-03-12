@@ -6,6 +6,7 @@ import { Store } from '../store';
 import { refreshView, selectElement } from '../store/canvas/actions';
 import { CustomComponents } from '..';
 import { values } from 'lodash';
+import { ToolbarDiv } from './components/Toolbar';
 
 type CanvasContainerProps = {
   customComponents?: CustomComponents;

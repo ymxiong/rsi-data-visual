@@ -30,8 +30,8 @@ const viewStateTemplate: ViewState = {
       id: '3',
       name: 'test3',
       color: '#95de64',
-      x: 700,
-      y: 100,
+      x: 400,
+      y: 400,
       select: false,
     },
   ],
@@ -50,7 +50,7 @@ const viewStateTemplate: ViewState = {
         },
         {
           x: 100,
-          y: 100,
+          y: 120,
         },
         {
           x: 100,
@@ -63,6 +63,28 @@ const viewStateTemplate: ViewState = {
       name: 'test-link1',
       color: '#ffc53d',
       fromElementId: '2',
+      toElementId: '3',
+      points: [
+        { x: 50, y: 50 },
+        {
+          x: 50,
+          y: 100,
+        },
+        {
+          x: 100,
+          y: 100,
+        },
+        {
+          x: 100,
+          y: 50,
+        },
+      ],
+    },
+    {
+      id: 'link2',
+      name: 'test-link2',
+      color: '#ff7875',
+      fromElementId: '1',
       toElementId: '3',
       points: [
         { x: 50, y: 50 },

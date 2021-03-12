@@ -29,7 +29,6 @@ export const LinkHOC = (
       <g key={props.link.id}>
         {/* <SubComponent {...props} /> */}
         <Body
-          id={props.link.id}
           color={props.link.state.color}
           points={calcPointsBetweenElement(elementFrom, elementTo, props.link)}
         />

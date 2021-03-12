@@ -10,7 +10,7 @@ import { ElementView } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
 import { keys, values } from 'lodash';
 import { LinkContainerProps, LinkHOC } from '../../../Link';
-import { LinkProps } from 'antd/lib/typography/Link';
+import CanvasToolbar from '../CanvasToolbar';
 
 type CanvasProps = {
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -47,6 +47,13 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           };
           return ElementHOC(ViewMode)(vProps);
         })}
+
+        <CanvasToolbar
+          onMouseDown={props.onMouseDown}
+          onMouseUp={props.onMouseUp}
+          onMouseMove={props.onMouseMove}
+          onMouseLeave={props.onMouseLeave}
+        />
       </CanvasArtboard>
     </CanvasViewport>
   );
