@@ -32,10 +32,6 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   };
 
   const onElementMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    console.log('c x, y', ev.clientX, ev.clientY);
-    console.log('p x, y', ev.pageX, ev.pageY);
-    console.log('m x, y', ev.movementX, ev.movementY);
-    console.log('s x, y', ev.screenX, ev.screenY);
     if (element.anchored) {
       if (ev.buttons !== 1) {
         // 如果被铆钉但鼠标已松开，释放铆钉

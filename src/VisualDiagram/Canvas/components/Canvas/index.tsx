@@ -1,4 +1,4 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../store';
 import { CanvasArtboard } from '../CanvasArtboard';
@@ -10,14 +10,10 @@ import {
   ElementView,
 } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
-import { keys, values } from 'lodash-es';
+import { values } from 'lodash-es';
 import { LinkContainer, LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
-import {
-  refreshElement,
-  refreshView,
-  selectElement,
-} from '../../../store/canvas/actions';
+import { refreshView } from '../../../store/canvas/actions';
 import { VisualComponentStyles } from '../../../../VisualDiagram';
 
 type CanvasProps = {

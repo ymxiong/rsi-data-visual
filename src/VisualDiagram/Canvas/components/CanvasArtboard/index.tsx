@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const CanvasArtboard = styled.div.attrs((props) => {
-  const restPercentage = 10;
   return {
     style: {
       transform: 'translate(500px, 500px) scale(1)',

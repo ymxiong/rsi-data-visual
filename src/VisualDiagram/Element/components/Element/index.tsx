@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { ElementStyle } from '../ElementStyle';
 import { ElementView } from '../../../logic/element/ElementView';
 
@@ -11,7 +11,7 @@ type ElementProps = {
   onMouseLeave: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-export const Element = (props: ElementProps) => {
+export const Element = (props: ElementProps): JSX.Element => {
   return (
     <ElementStyle
       style={{
