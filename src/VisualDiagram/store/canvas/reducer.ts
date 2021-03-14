@@ -1,12 +1,15 @@
 import { Reducer } from 'redux';
+import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
 import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
 
 export interface CanvasState {
+  canvas: Canvas;
   view: View;
 }
 
 const initialCanvasState: CanvasState = {
+  canvas: buildCanvasFromCanvasState(),
   view: buildViewFromViewState(),
 };
 

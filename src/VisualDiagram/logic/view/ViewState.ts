@@ -1,5 +1,5 @@
-import ElementState from './element/ElementState';
-import LinkState from './link/LinkState';
+import ElementState from '../element/ElementState';
+import LinkState from '../link/LinkState';
 import { View } from './View';
 import { values } from 'lodash-es';
 

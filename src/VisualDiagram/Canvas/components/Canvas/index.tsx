@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../store';
-import { CanvasArtboard } from '../CanvasArtboard';
+import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
 import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
 import { ElementContainer, ElementContainerProps } from '../../../Element';
@@ -28,6 +28,8 @@ type CanvasProps = {
 const Canvas = (props: CanvasProps): JSX.Element => {
   const dispatch = useDispatch();
 
+  const canvas = useSelector((state: Store) => state.canvas.canvas);
+
   const view = useSelector((state: Store) => state.canvas.view);
 
   const onCreateElement = () => {
@@ -44,9 +46,18 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     dispatch(refreshView(view));
   };
 
+  const canvasArtboardProps: CanvasArtboardProps = {
+    offsetX: canvas.offset.x,
+    offsetY: canvas.offset.y,
+    scale: canvas.state.scale,
+    width: 800,
+    height: 800,
+  };
+
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>
       <CanvasArtboard
+        {...canvasArtboardProps}
         onMouseDown={props.onMouseDown}
         onMouseUp={props.onMouseUp}
         onMouseMove={props.onMouseMove}

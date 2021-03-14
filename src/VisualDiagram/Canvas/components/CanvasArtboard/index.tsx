@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 
-const CanvasArtboard = styled.div.attrs((props) => {
+type CanvasArtboardProps = {
+  offsetX: number;
+  offsetY: number;
+  scale: number;
+  width: number;
+  height: number;
+};
+
+const CanvasArtboard = styled.div.attrs((props: CanvasArtboardProps) => {
   return {
     style: {
-      transform: 'translate(0px, 0px) scale(1)',
-      width: '100%',
-      height: '800px',
+      transform: `translate(${props.offsetX}px, ${props.offsetY}px) scale(${props.scale})`,
+      width: `${props.width}px`,
+      height: `${props.height}px`,
     },
   };
 })`
@@ -28,4 +36,4 @@ const CanvasArtboard = styled.div.attrs((props) => {
   overflow: hidden;
 `;
 
-export { CanvasArtboard };
+export { CanvasArtboard, CanvasArtboardProps };
