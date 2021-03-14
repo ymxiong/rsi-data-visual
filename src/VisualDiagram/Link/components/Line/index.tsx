@@ -20,17 +20,13 @@ const Line: React.FC<LineProps> = (props: LineProps) => {
   return (
     <>
       <defs>
-        <filter id="f1" x="-20" y="-20" width="200" height="200">
-          <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" />
-          <feGaussianBlur result="blurOut" in="offOut" stdDeviation="5" />
+        <filter id="linkShadow" x="-20" y="-20" width="200" height="200">
+          {/* <feOffset result="offOut" in="SourceAlpha" dx="0" dy="0" /> */}
+          <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
           <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
         </filter>
       </defs>
-      <LineStyle
-        {...props}
-        // filter="drop-shadow(-25px 25px 25px rgba(26,58,70,0.7))"
-        filter="url(#f1)"
-      />
+      <LineStyle {...props} filter="url(#linkShadow)" />
     </>
   );
 };

@@ -18,10 +18,10 @@ import {
   refreshView,
   selectElement,
 } from '../../../store/canvas/actions';
-import { VisualDiagramComponents } from '../../../../VisualDiagram';
+import { VisualComponentStyles } from '../../../../VisualDiagram';
 
 type CanvasProps = {
-  components: VisualDiagramComponents;
+  componentStyles: VisualComponentStyles;
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseMove: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -38,6 +38,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
       name: '新增元素',
+      type: 'model',
       color: '#2f3ffa',
       x: 100,
       y: 100,
@@ -60,7 +61,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           {values(view.links).map((link: LinkView) => {
             const vProps: LinkContainerProps = {
               link,
-              SubComponent: props.components.Task.elementStyle,
+              SubComponent: props.componentStyles.model.style,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}
@@ -69,7 +70,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
             element,
-            SubComponent: props.components.Task.elementStyle,
+            SubComponent: props.componentStyles[element.state.type].style,
           };
           return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}

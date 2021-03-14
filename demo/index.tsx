@@ -1,11 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import VisualDiagram from '../src';
-import { components } from './custom';
+import {
+  componentStyles,
+  viewStateTemplate,
+} from './test/TEST_SIMPLE_VIEW/ViewStateTemplate';
 
 const App = () => (
   <div>
-    <VisualDiagram components={components} />
+    <VisualDiagram
+      componentStyles={componentStyles}
+      viewState={viewStateTemplate}
+    />
   </div>
 );
 

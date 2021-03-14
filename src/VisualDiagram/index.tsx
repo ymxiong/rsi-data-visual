@@ -1,17 +1,28 @@
 import React, { ComponentType } from 'react';
-// import reducer from './reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { Store } from './store';
+import { refreshView, selectElement } from './store/canvas/actions';
 import CanvasContainer from './Canvas';
+import { ViewState } from './logic/ViewState';
+import { buildViewFromViewState } from './logic/View';
 
-export type VisualDiagramComponents = {
+export type VisualComponentStyles = {
   [type: string]: {
-    elementStyle: ComponentType<any>;
+    style: ComponentType<any>;
   };
 };
 
-export type VisualDiagramProps = { components: VisualDiagramComponents };
+export type VisualDiagramProps = {
+  componentStyles: VisualComponentStyles;
+  viewState: ViewState;
+};
 
 const VisualDiagram = (props: VisualDiagramProps) => {
-  return <CanvasContainer components={props.components} />;
+  const dispatch = useDispatch();
+
+  dispatch(refreshView(buildViewFromViewState(props.viewState)));
+
+  return <CanvasContainer componentStyles={props.componentStyles} />;
 };
 
 export default VisualDiagram;

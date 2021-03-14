@@ -1,6 +1,7 @@
 type ElementState = {
   id: string;
   name: string;
+  type: string;
   color: string;
   x: number;
   y: number;

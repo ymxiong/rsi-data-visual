@@ -2,7 +2,7 @@ import ElementState from './element/ElementState';
 import { buildFromElementState, ElementView } from './element/ElementView';
 import LinkState from './link/LinkState';
 import { buildFromLinkState, LinkView } from './link/LinkView';
-import { viewStateTemplate } from './ViewState';
+import { ViewState } from './ViewState';
 
 type View = {
   id: string;
@@ -15,13 +15,31 @@ type View = {
   selectedElementId?: string;
 };
 
-const viewTemplate = (): View => {
+const viewStateTemplate: ViewState = {
+  id: 'testView',
+  elements: [
+    {
+      id: 'testElement',
+      name: 'testElement',
+      type: 'model',
+      color: '#ff7875',
+      x: 100,
+      y: 100,
+      select: false,
+    },
+  ],
+  links: [],
+};
+
+const buildViewFromViewState = (
+  viewState: ViewState = { ...viewStateTemplate },
+): View => {
   const elements: { [id: string]: ElementView } = {};
   const links: { [id: string]: LinkView } = {};
-  viewStateTemplate.elements.forEach((element: ElementState) => {
+  viewState.elements.forEach((element: ElementState) => {
     elements[element.id] = buildFromElementState(element);
   });
-  viewStateTemplate.links.forEach((link: LinkState) => {
+  viewState.links.forEach((link: LinkState) => {
     links[link.id] = buildFromLinkState(link);
     elements[link.fromElementId].linkSourceIds.push(link.id);
     elements[link.toElementId].linkTargetIds.push(link.id);
@@ -33,4 +51,4 @@ const viewTemplate = (): View => {
   };
 };
 
-export { View, viewTemplate };
+export { View, buildViewFromViewState };

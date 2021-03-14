@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { ElementView } from '../../logic/element/ElementView';
-import { View, viewTemplate } from '../../logic/View';
+import { View, buildViewFromViewState } from '../../logic/View';
 import { CanvasAction } from './types';
 
 export interface CanvasState {
@@ -8,7 +8,7 @@ export interface CanvasState {
 }
 
 const initialCanvasState: CanvasState = {
-  view: viewTemplate(),
+  view: buildViewFromViewState(),
 };
 
 const canvasReducer: Reducer<CanvasState, CanvasAction> = (

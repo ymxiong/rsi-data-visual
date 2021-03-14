@@ -1,0 +1,74 @@
+import { ViewState } from '../../../src/VisualDiagram/logic/ViewState';
+
+const viewStateTemplate: ViewState = {
+  id: 'testView',
+  elements: [
+    {
+      id: '1',
+      name: 'test1',
+      type: 'model',
+      color: '#ff7875',
+      x: 200,
+      y: 100,
+      select: false,
+    },
+    {
+      id: '2',
+      name: 'test2',
+      type: 'model',
+      color: '#ffc53d',
+      x: 400,
+      y: 100,
+      select: false,
+    },
+    {
+      id: '3',
+      name: 'test3',
+      type: 'model',
+      color: '#95de64',
+      x: 600,
+      y: 100,
+      select: false,
+    },
+    {
+      id: '4',
+      name: 'test4',
+      type: 'model',
+      color: '#36cfc9',
+      x: 400,
+      y: 400,
+      select: false,
+    },
+  ],
+  links: [
+    {
+      id: 'linkFrom4To1',
+      name: 'linkFrom4To1',
+      color: '#95de64',
+      group: 'linkFrom4To1Group',
+      fromElementId: '4',
+      toElementId: '1',
+      points: [],
+    },
+    {
+      id: 'linkFrom4To2',
+      name: 'linkFrom4To2',
+      color: '#95de64',
+      group: 'linkFrom4To1Group',
+      fromElementId: '4',
+      toElementId: '2',
+      points: [],
+    },
+    {
+      id: 'linkFrom4To3',
+      name: 'linkFrom4To3',
+      color: '#95de64',
+      group: 'linkFrom4To1Group',
+      fromElementId: '4',
+      toElementId: '3',
+      points: [],
+    },
+  ],
+};
+
+export { viewStateTemplate };

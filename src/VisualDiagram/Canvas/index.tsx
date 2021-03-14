@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-
-import Canvas from './components/Canvas';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { refreshView, selectElement } from '../store/canvas/actions';
+
+import Canvas from './components/Canvas';
 import { values } from 'lodash-es';
-import { VisualDiagramComponents } from '..';
+import { VisualComponentStyles } from '..';
 
 type CanvasContainerProps = {
-  components: VisualDiagramComponents;
+  componentStyles: VisualComponentStyles;
   // isConnecting: boolean;
   // connectingLink: Links;
   // gridSize?: number;
@@ -94,7 +94,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
 
   return (
     <Canvas
-      components={props.components}
+      componentStyles={props.componentStyles}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}
