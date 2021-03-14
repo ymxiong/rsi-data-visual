@@ -4,9 +4,9 @@ const CanvasArtboard = styled.div.attrs((props) => {
   const restPercentage = 10;
   return {
     style: {
-      transform: 'translate(0px, 0px) scale(1)',
+      transform: 'translate(500px, 500px) scale(1)',
       width: '100%',
-      height: '800px',
+      height: '1000px',
     },
   };
 })`

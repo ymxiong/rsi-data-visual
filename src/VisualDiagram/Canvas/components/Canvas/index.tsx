@@ -74,9 +74,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           };
           return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}
-
-        <CanvasToolbar onCreateElement={onCreateElement} />
       </CanvasArtboard>
+
+      <CanvasToolbar onCreateElement={onCreateElement} />
     </CanvasViewport>
   );
 };

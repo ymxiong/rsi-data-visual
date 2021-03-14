@@ -1,7 +1,6 @@
 import React, { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Store } from './store';
-import { refreshView, selectElement } from './store/canvas/actions';
+import { useDispatch } from 'react-redux';
+import { refreshView } from './store/canvas/actions';
 import CanvasContainer from './Canvas';
 import { ViewState } from './logic/ViewState';
 import { buildViewFromViewState } from './logic/View';
@@ -17,7 +16,7 @@ export type VisualDiagramProps = {
   viewState: ViewState;
 };
 
-const VisualDiagram = (props: VisualDiagramProps) => {
+const VisualDiagram = (props: VisualDiagramProps): JSX.Element => {
   const dispatch = useDispatch();
 
   dispatch(refreshView(buildViewFromViewState(props.viewState)));
