@@ -1,5 +1,4 @@
 import { Reducer } from 'redux';
-import { ElementView } from '../../logic/element/ElementView';
 import { View, buildViewFromViewState } from '../../logic/View';
 import { CanvasAction } from './types';
 

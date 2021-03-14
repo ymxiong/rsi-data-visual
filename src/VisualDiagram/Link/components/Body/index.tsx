@@ -7,7 +7,7 @@ type BodyProps = {
   points: Point[];
 };
 
-const Body = (props: BodyProps) => {
+const Body = (props: BodyProps): JSX.Element => {
   const pointsToString = (points: Array<Point>): string => {
     let point: Point | undefined;
     return points
