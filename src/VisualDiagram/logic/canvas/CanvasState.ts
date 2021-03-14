@@ -4,6 +4,7 @@ import Point from '../utils/Point';
 
 type CanvasState = {
   id: string;
+  scale: number;
 };
 
 export { CanvasState };

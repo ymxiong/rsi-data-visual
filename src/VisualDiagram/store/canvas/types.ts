@@ -1,4 +1,4 @@
-import { View } from '../../logic/View';
+import { View } from '../../logic/view/View';
 import { ActionShape } from '..';
 import { ElementView } from '../../logic/element/ElementView';
 import { LinkView } from '../../logic/link/LinkView';

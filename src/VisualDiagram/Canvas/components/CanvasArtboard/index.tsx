@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const CanvasArtboard = styled.div.attrs((props) => {
   return {
     style: {
-      transform: 'translate(500px, 500px) scale(1)',
+      transform: 'translate(0px, 0px) scale(1)',
       width: '100%',
-      height: '1000px',
+      height: '800px',
     },
   };
 })`

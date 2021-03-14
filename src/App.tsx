@@ -4,7 +4,7 @@ import VisualDiagram, {
   VisualDiagramHandle,
   VisualDiagramProps,
 } from './VisualDiagram';
-import { ViewState } from './VisualDiagram/logic/ViewState';
+import { ViewState } from './VisualDiagram/logic/view/ViewState';
 import { configureStore } from './VisualDiagram/store';
 
 const App: React.ForwardRefRenderFunction<

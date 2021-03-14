@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
 import { refreshView } from './store/canvas/actions';
 import CanvasContainer from './Canvas';
-import { ViewState, buildViewStateFromView } from './logic/ViewState';
-import { buildViewFromViewState } from './logic/View';
+import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
+import { buildViewFromViewState } from './logic/view/View';
 
 export type VisualComponentStyles = {
   [type: string]: {

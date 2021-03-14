@@ -1,4 +1,4 @@
-import { ViewState } from '../../../src/VisualDiagram/logic/ViewState';
+import { ViewState } from '../../../src/VisualDiagram/logic/view/ViewState';
 import ViewMode from './components/ViewMode';
 
 const componentStyles = {

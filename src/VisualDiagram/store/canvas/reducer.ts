@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { View, buildViewFromViewState } from '../../logic/View';
+import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
 
 export interface CanvasState {

@@ -1,6 +1,7 @@
 import ElementState from '../element/ElementState';
 import LinkState from '../link/LinkState';
 import Point from '../utils/Point';
+import { CanvasState } from './CanvasState';
 
 type Canvas = {
   id: string;

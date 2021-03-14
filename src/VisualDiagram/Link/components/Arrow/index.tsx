@@ -1,5 +1,5 @@
 import React from 'react';
-import style from 'styled-components';
+// import style from 'styled-components';
 
 // const ArrowStyle = style.path`
 //   fill: ${(props) => props.color || 'black'};
