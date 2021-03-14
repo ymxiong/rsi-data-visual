@@ -6,8 +6,8 @@ import { LinkView } from '../../logic/link/LinkView';
 export type CanvasViewRefeshAction = ActionShape<'canvas/view/refresh', View>;
 
 export type CanvasElementRefeshAction = ActionShape<
-'canvas/element/refresh',
-ElementView
+  'canvas/element/refresh',
+  ElementView
 >;
 
 export type CanvasElementSelectType = {
@@ -16,13 +16,13 @@ export type CanvasElementSelectType = {
 };
 
 export type CanvasElementSelectAction = ActionShape<
-'canvas/element/select',
-CanvasElementSelectType
+  'canvas/element/select',
+  CanvasElementSelectType
 >;
 
 export type CanvasLinkRefeshAction = ActionShape<
-'canvas/link/refresh',
-LinkView
+  'canvas/link/refresh',
+  LinkView
 >;
 
 export type CanvasAction =

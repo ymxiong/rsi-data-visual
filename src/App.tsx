@@ -1,16 +1,37 @@
-import React, { useRef } from 'react';
+import React, { useImperativeHandle, useRef } from 'react';
 import { Provider } from 'react-redux';
-import VisualDiagram, { VisualDiagramProps } from './VisualDiagram';
+import VisualDiagram, {
+  VisualDiagramHandle,
+  VisualDiagramProps,
+} from './VisualDiagram';
+import { ViewState } from './VisualDiagram/logic/ViewState';
 import { configureStore } from './VisualDiagram/store';
 
-const App: React.FC<VisualDiagramProps> = (props) => {
+const App: React.ForwardRefRenderFunction<
+  VisualDiagramHandle,
+  VisualDiagramProps
+> = (props, ref) => {
   const storeRef = useRef(configureStore());
+  const visualDiagramRef = useRef<VisualDiagramHandle>(null);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      setView: (viewState: ViewState) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.setView(viewState);
+        }
+        return false;
+      },
+    }),
+    [],
+  );
 
   return (
     <Provider store={storeRef.current}>
-      <VisualDiagram {...props}></VisualDiagram>
+      <VisualDiagram {...props} ref={visualDiagramRef}></VisualDiagram>
     </Provider>
   );
 };
 
-export default App;
+export default React.memo(React.forwardRef(App));

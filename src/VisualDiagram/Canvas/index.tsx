@@ -104,4 +104,4 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   );
 };
 
-export default CanvasContainer;
+export default React.memo(CanvasContainer);
