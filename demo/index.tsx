@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import VisualDiagram from '../src';
 import {
@@ -6,13 +6,28 @@ import {
   viewStateTemplate,
 } from './test/TEST_SIMPLE_VIEW/ViewStateTemplate';
 
-const App = () => (
-  <div>
-    <VisualDiagram
-      componentStyles={componentStyles}
-      viewState={viewStateTemplate}
-    />
-  </div>
-);
+const App = () => {
+  const visualDiagramRef = useRef<any>(null);
+
+  useEffect(() => {
+    if (visualDiagramRef.current) {
+      visualDiagramRef.current.setView(viewStateTemplate);
+    }
+  }, []);
+
+  const handleChange = (viewState: any) => {
+    console.log('onChange', viewState);
+  };
+
+  return (
+    <div>
+      <VisualDiagram
+        componentStyles={componentStyles}
+        ref={visualDiagramRef}
+        onChange={handleChange}
+      />
+    </div>
+  );
+};
 
 ReactDOM.render(<App></App>, document.getElementById('root'));
