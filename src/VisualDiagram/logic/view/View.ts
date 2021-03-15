@@ -2,7 +2,12 @@ import ElementState from '../element/ElementState';
 import { buildFromElementState, ElementView } from '../element/ElementView';
 import LinkState from '../link/LinkState';
 import { buildFromLinkState, LinkView } from '../link/LinkView';
-import { Point } from '../utils/Point';
+import {
+  Point,
+  standardOffset,
+  zeroOffset,
+  newElementPoint,
+} from '../utils/Point';
 import { ViewState } from './ViewState';
 
 type View = {
@@ -25,8 +30,8 @@ const viewStateTemplate: ViewState = {
       name: 'testElement',
       type: 'model',
       color: '#ff7875',
-      x: 100,
-      y: 100,
+      x: newElementPoint.x,
+      y: newElementPoint.y,
       select: false,
     },
   ],
@@ -50,6 +55,7 @@ const buildViewFromViewState = (
     id: '',
     elements,
     links,
+    offset: { ...zeroOffset },
   };
 };
 

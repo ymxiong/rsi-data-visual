@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import {
   refreshCanvas,
+  refreshElement,
   refreshView,
   selectElement,
 } from '../store/canvas/actions';
@@ -64,6 +65,21 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
         dispatch(refreshCanvas(newCanvas));
       }
     }
+
+    // 滑出画布的监听问题
+    if (view.selectedElementId && view.elements[view.selectedElementId].anchored) {
+      const anchoredElement = view.elements[view.selectedElementId];
+      if (ev.buttons !== 1) {
+        // 如果被铆钉但鼠标已松开，释放铆钉
+        dispatch(refreshElement({ ...anchoredElement, anchored: false }));
+      } else {
+        // 如果被铆钉，计算新的x，y值
+        const refreshViewElement = { ...anchoredElement };
+        refreshViewElement.state.x = ev.pageX - anchoredElement.width / 2;
+        refreshViewElement.state.y = ev.pageY - anchoredElement.height / 2;
+        dispatch(refreshElement(refreshViewElement));
+      }
+    }
   };
 
   const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -78,7 +94,6 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   };
 
   const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    dispatch(selectElement('', false));
     onCanvasMove(ev);
   };
 

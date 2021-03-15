@@ -15,6 +15,7 @@ import { LinkContainer, LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
 import { refreshView } from '../../../store/canvas/actions';
 import { VisualComponentStyles } from '../../../../VisualDiagram';
+import { newElementPoint } from '../../../logic/utils/Point';
 
 type CanvasProps = {
   componentStyles: VisualComponentStyles;
@@ -38,8 +39,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       name: '新增元素',
       type: 'model',
       color: '#2f3ffa',
-      x: 100,
-      y: 100,
+      x: newElementPoint.x,
+      y: newElementPoint.y,
       select: false,
     });
     view.elements[elementView.id] = elementView;
