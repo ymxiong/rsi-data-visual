@@ -75,8 +75,8 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
       } else {
         // 如果被铆钉，计算新的x，y值
         const refreshViewElement = { ...anchoredElement };
-        refreshViewElement.state.x = ev.pageX - anchoredElement.width / 2;
-        refreshViewElement.state.y = ev.pageY - anchoredElement.height / 2;
+        refreshViewElement.state.x = ev.pageX - canvas.offset.x - anchoredElement.width / 2;
+        refreshViewElement.state.y = ev.pageY - canvas.offset.y - anchoredElement.height / 2;
         dispatch(refreshElement(refreshViewElement));
       }
     }
