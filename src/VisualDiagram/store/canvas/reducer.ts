@@ -30,8 +30,8 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       ) {
         refreshState.canvas.offset.x += standardOffset.x;
         refreshState.canvas.offset.y += standardOffset.y;
-        refreshState.canvas.width -= standardOffset.x;
-        refreshState.canvas.height -= standardOffset.y;
+        refreshState.canvas.size.width -= standardOffset.x;
+        refreshState.canvas.size.height -= standardOffset.y;
         refreshState.view.offset.x += standardOffset.x;
         refreshState.view.offset.y += standardOffset.y;
       }

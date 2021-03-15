@@ -68,7 +68,10 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
     }
 
     // 滑出画布的监听问题
-    if (view.selectedElementId && view.elements[view.selectedElementId].anchored) {
+    if (
+      view.selectedElementId
+      && view.elements[view.selectedElementId].anchored
+    ) {
       const anchoredElement = view.elements[view.selectedElementId];
       if (ev.buttons !== 1) {
         // 如果被铆钉但鼠标已松开，释放铆钉
@@ -77,8 +80,16 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
         // 如果被铆钉，计算新的x，y值
         const refreshViewElement = { ...anchoredElement };
         const point: Point = {
-          x: ev.pageX - canvas.offset.x + view.offset.x - anchoredElement.width / 2,
-          y: ev.pageY - canvas.offset.y + view.offset.y - anchoredElement.height / 2,
+          x:
+            ev.pageX
+            - canvas.offset.x
+            + view.offset.x
+            - anchoredElement.width / 2,
+          y:
+            ev.pageY
+            - canvas.offset.y
+            + view.offset.y
+            - anchoredElement.height / 2,
         };
         refreshViewElement.state.x = point.x;
         refreshViewElement.state.y = point.y;

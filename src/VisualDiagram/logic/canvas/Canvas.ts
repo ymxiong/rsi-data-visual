@@ -1,4 +1,5 @@
-import { Point, standardOffset, standardSize } from '../utils/Point';
+import { Point, standardOffset } from '../utils/Point';
+import { Size, standardSize } from '../utils/Size';
 import { CanvasState } from './CanvasState';
 
 type Canvas = {
@@ -6,8 +7,7 @@ type Canvas = {
   state: CanvasState;
   anchored: boolean;
   offset: Point;
-  width: number;
-  height: number;
+  size: Size;
 };
 
 const canvasStateTemplate: CanvasState = {
@@ -26,8 +26,7 @@ const buildCanvasFromCanvasState = (
       // ...zeroOffset,
     },
     anchored: false,
-    width: standardSize.x,
-    height: standardSize.y,
+    size: { ...standardSize },
   };
   return canvas;
 };
