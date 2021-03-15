@@ -17,7 +17,11 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     (state: Store) => state.canvas.view.elements[props.element.id],
   );
 
-  const offset = useSelector((state: Store) => state.canvas.canvas.offset);
+  const canvasOffset = useSelector(
+    (state: Store) => state.canvas.canvas.offset,
+  );
+
+  const viewOffset = useSelector((state: Store) => state.canvas.view.offset);
 
   const MOVE_FREQUENCY = 2;
 
@@ -41,8 +45,8 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       } else {
         // 如果被铆钉，计算新的x，y值
         const refreshView = { ...element };
-        refreshView.state.x = ev.pageX - offset.x - element.width / 2;
-        refreshView.state.y = ev.pageY - offset.y - element.height / 2;
+        refreshView.state.x = ev.pageX - canvasOffset.x + viewOffset.x - element.width / 2;
+        refreshView.state.y = ev.pageY - canvasOffset.y + viewOffset.y - element.height / 2;
         dispatch(refreshElement(refreshView));
       }
     }
@@ -67,6 +71,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     <Element
       key={element.id}
       element={element}
+      offset={viewOffset}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}

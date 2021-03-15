@@ -6,7 +6,16 @@ export const calcPointsBetweenElement = (
   fromElement: ElementView,
   toElement: ElementView,
   link: LinkView,
+  offset: Point,
 ): Array<Point> => {
+  const FROM_ELEMENT_POINT = {
+    x: fromElement.state.x - offset.x,
+    y: fromElement.state.y - offset.y,
+  };
+  const TO_ELEMENT_POINT = {
+    x: toElement.state.x - offset.x,
+    y: toElement.state.y - offset.y,
+  };
   const ELEMENT_LINK_MARGIN = 25;
   const SOURCE_LINK_TOTAL = fromElement.linkSourceIds.length;
   const TARGET_LINK_TOTAL = toElement.linkTargetIds.length;
@@ -26,17 +35,19 @@ export const calcPointsBetweenElement = (
     }
     targetIndex += 1;
   }
-  const FROM_ELEMENT_PADDING = (fromElement.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
-  const TO_ELEMENT_PADDING = (fromElement.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
+  const FROM_ELEMENT_PADDING =
+    (fromElement.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
+  const TO_ELEMENT_PADDING =
+    (fromElement.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
 
   const fromElementB: Point = {
-    x: fromElement.state.x,
-    y: fromElement.state.y + fromElement.height,
+    x: FROM_ELEMENT_POINT.x,
+    y: FROM_ELEMENT_POINT.y + fromElement.height,
   };
 
   const toElementA: Point = {
-    x: toElement.state.x,
-    y: toElement.state.y,
+    x: TO_ELEMENT_POINT.x,
+    y: TO_ELEMENT_POINT.y,
   };
 
   const sourcePoint: Point = {

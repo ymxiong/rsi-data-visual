@@ -11,6 +11,7 @@ import {
 import Canvas from './components/Canvas';
 import { values } from 'lodash-es';
 import { VisualComponentStyles } from '..';
+import { Point } from '../logic/utils/Point';
 
 type CanvasContainerProps = {
   componentStyles: VisualComponentStyles;
@@ -75,8 +76,12 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
       } else {
         // 如果被铆钉，计算新的x，y值
         const refreshViewElement = { ...anchoredElement };
-        refreshViewElement.state.x = ev.pageX - canvas.offset.x - anchoredElement.width / 2;
-        refreshViewElement.state.y = ev.pageY - canvas.offset.y - anchoredElement.height / 2;
+        const point: Point = {
+          x: ev.pageX - canvas.offset.x + view.offset.x - anchoredElement.width / 2,
+          y: ev.pageY - canvas.offset.y + view.offset.y - anchoredElement.height / 2,
+        };
+        refreshViewElement.state.x = point.x;
+        refreshViewElement.state.y = point.y;
         dispatch(refreshElement(refreshViewElement));
       }
     }

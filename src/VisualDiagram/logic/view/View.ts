@@ -55,7 +55,10 @@ const buildViewFromViewState = (
     id: '',
     elements,
     links,
-    offset: { ...zeroOffset },
+    offset: {
+      ...standardOffset,
+      // ...zeroOffset,
+    },
   };
 };
 

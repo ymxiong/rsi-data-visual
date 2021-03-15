@@ -51,8 +51,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     offsetX: canvas.offset.x,
     offsetY: canvas.offset.y,
     scale: canvas.state.scale,
-    width: 800,
-    height: 800,
+    width: canvas.width,
+    height: canvas.height,
   };
 
   return (

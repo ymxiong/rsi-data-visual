@@ -22,12 +22,19 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
     (state: Store) => state.canvas.view.elements[props.link.state.toElementId],
   );
 
+  const offset = useSelector((state: Store) => state.canvas.view.offset);
+
   return (
     <g key={props.link.id}>
       {/* <SubComponent {...props} /> */}
       <Body
         color={props.link.state.color}
-        points={calcPointsBetweenElement(elementFrom, elementTo, props.link)}
+        points={calcPointsBetweenElement(
+          elementFrom,
+          elementTo,
+          props.link,
+          offset,
+        )}
       />
     </g>
   );

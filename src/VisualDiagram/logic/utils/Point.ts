@@ -18,4 +18,9 @@ const standardOffset: Point = {
   y: -200,
 };
 
-export { Point, standardOffset, zeroOffset, newElementPoint };
+const standardSize: Point = {
+  x: 1800,
+  y: 1000,
+};
+
+export { Point, standardOffset, zeroOffset, newElementPoint, standardSize };

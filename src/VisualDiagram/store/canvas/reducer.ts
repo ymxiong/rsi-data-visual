@@ -1,4 +1,5 @@
 import { Reducer } from 'redux';
+import { standardOffset } from '../../logic/utils/Point';
 import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
 import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
@@ -19,10 +20,22 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
 ) => {
   switch (action.type) {
     case 'canvas/refresh': {
-      return {
+      const refreshState = {
         ...state,
         canvas: { ...action.payload },
       };
+      if (
+        refreshState.canvas.offset.x > 0
+        || refreshState.canvas.offset.y > 0
+      ) {
+        refreshState.canvas.offset.x += standardOffset.x;
+        refreshState.canvas.offset.y += standardOffset.y;
+        refreshState.canvas.width -= standardOffset.x;
+        refreshState.canvas.height -= standardOffset.y;
+        refreshState.view.offset.x += standardOffset.x;
+        refreshState.view.offset.y += standardOffset.y;
+      }
+      return refreshState;
     }
     case 'canvas/view/refresh': {
       return {

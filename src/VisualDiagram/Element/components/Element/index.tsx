@@ -1,9 +1,11 @@
 import React, { ReactNode } from 'react';
 import { ElementStyle } from '../ElementStyle';
 import { ElementView } from '../../../logic/element/ElementView';
+import { Point } from 'src/VisualDiagram/logic/utils/Point';
 
 type ElementProps = {
   element: ElementView;
+  offset: Point;
   children: ReactNode;
   onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -15,7 +17,9 @@ export const Element = (props: ElementProps): JSX.Element => {
   return (
     <ElementStyle
       style={{
-        transform: `translate(${props.element.state.x}px, ${props.element.state.y}px)`,
+        transform: `translate(${props.element.state.x - props.offset.x}px, ${
+          props.element.state.y - props.offset.y
+        }px)`,
         cursor: 'pointer',
       }}
     >
