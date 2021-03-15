@@ -2,6 +2,12 @@ import { CanvasAction } from './types';
 import { View } from '../../logic/view/View';
 import { ElementView } from '../../logic/element/ElementView';
 import { LinkView } from '../../logic/link/LinkView';
+import { Canvas } from '../../logic/canvas/Canvas';
+
+export const refreshCanvas = (canvas: Canvas): CanvasAction => ({
+  type: 'canvas/refresh',
+  payload: canvas,
+});
 
 export const refreshView = (view: View): CanvasAction => ({
   type: 'canvas/view/refresh',

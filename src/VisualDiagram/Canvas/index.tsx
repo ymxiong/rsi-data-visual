@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
-import { refreshView, selectElement } from '../store/canvas/actions';
+import {
+  refreshCanvas,
+  refreshView,
+  selectElement,
+} from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
 import { values } from 'lodash-es';
@@ -9,23 +13,12 @@ import { VisualComponentStyles } from '..';
 
 type CanvasContainerProps = {
   componentStyles: VisualComponentStyles;
-  // isConnecting: boolean;
-  // connectingLink: Links;
-  // gridSize?: number;
-  // artboard: { x: number; y: number; width: number; height: number };
-  // zoomLevel: number;
-  // configViewport: () => CanvasAction;
-  // trackMovement: (coords: Coords) => CanvasAction;
-  // anchorCanvas: (anchor: boolean) => CanvasAction;
-  // zoom: (level: number) => CanvasAction;
-  // undo: () => HistoryAction;
-  // redo: () => HistoryAction;
-  // unselectAll: () => MetaEntityAction;
-  // anchorEntity: (isAnchored: boolean, id: string) => CanvasAction;
 };
 
 const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   const dispatch = useDispatch();
+
+  const canvas = useSelector((state: Store) => state.canvas.canvas);
 
   const view = useSelector((state: Store) => state.canvas.view);
 
@@ -41,47 +34,58 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
     }
   };
 
-  const testMoveComponent = () => {
-    const element = values(view.elements)[0];
-    console.log('element', element);
-    element.state.y += 100;
-    dispatch(refreshView(view));
-  };
-
   const handleKey = (ev: KeyboardEvent) => {
     if (ev.getModifierState('Meta') || ev.getModifierState('Control')) {
       switch (ev.key) {
         case 'z':
           ev.preventDefault();
-          console.log('press z');
-          // this.props.undo();
           break;
         case 'y':
           ev.preventDefault();
-          console.log('press y');
-          testMoveComponent();
-          // this.props.redo();
           break;
         case 's':
           ev.preventDefault();
-          console.log('press s');
-          // this.props.redo();
           break;
         // no default
       }
     }
   };
 
-  const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
-
-  const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    dispatch(selectElement('', false));
+  const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    if (canvas.anchored) {
+      if (ev.buttons !== 1) {
+        // 如果被铆钉但鼠标已松开，释放铆钉
+        dispatch(refreshCanvas({ ...canvas, anchored: false }));
+      } else {
+        // 如果被铆钉，计算新的x，y值
+        const newCanvas = { ...canvas };
+        newCanvas.offset.x += ev.movementX;
+        newCanvas.offset.y += ev.movementY;
+        dispatch(refreshCanvas(newCanvas));
+      }
+    }
   };
 
-  const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {};
+  const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    ev.stopPropagation();
+    dispatch(refreshCanvas({ ...canvas, anchored: true }));
+  };
+
+  const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    ev.stopPropagation();
+    dispatch(selectElement('', false));
+    dispatch(refreshCanvas({ ...canvas, anchored: false }));
+  };
+
+  const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    dispatch(selectElement('', false));
+    onCanvasMove(ev);
+  };
 
   const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    ev.stopPropagation();
     dispatch(selectElement('', false));
+    dispatch(refreshCanvas({ ...canvas, anchored: false }));
   };
 
   useEffect(() => {

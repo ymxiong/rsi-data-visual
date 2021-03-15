@@ -1,9 +1,10 @@
-import Point from '../utils/Point';
+import { Point, standardOffset, zeroOffset } from '../utils/Point';
 import { CanvasState } from './CanvasState';
 
 type Canvas = {
   id: string;
   state: CanvasState;
+  anchored: boolean;
   offset: Point;
 };
 
@@ -19,8 +20,8 @@ const buildCanvasFromCanvasState = (
     id: state.id,
     state,
     offset: {
-      x: 0,
-      y: 0,
+      ...standardOffset,
+      ...zeroOffset,
     },
   };
   return canvas;

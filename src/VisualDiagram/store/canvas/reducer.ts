@@ -18,6 +18,12 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
   action,
 ) => {
   switch (action.type) {
+    case 'canvas/refresh': {
+      return {
+        ...state,
+        canvas: { ...action.payload },
+      };
+    }
     case 'canvas/view/refresh': {
       return {
         ...state,

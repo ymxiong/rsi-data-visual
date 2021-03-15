@@ -1,4 +1,4 @@
-import Point from '../utils/Point';
+import { Point } from '../utils/Point';
 
 type LinkState = {
   id: string;
