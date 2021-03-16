@@ -1,10 +1,14 @@
-import style from 'styled-components';
+import styled from 'styled-components';
 
-const CanvasViewport = style.div`
+const CanvasViewport = styled.div`
   min-height: 600px;
   flex: 1 0 auto;
   overflow: hidden;
   background: #eee;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 
   & * {
     box-sizing: border-box;
