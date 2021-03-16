@@ -4,7 +4,7 @@ type Size = {
 };
 
 const standardSize: Size = {
-  width: 1600,
+  width: 1664,
   height: 900,
 };
 

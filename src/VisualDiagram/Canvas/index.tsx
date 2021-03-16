@@ -4,12 +4,10 @@ import { Store } from '../store';
 import {
   refreshCanvas,
   refreshElement,
-  refreshView,
   selectElement,
 } from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
-import { values } from 'lodash-es';
 import { VisualComponentStyles } from '..';
 import { Point } from '../logic/utils/Point';
 
@@ -32,6 +30,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
 
   const handleResize = () => {
     if (canvasDOM) {
+      console.log(canvasDOM);
       // this.props.configViewport();
     }
   };

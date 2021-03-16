@@ -1,9 +1,8 @@
 import style from 'styled-components';
 
 const CanvasViewport = style.div`
-  min-height: 30em;
+  min-height: 600px;
   flex: 1 0 auto;
-  position: relative;
   overflow: hidden;
   background: #eee;
 

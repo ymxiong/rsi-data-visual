@@ -25,6 +25,15 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
         canvas: { ...action.payload },
       };
       if (
+        refreshState.canvas.size.width + refreshState.canvas.offset.x
+          < refreshState.canvas.viewport.width
+        || refreshState.canvas.size.height + refreshState.canvas.offset.y
+          < refreshState.canvas.viewport.height
+      ) {
+        refreshState.canvas.size.width -= standardOffset.x;
+        refreshState.canvas.size.height -= standardOffset.y;
+      }
+      if (
         refreshState.canvas.offset.x > 0
         || refreshState.canvas.offset.y > 0
       ) {

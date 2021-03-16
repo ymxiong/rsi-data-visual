@@ -7,6 +7,7 @@ type Canvas = {
   state: CanvasState;
   anchored: boolean;
   offset: Point;
+  viewport: Size;
   size: Size;
 };
 
@@ -26,7 +27,11 @@ const buildCanvasFromCanvasState = (
       // ...zeroOffset,
     },
     anchored: false,
-    size: { ...standardSize },
+    viewport: { ...standardSize },
+    size: {
+      width: standardSize.width - 2 * standardOffset.x,
+      height: standardSize.height - 2 * standardOffset.y,
+    },
   };
   return canvas;
 };
