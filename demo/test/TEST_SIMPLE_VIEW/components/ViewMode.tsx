@@ -1,5 +1,5 @@
 import React from 'react';
-import { ElementView } from '../../../../src/VisualDiagram/logic/element/ElementView';
+import { VisualComponentProps } from '../../../../src/VisualDiagram';
 import ModelFooter from './ModelFooter';
 import { ModelTitle } from './ModelTitle';
 
@@ -14,9 +14,7 @@ const modelStyle = {
   color: '#333',
 };
 
-export interface ViewModeProps {
-  element: ElementView;
-}
+export type ViewModeProps = VisualComponentProps;
 
 const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
   const computeStyle = (width = 160, height = 62) => ({

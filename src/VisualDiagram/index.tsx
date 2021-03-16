@@ -5,10 +5,15 @@ import { refreshView } from './store/canvas/actions';
 import CanvasContainer from './Canvas';
 import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
 import { buildViewFromViewState } from './logic/view/View';
+import { ElementView } from './logic/element/ElementView';
+
+export type VisualComponentProps = {
+  element: ElementView;
+};
 
 export type VisualComponentStyles = {
   [type: string]: {
-    style: ComponentType<any>;
+    style: ComponentType<VisualComponentProps>;
   };
 };
 

@@ -20,16 +20,16 @@ const CanvasArtboard = styled.div.attrs((props: CanvasArtboardProps) => {
   background-image: linear-gradient(
       0deg,
       transparent 0%,
-      transparent 90%,
-      rgba(0, 0, 0, 0.2) 100%
+      transparent 95%,
+      rgba(0, 0, 0, 0.1) 100%
     ),
     linear-gradient(
       90deg,
       transparent 0%,
-      transparent 90%,
-      rgba(0, 0, 0, 0.2) 100%
+      transparent 95%,
+      rgba(0, 0, 0, 0.1) 100%
     );
-  background-size: 10px 10px;
+  background-size: 25px 25px;
   position: relative;
   transform-origin: 0 0;
   background-color: #fff;

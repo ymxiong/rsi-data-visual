@@ -13,7 +13,7 @@ import { LinkView } from '../../../logic/link/LinkView';
 import { values } from 'lodash-es';
 import { LinkContainer, LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
-import { refreshView } from '../../../store/canvas/actions';
+import { refreshView, refreshCanvas } from '../../../store/canvas/actions';
 import { VisualComponentStyles } from '../../../../VisualDiagram';
 import { newElementPoint } from '../../../logic/utils/Point';
 
@@ -45,6 +45,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     });
     view.elements[elementView.id] = elementView;
     dispatch(refreshView(view));
+  };
+
+  const onSort = () => {
+    dispatch(refreshCanvas(canvas));
   };
 
   const canvasArtboardProps: CanvasArtboardProps = {
