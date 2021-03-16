@@ -5,6 +5,13 @@ import SVG from 'react-inlinesvg';
 import StyledTooltip from '../../../../components/StyledTooltip';
 import plusIcon from '../../../../assets/icons/plus.svg';
 import linkIcon from '../../../../assets/icons/link.svg';
+import uploadIcon from '../../../../assets/icons/upload.svg';
+import zoomIn from '../../../../assets/icons/zoomIn.svg';
+import zoomOut from '../../../../assets/icons/zoomOut.svg';
+import sort from '../../../../assets/icons/sort.svg';
+import cut from '../../../../assets/icons/cut.svg';
+import undo from '../../../../assets/icons/undo.svg';
+import redo from '../../../../assets/icons/redo.svg';
 
 const ToolbarStyle = styled.div`
   position: absolute;
@@ -67,32 +74,37 @@ const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
       </StyledTooltip>
       <StyledTooltip overlay="保存" placement="right">
         <ToolbarButton>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
+          <ToolbarIcon src={uploadIcon}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="放大" placement="right">
         <ToolbarButton>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
+          <ToolbarIcon src={zoomIn}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="缩小" placement="right">
         <ToolbarButton>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
+          <ToolbarIcon src={zoomOut}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="整理" placement="right">
         <ToolbarButton>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
+          <ToolbarIcon src={sort}></ToolbarIcon>
+        </ToolbarButton>
+      </StyledTooltip>
+      <StyledTooltip overlay="剪裁" placement="right">
+        <ToolbarButton>
+          <ToolbarIcon src={cut}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="撤销" placement="right">
         <ToolbarButton>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
+          <ToolbarIcon src={undo}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="重做" placement="right">
         <ToolbarButton>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
+          <ToolbarIcon src={redo}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
     </ToolbarStyle>
