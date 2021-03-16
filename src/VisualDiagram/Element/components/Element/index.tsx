@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { ElementStyle } from '../ElementStyle';
 import { ElementView } from '../../../logic/element/ElementView';
-import { Point } from 'src/VisualDiagram/logic/utils/Point';
+import { Point } from '../../../logic/utils/Point';
 
 type ElementProps = {
   element: ElementView;

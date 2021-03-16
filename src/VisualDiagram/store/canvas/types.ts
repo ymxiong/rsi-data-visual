@@ -2,7 +2,7 @@ import { View } from '../../logic/view/View';
 import { ActionShape } from '..';
 import { ElementView } from '../../logic/element/ElementView';
 import { LinkView } from '../../logic/link/LinkView';
-import { Canvas } from 'src/VisualDiagram/logic/canvas/Canvas';
+import { Canvas } from '../../logic/canvas/Canvas';
 
 export type CanvasRefeshAction = ActionShape<'canvas/refresh', Canvas>;
 
