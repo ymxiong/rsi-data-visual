@@ -10,6 +10,7 @@ import {
 import Canvas from './components/Canvas';
 import { VisualComponentStyles } from '../../../types';
 import { Point } from '../logic/utils/Point';
+import { zoomLevels } from '../logic/utils/Scale';
 
 type CanvasContainerProps = {
   componentStyles: VisualComponentStyles;
@@ -65,8 +66,10 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
       } else {
         // 如果被铆钉，计算新的x，y值
         const newCanvas = { ...canvas };
-        newCanvas.offset.x += ev.movementX;
-        newCanvas.offset.y += ev.movementY;
+        newCanvas.offset.x
+          += ev.movementX * zoomLevels[zoomLevels.length - 1 - canvas.state.scale];
+        newCanvas.offset.y
+          += ev.movementY * zoomLevels[zoomLevels.length - 1 - canvas.state.scale];
         dispatch(refreshCanvas(newCanvas));
       }
     }
@@ -85,15 +88,13 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
         const refreshViewElement = { ...anchoredElement };
         const point: Point = {
           x:
-            ev.pageX
+            (ev.pageX - canvas.margin.x) / zoomLevels[canvas.state.scale]
             - canvas.offset.x
-            - canvas.margin.x
             + view.offset.x
             - anchoredElement.width / 2,
           y:
-            ev.pageY
+            (ev.pageY - canvas.margin.y) / zoomLevels[canvas.state.scale]
             - canvas.offset.y
-            - canvas.margin.y
             + view.offset.y
             - anchoredElement.height / 2,
         };

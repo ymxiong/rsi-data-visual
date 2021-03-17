@@ -11,7 +11,9 @@ type CanvasArtboardProps = {
 const CanvasArtboard = styled.div.attrs((props: CanvasArtboardProps) => {
   return {
     style: {
-      transform: `translate(${props.offsetX}px, ${props.offsetY}px) scale(${props.scale})`,
+      transform: `translate(${props.offsetX * props.scale}px, ${
+        props.offsetY * props.scale
+      }px) scale(${props.scale})`,
       width: `${props.width}px`,
       height: `${props.height}px`,
     },

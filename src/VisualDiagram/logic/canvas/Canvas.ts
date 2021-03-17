@@ -20,7 +20,7 @@ type Canvas = {
 };
 
 const canvasStateTemplate: CanvasState = {
-  id: 'testCanvasState',
+  id: 'defaultCanvasState',
   scale: 3,
 };
 

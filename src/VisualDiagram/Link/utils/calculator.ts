@@ -2,6 +2,7 @@ import { ElementView } from '../../../VisualDiagram/logic/element/ElementView';
 import { LinkView } from '../../../VisualDiagram/logic/link/LinkView';
 import { Point } from '../../logic/utils/Point';
 
+// TODO: 位置排序与线条交错问题
 export const calcPointsBetweenElement = (
   fromElement: ElementView,
   toElement: ElementView,

@@ -16,6 +16,7 @@ import CanvasToolbar from '../CanvasToolbar';
 import { refreshView, refreshCanvas } from '../../../store/canvas/actions';
 import { VisualComponentStyles } from '../../../../../types';
 import { newElementPoint } from '../../../logic/utils/Point';
+import { zoomLevels } from '../../../logic/utils/Scale';
 
 type CanvasProps = {
   componentStyles: VisualComponentStyles;
@@ -33,8 +34,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const view = useSelector((state: Store) => state.canvas.view);
 
-  const zoomLevels: Array<number> = [0.25, 0.5, 0.75, 1, 1.5, 2];
-
   const onCreateElement = () => {
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
@@ -50,8 +49,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   };
 
   const onZoomIn = () => {
-    if (canvas.state.scale > 5) {
-      canvas.state.scale = 5;
+    if (canvas.state.scale > zoomLevels.length - 2) {
+      canvas.state.scale = zoomLevels.length - 1;
     } else {
       canvas.state.scale += 1;
     }
@@ -59,7 +58,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   };
 
   const onZoomOut = () => {
-    if (canvas.state.scale < 0) {
+    if (canvas.state.scale < 1) {
       canvas.state.scale = 0;
     } else {
       canvas.state.scale -= 1;

@@ -4,6 +4,7 @@ import { Store } from '../store';
 import { refreshElement, selectElement } from '../store/canvas/actions';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
+import { zoomLevels } from '../logic/utils/Scale';
 
 export type ElementContainerProps = {
   element: ElementView;
@@ -23,6 +24,10 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   const canvasMargin = useSelector(
     (state: Store) => state.canvas.canvas.margin,
+  );
+
+  const canvasScale = useSelector(
+    (state: Store) => state.canvas.canvas.state.scale,
   );
 
   const viewOffset = useSelector((state: Store) => state.canvas.view.offset);
@@ -49,14 +54,12 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       } else {
         // 如果被铆钉，计算新的x，y值
         const refreshView = { ...element };
-        refreshView.state.x = ev.pageX
+        refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
           - canvasOffset.x
-          - canvasMargin.x
           + viewOffset.x
           - element.width / 2;
-        refreshView.state.y = ev.pageY
+        refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
           - canvasOffset.y
-          - canvasMargin.y
           + viewOffset.y
           - element.height / 2;
         dispatch(refreshElement(refreshView));
