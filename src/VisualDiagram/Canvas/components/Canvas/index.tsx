@@ -33,6 +33,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const view = useSelector((state: Store) => state.canvas.view);
 
+  const zoomLevels: Array<number> = [0.25, 0.5, 0.75, 1, 1.5, 2];
+
   const onCreateElement = () => {
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
@@ -47,6 +49,24 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     dispatch(refreshView(view));
   };
 
+  const onZoomIn = () => {
+    if (canvas.state.scale > 5) {
+      canvas.state.scale = 5;
+    } else {
+      canvas.state.scale += 1;
+    }
+    dispatch(refreshCanvas({ ...canvas }));
+  };
+
+  const onZoomOut = () => {
+    if (canvas.state.scale < 0) {
+      canvas.state.scale = 0;
+    } else {
+      canvas.state.scale -= 1;
+    }
+    dispatch(refreshCanvas({ ...canvas }));
+  };
+
   const onSort = () => {
     dispatch(refreshCanvas(canvas));
   };
@@ -54,7 +74,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const canvasArtboardProps: CanvasArtboardProps = {
     offsetX: canvas.offset.x,
     offsetY: canvas.offset.y,
-    scale: canvas.state.scale,
+    scale: zoomLevels[canvas.state.scale],
     width: canvas.size.width,
     height: canvas.size.height,
   };
@@ -88,7 +108,11 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         })}
       </CanvasArtboard>
 
-      <CanvasToolbar onCreateElement={onCreateElement} />
+      <CanvasToolbar
+        onCreateElement={onCreateElement}
+        onZoomIn={onZoomIn}
+        onZoomOut={onZoomOut}
+      />
     </CanvasViewport>
   );
 };

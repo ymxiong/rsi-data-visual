@@ -56,6 +56,8 @@ const ToolbarIcon = styled(SVG)`
 
 type CanvasToolbarProps = {
   onCreateElement: () => void;
+  onZoomIn: () => void;
+  onZoomOut: () => void;
 };
 
 const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
@@ -78,12 +80,12 @@ const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="放大" placement="right">
-        <ToolbarButton>
+        <ToolbarButton onClick={props.onZoomIn}>
           <ToolbarIcon src={zoomIn}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
       <StyledTooltip overlay="缩小" placement="right">
-        <ToolbarButton>
+        <ToolbarButton onClick={props.onZoomOut}>
           <ToolbarIcon src={zoomOut}></ToolbarIcon>
         </ToolbarButton>
       </StyledTooltip>
