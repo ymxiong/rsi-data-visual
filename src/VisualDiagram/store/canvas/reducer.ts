@@ -3,6 +3,7 @@ import { standardOffset } from '../../logic/utils/Point';
 import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
 import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
+import { zoomLevels } from '../../logic/utils/Scale';
 
 export interface CanvasState {
   canvas: Canvas;
@@ -27,8 +28,10 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       if (
         refreshState.canvas.size.width + refreshState.canvas.offset.x
           < refreshState.canvas.viewport.width
+            / zoomLevels[refreshState.canvas.state.scale]
         || refreshState.canvas.size.height + refreshState.canvas.offset.y
           < refreshState.canvas.viewport.height
+            / zoomLevels[refreshState.canvas.state.scale]
       ) {
         refreshState.canvas.size.width -= standardOffset.x;
         refreshState.canvas.size.height -= standardOffset.y;
