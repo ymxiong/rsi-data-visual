@@ -1,9 +1,7 @@
 import React, { useImperativeHandle, useRef } from 'react';
 import { Provider } from 'react-redux';
-import VisualDiagram, {
-  VisualDiagramHandle,
-  VisualDiagramProps,
-} from './VisualDiagram';
+import { VisualDiagramHandle, VisualDiagramProps } from '../types';
+import VisualDiagram from './VisualDiagram';
 import { ViewState } from './VisualDiagram/logic/view/ViewState';
 import { configureStore } from './VisualDiagram/store';
 

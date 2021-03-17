@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
+import { ViewState } from '../src/VisualDiagram/logic/view/ViewState';
+import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
+
+export type VisualComponentProps = {
+  element: ElementView;
+};
+
+export type VisualComponentStyles = {
+  [type: string]: {
+    style: ComponentType<VisualComponentProps>;
+  };
+};
 
 export type VisualDiagramProps = {
-  test: string;
+  componentStyles: VisualComponentStyles;
+  onChange?: (viewState: ViewState) => void;
 };
 
 export type VisualDiagramHandle = {
-  setView: (test: string) => boolean;
+  setView: (viewState: ViewState) => boolean;
 };
 
 export declare const VisualDiagram: React.ForwardRefRenderFunction<

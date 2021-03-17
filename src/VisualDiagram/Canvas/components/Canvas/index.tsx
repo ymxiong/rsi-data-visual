@@ -14,7 +14,7 @@ import { values } from 'lodash-es';
 import { LinkContainer, LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
 import { refreshView, refreshCanvas } from '../../../store/canvas/actions';
-import { VisualComponentStyles } from '../../../../VisualDiagram';
+import { VisualComponentStyles } from '../../../../../types';
 import { newElementPoint } from '../../../logic/utils/Point';
 
 type CanvasProps = {

@@ -1,30 +1,11 @@
-import React, { ComponentType, useEffect, useImperativeHandle } from 'react';
+import React, { useEffect, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
 import { refreshView } from './store/canvas/actions';
 import CanvasContainer from './Canvas';
 import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
 import { buildViewFromViewState } from './logic/view/View';
-import { ElementView } from './logic/element/ElementView';
-
-export type VisualComponentProps = {
-  element: ElementView;
-};
-
-export type VisualComponentStyles = {
-  [type: string]: {
-    style: ComponentType<VisualComponentProps>;
-  };
-};
-
-export type VisualDiagramProps = {
-  componentStyles: VisualComponentStyles;
-  onChange?: (viewState: ViewState) => void;
-};
-
-export type VisualDiagramHandle = {
-  setView: (viewState: ViewState) => boolean;
-};
+import { VisualDiagramHandle, VisualDiagramProps } from '../../types';
 
 const VisualDiagram: React.ForwardRefRenderFunction<
   VisualDiagramHandle,

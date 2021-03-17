@@ -8,7 +8,7 @@ import {
 } from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
-import { VisualComponentStyles } from '..';
+import { VisualComponentStyles } from '../../../types';
 import { Point } from '../logic/utils/Point';
 
 type CanvasContainerProps = {
@@ -26,14 +26,19 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
 
   const handleRef = (div: HTMLDivElement) => {
     canvasDOM = div;
-  };
-
-  const handleResize = () => {
     if (canvasDOM) {
-      console.log(canvasDOM);
-      // this.props.configViewport();
+      const domRect = canvasDOM.getBoundingClientRect();
+      if (domRect.x !== canvas.margin.x || domRect.y !== canvas.margin.y) {
+        // 如果被铆钉，计算新的x，y值
+        const newCanvas = { ...canvas };
+        newCanvas.margin.x = domRect.x;
+        newCanvas.margin.y = domRect.y;
+        dispatch(refreshCanvas(newCanvas));
+      }
     }
   };
+
+  const handleResize = () => {};
 
   const handleKey = (ev: KeyboardEvent) => {
     if (ev.getModifierState('Meta') || ev.getModifierState('Control')) {
@@ -82,11 +87,13 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
           x:
             ev.pageX
             - canvas.offset.x
+            - canvas.margin.x
             + view.offset.x
             - anchoredElement.width / 2,
           y:
             ev.pageY
             - canvas.offset.y
+            - canvas.margin.y
             + view.offset.y
             - anchoredElement.height / 2,
         };

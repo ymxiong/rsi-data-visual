@@ -14,8 +14,8 @@ function buildFromElementState(state: ElementState): ElementView {
   return {
     id: state.id,
     state,
-    width: 100,
-    height: 100,
+    width: 160,
+    height: 62,
     anchored: false,
     linkSourceIds: [],
     linkTargetIds: [],
