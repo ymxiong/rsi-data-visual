@@ -1,5 +1,5 @@
 import React from 'react';
-import { VisualComponentProps } from '../types';
+import { VisualComponentProps } from '../../../../types';
 import ModelFooter from './ModelFooter';
 import { ModelTitle } from './ModelTitle';
 
