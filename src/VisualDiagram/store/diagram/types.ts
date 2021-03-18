@@ -1,5 +1,22 @@
+import { VisualToolbarProps } from '../../../../types';
 import { ActionShape } from '..';
 
-export type DiagramUpdateIdAction = ActionShape<'test/test', string>;
+export type DiagramRefreshToolbarItem = ActionShape<
+  'diagram/toolbar/item/refresh',
+  VisualToolbarProps
+>;
 
-export type DiagramAction = DiagramUpdateIdAction;
+export type DiagramRefreshToolbarItemBatch = ActionShape<
+  'diagram/toolbar/item/batch/refresh',
+  VisualToolbarProps[]
+>;
+
+export type DiagramToolbarItemBatchSelect = ActionShape<
+  'diagram/toolbar/item/batch/select',
+  string[]
+>;
+
+export type DiagramAction =
+  | DiagramRefreshToolbarItem
+  | DiagramRefreshToolbarItemBatch
+  | DiagramToolbarItemBatchSelect;

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import VisualDiagram from '../src';
 import {
   componentStyles,
+  toolbarState,
   viewStateTemplate,
 } from './test/TEST_SIMPLE_VIEW/ViewStateTemplate';
 
@@ -12,6 +13,7 @@ const App = () => {
   useEffect(() => {
     if (visualDiagramRef.current) {
       visualDiagramRef.current.setView(viewStateTemplate);
+      visualDiagramRef.current.selectToolbarItems(['create', 'plus']);
     }
   }, []);
 
@@ -23,6 +25,7 @@ const App = () => {
     <div style={{ width: '100%', height: '900px' }}>
       <VisualDiagram
         componentStyles={componentStyles}
+        toolbarState={toolbarState}
         ref={visualDiagramRef}
         onChange={handleChange}
       />

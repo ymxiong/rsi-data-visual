@@ -1,17 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import SVG from 'react-inlinesvg';
+import { useSelector } from 'react-redux';
+import { Store } from '../../../store';
 
-import StyledTooltip from '../../../../components/StyledTooltip';
-import plusIcon from '../../../../assets/icons/plus.svg';
-import linkIcon from '../../../../assets/icons/link.svg';
-import uploadIcon from '../../../../assets/icons/upload.svg';
-import zoomIn from '../../../../assets/icons/zoomIn.svg';
-import zoomOut from '../../../../assets/icons/zoomOut.svg';
-import sort from '../../../../assets/icons/sort.svg';
-import cut from '../../../../assets/icons/cut.svg';
-import undo from '../../../../assets/icons/undo.svg';
-import redo from '../../../../assets/icons/redo.svg';
+import styled from 'styled-components';
+import { buildVisualToolbarStyles } from './VisualToolbarStyles';
 
 const ToolbarStyle = styled.div`
   position: absolute;
@@ -30,87 +22,19 @@ const ToolbarStyle = styled.div`
   justify-content: space-between;
 `;
 
-const ToolbarButton = styled.div`
-  flex: 1;
-  flex-shrink: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  border-radius: 10px;
-  transition: background-color 0.3s ease;
+const CanvasToolbar = (): JSX.Element => {
+  const toolbar = useSelector((state: Store) => state.diagram.toolbar);
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const ToolbarIcon = styled(SVG)`
-  width: 30px;
-  height: 30px;
-  path {
-    fill: #1890ff;
-  }
-`;
-
-type CanvasToolbarProps = {
-  onCreateElement: () => void;
-  onZoomIn: () => void;
-  onZoomOut: () => void;
-};
-
-const CanvasToolbar = (props: CanvasToolbarProps): JSX.Element => {
-  return (
-    <ToolbarStyle>
-      {/* <Tooltip title="保存模型"> */}
-      <StyledTooltip overlay="新增元素" placement="right">
-        <ToolbarButton onClick={props.onCreateElement}>
-          <ToolbarIcon src={plusIcon}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="新增链接" placement="right">
-        <ToolbarButton>
-          <ToolbarIcon src={linkIcon}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="保存" placement="right">
-        <ToolbarButton>
-          <ToolbarIcon src={uploadIcon}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="放大" placement="right">
-        <ToolbarButton onClick={props.onZoomIn}>
-          <ToolbarIcon src={zoomIn}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="缩小" placement="right">
-        <ToolbarButton onClick={props.onZoomOut}>
-          <ToolbarIcon src={zoomOut}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="整理" placement="right">
-        <ToolbarButton>
-          <ToolbarIcon src={sort}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="剪裁" placement="right">
-        <ToolbarButton>
-          <ToolbarIcon src={cut}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="撤销" placement="right">
-        <ToolbarButton>
-          <ToolbarIcon src={undo}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-      <StyledTooltip overlay="重做" placement="right">
-        <ToolbarButton>
-          <ToolbarIcon src={redo}></ToolbarIcon>
-        </ToolbarButton>
-      </StyledTooltip>
-    </ToolbarStyle>
+  const toolbarShowItems = useSelector(
+    (state: Store) => state.diagram.toolbarShowItems,
   );
+
+  const styles: JSX.Element[] = buildVisualToolbarStyles(
+    toolbarShowItems,
+    toolbar,
+  );
+
+  return <ToolbarStyle>{styles.map((style) => style)}</ToolbarStyle>;
 };
 
 export default CanvasToolbar;

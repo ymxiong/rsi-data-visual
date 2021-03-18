@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../store';
 import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
@@ -13,10 +13,14 @@ import { LinkView } from '../../../logic/link/LinkView';
 import { values } from 'lodash-es';
 import { LinkContainer, LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
-import { refreshView, refreshCanvas } from '../../../store/canvas/actions';
+import { refreshCanvas, addElement } from '../../../store/canvas/actions';
 import { VisualComponentStyles } from '../../../../../types';
 import { newElementPoint } from '../../../logic/utils/Point';
 import { zoomLevels } from '../../../logic/utils/Scale';
+import {
+  refreshToolbarItem,
+  refreshToolbarItemBatch,
+} from '../../../store/diagram/actions';
 
 type CanvasProps = {
   componentStyles: VisualComponentStyles;
@@ -44,8 +48,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       y: newElementPoint.y,
       select: false,
     });
-    view.elements[elementView.id] = elementView;
-    dispatch(refreshView(view));
+    dispatch(addElement(elementView));
   };
 
   const onZoomIn = () => {
@@ -78,6 +81,55 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     height: canvas.size.height,
   };
 
+  useEffect(() => {
+    dispatch(
+      refreshToolbarItemBatch([
+        {
+          id: 'plus',
+          onClick: onCreateElement,
+          icon: 'plus',
+          tips: '新增元素',
+        },
+        {
+          id: 'zoomIn',
+          onClick: onZoomIn,
+          icon: 'zoomIn',
+          tips: '放大',
+        },
+        {
+          id: 'zoomOut',
+          onClick: onZoomOut,
+          icon: 'zoomOut',
+          tips: '缩小',
+        },
+        {
+          id: 'sort',
+          onClick: onSort,
+          icon: 'sort',
+          tips: '整理',
+        },
+        {
+          id: 'cut',
+          onClick: onSort,
+          icon: 'cut',
+          tips: '裁剪',
+        },
+        {
+          id: 'undo',
+          onClick: onSort,
+          icon: 'undo',
+          tips: '撤销',
+        },
+        {
+          id: 'redo',
+          onClick: onSort,
+          icon: 'redo',
+          tips: '重做',
+        },
+      ]),
+    );
+  }, []);
+
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>
       <CanvasArtboard
@@ -107,11 +159,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         })}
       </CanvasArtboard>
 
-      <CanvasToolbar
-        onCreateElement={onCreateElement}
-        onZoomIn={onZoomIn}
-        onZoomOut={onZoomOut}
-      />
+      <CanvasToolbar />
     </CanvasViewport>
   );
 };

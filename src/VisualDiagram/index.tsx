@@ -2,6 +2,7 @@ import React, { useEffect, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
 import { refreshView } from './store/canvas/actions';
+import { selectToolbarItems } from './store/diagram/actions';
 import CanvasContainer from './Canvas';
 import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
 import { buildViewFromViewState } from './logic/view/View';
@@ -10,12 +11,10 @@ import { VisualDiagramHandle, VisualDiagramProps } from '../../types';
 const VisualDiagram: React.ForwardRefRenderFunction<
   VisualDiagramHandle,
   VisualDiagramProps
-> = ({ componentStyles, onChange }: VisualDiagramProps, ref) => {
+> = ({ componentStyles, toolbarState, onChange }: VisualDiagramProps, ref) => {
   const dispatch = useDispatch();
 
-  const view = useSelector((state: Store) => {
-    return state.canvas.view;
-  });
+  const view = useSelector((state: Store) => state.canvas.view);
 
   useEffect(() => {
     if (onChange) {
@@ -35,11 +34,22 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         // 这里返回布尔是想让外层能感知是否设置成功，上面这部份逻辑要做一下判断
         return true;
       },
+      getView: (): ViewState => {
+        return buildViewStateFromView(view);
+      },
+      selectToolbarItems(items: string[]) {
+        dispatch(selectToolbarItems(items));
+      },
     }),
     [dispatch],
   );
 
-  return <CanvasContainer componentStyles={componentStyles} />;
+  return (
+    <CanvasContainer
+      componentStyles={componentStyles}
+      toolbarState={toolbarState}
+    />
+  );
 };
 
 export default React.memo(React.forwardRef(VisualDiagram));

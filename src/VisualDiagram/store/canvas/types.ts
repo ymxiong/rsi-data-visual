@@ -13,6 +13,11 @@ export type CanvasElementRefeshAction = ActionShape<
   ElementView
 >;
 
+export type CanvasElementAddAction = ActionShape<
+  'canvas/element/add',
+  ElementView
+>;
+
 export type CanvasElementSelectType = {
   elementId: string;
   selected: boolean;
@@ -31,6 +36,7 @@ export type CanvasLinkRefeshAction = ActionShape<
 export type CanvasAction =
   | CanvasRefeshAction
   | CanvasViewRefeshAction
+  | CanvasElementAddAction
   | CanvasElementRefeshAction
   | CanvasElementSelectAction
   | CanvasLinkRefeshAction;

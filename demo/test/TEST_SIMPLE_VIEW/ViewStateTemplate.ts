@@ -1,9 +1,23 @@
+import { VisualToolbarState } from 'types';
 import { ViewState } from '../../../src/VisualDiagram/logic/view/ViewState';
 import ViewMode from './components/ViewMode';
 
 const componentStyles = {
   model: {
     style: ViewMode,
+  },
+};
+
+const onNaN = () => {
+  console.log('新增测试');
+};
+
+const toolbarState: VisualToolbarState = {
+  create: {
+    id: 'create',
+    onClick: onNaN,
+    icon: 'plus',
+    tips: '新增',
   },
 };
 
@@ -66,4 +80,4 @@ const viewStateTemplate: ViewState = {
   ],
 };
 
-export { componentStyles, viewStateTemplate };
+export { componentStyles, toolbarState, viewStateTemplate };

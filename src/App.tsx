@@ -21,6 +21,21 @@ const App: React.ForwardRefRenderFunction<
         }
         return false;
       },
+      getView: (): ViewState => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.getView();
+        }
+        return {
+          id: '',
+          elements: [],
+          links: [],
+        };
+      },
+      selectToolbarItems: (items: string[]) => {
+        if (visualDiagramRef.current) {
+          visualDiagramRef.current.selectToolbarItems(items);
+        }
+      },
     }),
     [],
   );

@@ -8,12 +8,15 @@ import {
 } from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
-import { VisualComponentStyles } from '../../../types';
+import { VisualComponentStyles, VisualToolbarState } from '../../../types';
 import { Point } from '../logic/utils/Point';
 import { zoomLevels } from '../logic/utils/Scale';
+import { refreshToolbarItemBatch } from '../store/diagram/actions';
+import { values } from 'lodash-es';
 
 type CanvasContainerProps = {
   componentStyles: VisualComponentStyles;
+  toolbarState: VisualToolbarState;
 };
 
 const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
@@ -132,6 +135,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
     }
     window.document.addEventListener('keydown', handleKey);
     window.addEventListener('resize', handleResize);
+    dispatch(refreshToolbarItemBatch(values(props.toolbarState)));
   }, []);
 
   return (

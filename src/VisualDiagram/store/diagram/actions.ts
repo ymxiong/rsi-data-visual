@@ -1,21 +1,21 @@
+import { VisualToolbarProps } from '../../../../types';
 import { DiagramAction } from './types';
 
-export const updateId = (id: string): DiagramAction => ({
-  type: 'test/test',
-  payload: id,
+export const refreshToolbarItem = (
+  item: VisualToolbarProps,
+): DiagramAction => ({
+  type: 'diagram/toolbar/item/refresh',
+  payload: item,
 });
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const updateIdAndxxx = (id: string) => (dispatch, getStore) => {
-  const oldId = getStore().diagram.id;
+export const refreshToolbarItemBatch = (
+  items: VisualToolbarProps[],
+): DiagramAction => ({
+  type: 'diagram/toolbar/item/batch/refresh',
+  payload: items,
+});
 
-  if (!oldId) {
-    return;
-  }
-
-  if (id === oldId) {
-    dispatch(updateId('1222'));
-  } else {
-    dispatch(updateId('1122312333'));
-  }
-};
+export const selectToolbarItems = (items: string[]): DiagramAction => ({
+  type: 'diagram/toolbar/item/batch/select',
+  payload: items,
+});
