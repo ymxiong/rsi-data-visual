@@ -33,7 +33,4 @@ export type VisualDiagramHandle = {
   selectToolbarItems: (items: string[]) => void;
 };
 
-export declare const VisualDiagram: React.ForwardRefRenderFunction<
-  VisualDiagramHandle,
-  VisualDiagramProps
->;
+export declare const VisualDiagram: React.ForwardRefExoticComponent<VisualDiagramProps>;
