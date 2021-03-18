@@ -20,9 +20,14 @@ const ToolbarStyle = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.3s ease;
 `;
 
-const CanvasToolbar = (): JSX.Element => {
+export interface CanvasToolbarProps {
+  hide?: boolean;
+}
+
+const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ hide }) => {
   const toolbar = useSelector((state: Store) => state.diagram.toolbar);
 
   const toolbarShowItems = useSelector(
@@ -34,7 +39,11 @@ const CanvasToolbar = (): JSX.Element => {
     toolbar,
   );
 
-  return <ToolbarStyle>{styles.map((style) => style)}</ToolbarStyle>;
+  return (
+    <ToolbarStyle style={{ transform: hide ? 'translateX(-140%)' : 'unset' }}>
+      {styles.map((style) => style)}
+    </ToolbarStyle>
+  );
 };
 
 export default CanvasToolbar;
