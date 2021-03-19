@@ -17,6 +17,8 @@ export type LinkContainerProps = {
 export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
   const dispatch = useDispatch();
 
+  const linkName = props.link.state.name;
+
   const elementFrom = useSelector(
     (state: Store) => state.canvas.view.elements[props.link.state.fromElementId],
   );

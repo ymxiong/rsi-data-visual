@@ -25,13 +25,6 @@ const Arrow = (props: ArrowProps): JSX.Element => (
     </defs>
     <ArrowStyle {...props} filter="url(#arrowShadow)" />
   </>
-
-  // <path
-  //   name="三角形"
-  //   fill={props.color || 'black'}
-  //   stroke={props.color || 'black'}
-  //   d={props.d}
-  // />
 );
 
 export default Arrow;
