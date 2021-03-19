@@ -6,8 +6,10 @@ import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
+import { View } from '../logic/view/View';
 
 export type LinkContainerProps = {
+  view: View;
   link: LinkView;
   SubComponent: ComponentType<any>;
 };
@@ -38,6 +40,7 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
       <Body
         color={color}
         points={calcPointsBetweenElement(
+          props.view,
           elementFrom,
           elementTo,
           props.link,

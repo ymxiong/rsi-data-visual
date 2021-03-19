@@ -1,9 +1,11 @@
+import { View } from '../../../VisualDiagram/logic/view/View';
 import { ElementView } from '../../../VisualDiagram/logic/element/ElementView';
 import { LinkView } from '../../../VisualDiagram/logic/link/LinkView';
 import { Point } from '../../logic/utils/Point';
 
 // TODO: 位置排序与线条交错问题
 export const calcPointsBetweenElement = (
+  view: View,
   fromElement: ElementView,
   toElement: ElementView,
   link: LinkView,
@@ -23,19 +25,24 @@ export const calcPointsBetweenElement = (
 
   let sourceIndex = 0;
   for (let index = 0; index < fromElement.linkSourceIds.length; index += 1) {
-    if (fromElement.linkSourceIds[index] === link.id) {
-      break;
+    const linkId = fromElement.linkSourceIds[index];
+    const linkView = view.links[linkId];
+    const elementToNeedSort = view.elements[linkView.state.toElementId];
+    if (elementToNeedSort.state.x < toElement.state.x) {
+      sourceIndex += 1;
     }
-    sourceIndex += 1;
   }
 
   let targetIndex = 0;
   for (let index = 0; index < toElement.linkTargetIds.length; index += 1) {
-    if (toElement.linkTargetIds[index] === link.id) {
-      break;
+    const linkId = toElement.linkTargetIds[index];
+    const linkView = view.links[linkId];
+    const elementFromNeedSort = view.elements[linkView.state.fromElementId];
+    if (elementFromNeedSort.state.x < fromElement.state.x) {
+      targetIndex += 1;
     }
-    targetIndex += 1;
   }
+
   const FROM_ELEMENT_PADDING = (fromElement.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
   const TO_ELEMENT_PADDING = (fromElement.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
 
@@ -59,25 +66,28 @@ export const calcPointsBetweenElement = (
     y: toElementA.y,
   };
 
-  if (sourcePoint.y - targetPoint.y > -2 * ELEMENT_LINK_MARGIN) {
+  if (
+    sourcePoint.y - targetPoint.y
+    > -1 * (ELEMENT_LINK_MARGIN * (sourceIndex + targetIndex + 2))
+  ) {
     const midPoint0: Point = {
       x: sourcePoint.x,
-      y: sourcePoint.y + ELEMENT_LINK_MARGIN,
+      y: sourcePoint.y + ELEMENT_LINK_MARGIN * (sourceIndex + 1),
     };
 
     const midPoint1: Point = {
       x: (sourcePoint.x + targetPoint.x) / 2,
-      y: sourcePoint.y + ELEMENT_LINK_MARGIN,
+      y: sourcePoint.y + ELEMENT_LINK_MARGIN * (sourceIndex + 1),
     };
 
     const midPoint2: Point = {
       x: (sourcePoint.x + targetPoint.x) / 2,
-      y: targetPoint.y - ELEMENT_LINK_MARGIN,
+      y: targetPoint.y - ELEMENT_LINK_MARGIN * (targetIndex + 1),
     };
 
     const midPoint3: Point = {
       x: targetPoint.x,
-      y: targetPoint.y - ELEMENT_LINK_MARGIN,
+      y: targetPoint.y - ELEMENT_LINK_MARGIN * (targetIndex + 1),
     };
     return [
       sourcePoint,

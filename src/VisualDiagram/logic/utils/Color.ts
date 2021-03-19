@@ -63,7 +63,6 @@ export const selectRelationColor = (): string => {
     }
     return result;
   }, []);
-  // TODO:
   if (!colors.length) {
     colors = defaultColors;
   }

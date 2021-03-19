@@ -2,12 +2,7 @@ import ElementState from '../element/ElementState';
 import { buildFromElementState, ElementView } from '../element/ElementView';
 import LinkState from '../link/LinkState';
 import { buildFromLinkState, LinkView } from '../link/LinkView';
-import {
-  Point,
-  standardOffset,
-  zeroOffset,
-  newElementPoint,
-} from '../utils/Point';
+import { Point, standardOffset, newElementPoint } from '../utils/Point';
 import { ViewState } from './ViewState';
 
 type View = {

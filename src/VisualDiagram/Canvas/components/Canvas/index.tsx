@@ -242,6 +242,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         <CanvasLinkSvgLand width="100%" height="100%">
           {values(view.links).map((link: LinkView) => {
             const vProps: LinkContainerProps = {
+              view,
               link,
               SubComponent: props.componentStyles.model.style,
             };
