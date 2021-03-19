@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Store } from '../../../store';
 
 import styled from 'styled-components';
-import { buildElementComponents } from './elementComponents';
+import { buildElementComponents } from './buildComponents';
 
 const ToolbarStyle = styled.div`
   position: absolute;
