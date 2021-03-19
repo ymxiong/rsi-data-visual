@@ -1,6 +1,6 @@
 {
   "name": "visual-core",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "可视化核心",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
