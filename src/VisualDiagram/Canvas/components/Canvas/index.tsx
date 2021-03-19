@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../store';
 import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
@@ -35,6 +35,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const canvas = useSelector((state: Store) => state.canvas.canvas);
 
   const view = useSelector((state: Store) => state.canvas.view);
+
+  const [hideToolbar, setToolbarHide] = useState(false);
 
   const onCreateElement = () => {
     const elementView: ElementView = buildFromElementState({
@@ -106,6 +108,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (canvas.anchored) {
+      setToolbarHide(false);
       if (ev.buttons !== 1) {
         // 如果被铆钉但鼠标已松开，释放铆钉
         dispatch(refreshCanvas({ ...canvas, anchored: false }));
@@ -125,6 +128,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       view.selectedElementId
       && view.elements[view.selectedElementId].anchored
     ) {
+      setToolbarHide(true);
       const anchoredElement = view.elements[view.selectedElementId];
       if (ev.buttons !== 1) {
         // 如果被铆钉但鼠标已松开，释放铆钉
@@ -254,7 +258,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         })}
       </CanvasArtboard>
 
-      <CanvasToolbar />
+      <CanvasToolbar hide={hideToolbar} />
     </CanvasViewport>
   );
 };
