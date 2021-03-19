@@ -1,5 +1,6 @@
 import React from 'react';
 import { Point } from '../../../logic/utils/Point';
+import Arrow from '../Arrow';
 import { Line } from '../Line';
 
 type BodyProps = {
@@ -7,7 +8,7 @@ type BodyProps = {
   points: Point[];
 };
 
-const Body = (props: BodyProps): JSX.Element => {
+const Body: React.FC<BodyProps> = (props: BodyProps) => {
   const pointsToString = (points: Array<Point>): string => {
     let point: Point | undefined;
     return points
@@ -27,33 +28,29 @@ const Body = (props: BodyProps): JSX.Element => {
       .replace(/ L$/, '');
   };
 
-  const pointsStr = pointsToString(props.points);
+  const arrowMainLen = 8;
+  const arrowPadding = 1;
+  const calArrowPoints = (end: Point) => {
+    return [
+      { x: end.x + arrowMainLen, y: end.y - arrowMainLen - arrowPadding },
+      {
+        x: end.x,
+        y: end.y - arrowPadding,
+      },
+      {
+        x: end.x - arrowMainLen,
+        y: end.y - arrowMainLen - arrowPadding,
+      },
+    ];
+  };
 
-  // const arrowPoints = calArrowPoints(
-  //   points[points.length - 1],
-  //   arrowDirection
-  // );
+  const linePointsStr = pointsToString(props.points);
+  const arrowPoints = calArrowPoints(props.points[props.points.length - 1]);
 
   return (
     <g>
-      {/* {customLink ? (
-      <CustomLink
-        lineId={newId}
-        pointsStr={pointsStr}
-        points={pointsToString(arrowPoints)}
-        onSubmit={this.handleCustomSubmit}
-        onDelete={this.props.handleDelete}
-        {...others}
-      />
-    ) : ( */}
-      <Line d={pointsStr} fill="none" color={props.color} />
-      {/* )} */}
-      {/* {this.props.hasArrow && (
-      <ArrowMarker
-        color={this.props.color}
-        points={pointsToString(arrowPoints)}
-      />
-    )} */}
+      <Line d={linePointsStr} fill="none" color={props.color} />
+      <Arrow color={props.color} d={pointsToString(arrowPoints)} />
     </g>
   );
 };

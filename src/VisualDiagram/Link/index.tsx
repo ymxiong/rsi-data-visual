@@ -35,8 +35,12 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
     color = selectRelationColor();
   }
 
+  const onClick = () => {
+    console.log('link on click');
+  };
+
   return (
-    <g key={props.link.id}>
+    <g key={props.link.id} onClick={onClick}>
       <Body
         color={color}
         points={calcPointsBetweenElement(

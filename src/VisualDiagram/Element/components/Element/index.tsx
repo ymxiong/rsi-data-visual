@@ -14,6 +14,9 @@ type ElementProps = {
 };
 
 export const Element = (props: ElementProps): JSX.Element => {
+  const onClick = () => {
+    console.log('element on click');
+  };
   return (
     <ElementStyle
       style={{
@@ -24,6 +27,7 @@ export const Element = (props: ElementProps): JSX.Element => {
       }}
     >
       <div
+        onClick={onClick}
         onMouseUp={props.onMouseUp}
         onMouseDown={props.onMouseDown}
         onMouseMove={props.onMouseMove}
