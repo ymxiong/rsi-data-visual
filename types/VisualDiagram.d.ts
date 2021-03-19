@@ -19,11 +19,20 @@ export type VisualToolbarProps = {
   onClick: () => void;
 };
 
-export type VisualToolbarState = { [id: string]: VisualToolbarProps };
+export type VisualToolbarConfig = { [id: string]: VisualToolbarProps };
+
+export type VisualElementConfig = { components: VisualElementComponents };
+
+export type VisualLinkConfig = { hasArrow: boolean };
+
+export type VisualCanvasConfig = {
+  elementConfig: VisualElementConfig;
+  linkConfig: VisualLinkConfig;
+  toolbarConfig: VisualToolbarConfig;
+};
 
 export type VisualDiagramProps = {
-  elementComponents: VisualElementComponents;
-  toolbarState: VisualToolbarState;
+  canvasConfig: VisualCanvasConfig;
   onChange?: (viewState: ViewState) => void;
 };
 

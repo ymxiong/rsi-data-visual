@@ -1,9 +1,9 @@
 import { Reducer } from 'redux';
-import { VisualToolbarProps, VisualToolbarState } from '../../../../types';
+import { VisualToolbarProps, VisualToolbarConfig } from '../../../../types';
 import { DiagramAction } from './types';
 
 export interface DiagramState {
-  toolbar: VisualToolbarState;
+  toolbar: VisualToolbarConfig;
   toolbarShowItems: string[];
 }
 

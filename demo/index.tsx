@@ -2,8 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import VisualDiagram from '../src';
 import {
-  elementComponents,
-  toolbarState,
+  canvas,
   viewStateTemplate,
 } from './test/TEST_SIMPLE_VIEW/ViewStateTemplate';
 
@@ -13,7 +12,16 @@ const App = () => {
   useEffect(() => {
     if (visualDiagramRef.current) {
       visualDiagramRef.current.setView(viewStateTemplate);
-      visualDiagramRef.current.selectToolbarItems(['create', 'plus']);
+      visualDiagramRef.current.selectToolbarItems([
+        'create',
+        // 'plus',
+        'zoomIn',
+        'zoomOut',
+        'undo',
+        'redo',
+        'sort',
+        'cut',
+      ]);
     }
   }, []);
 
@@ -24,8 +32,7 @@ const App = () => {
   return (
     <div style={{ width: '100%', height: '900px' }}>
       <VisualDiagram
-        elementComponents={elementComponents}
-        toolbarState={toolbarState}
+        canvasConfig={canvas}
         ref={visualDiagramRef}
         onChange={handleChange}
       />

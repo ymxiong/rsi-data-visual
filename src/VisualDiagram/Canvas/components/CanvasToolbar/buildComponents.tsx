@@ -9,7 +9,7 @@ import sortIcon from '../../../../assets/icons/sort.svg';
 import cutIcon from '../../../../assets/icons/cut.svg';
 import undoIcon from '../../../../assets/icons/undo.svg';
 import redoIcon from '../../../../assets/icons/redo.svg';
-import { VisualToolbarState } from '../../../../../types';
+import { VisualToolbarConfig } from '../../../../../types';
 
 const defaultIconMap: { [name: string]: string } = {
   plus: plusIcon,
@@ -25,7 +25,7 @@ const defaultIconMap: { [name: string]: string } = {
 
 export const buildElementComponents = (
   toolbarItems: string[] = [],
-  toolbarState: VisualToolbarState,
+  toolbarState: VisualToolbarConfig,
 ): JSX.Element[] => {
   const styles: JSX.Element[] = [];
   toolbarItems.forEach((toolbarItem: string) => {

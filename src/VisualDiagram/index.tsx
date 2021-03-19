@@ -11,10 +11,7 @@ import { VisualDiagramHandle, VisualDiagramProps } from '../../types';
 const VisualDiagram: React.ForwardRefRenderFunction<
   VisualDiagramHandle,
   VisualDiagramProps
-> = (
-  { elementComponents, toolbarState, onChange }: VisualDiagramProps,
-  ref,
-) => {
+> = ({ canvasConfig, onChange }: VisualDiagramProps, ref) => {
   const dispatch = useDispatch();
 
   const view = useSelector((state: Store) => state.canvas.view);
@@ -49,8 +46,8 @@ const VisualDiagram: React.ForwardRefRenderFunction<
 
   return (
     <CanvasContainer
-      elementComponents={elementComponents}
-      toolbarState={toolbarState}
+      elementComponents={canvasConfig.elementConfig.components}
+      toolbarConfig={canvasConfig.toolbarConfig}
     />
   );
 };
