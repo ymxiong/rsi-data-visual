@@ -56,19 +56,22 @@ export const calcPointsBetweenElement = (
     y: TO_ELEMENT_POINT.y,
   };
 
+  // 初始化源头点位置
   const sourcePoint: Point = {
     x: fromElementB.x + FROM_ELEMENT_PADDING,
     y: fromElementB.y,
   };
 
+  // 初始化目标点位置
   const targetPoint: Point = {
     x: toElementA.x + TO_ELEMENT_PADDING,
     y: toElementA.y,
   };
 
+  // （如果源头元素y值+偏执）大于（目标元素y值），既源头元素在下面，需要插点转向
   if (
-    sourcePoint.y - targetPoint.y
-    > -1 * (ELEMENT_LINK_MARGIN * (sourceIndex + targetIndex + 2))
+    sourcePoint.y + ELEMENT_LINK_MARGIN * (sourceIndex + targetIndex + 2)
+    > targetPoint.y
   ) {
     const midPoint0: Point = {
       x: sourcePoint.x,
@@ -89,6 +92,24 @@ export const calcPointsBetweenElement = (
       x: targetPoint.x,
       y: targetPoint.y - ELEMENT_LINK_MARGIN * (targetIndex + 1),
     };
+    // 当x值靠的很近的时候，需要对x进行范围扩展
+    if (
+      FROM_ELEMENT_POINT.x - TO_ELEMENT_POINT.x < fromElement.width
+      && TO_ELEMENT_POINT.x - FROM_ELEMENT_POINT.x < fromElement.width
+    ) {
+      midPoint1.x += fromElement.width;
+      midPoint2.x += fromElement.width;
+      // 当x值靠的很近且当y值靠的很近的时候，需要对y进行范围扩展
+      // if (
+      //   TO_ELEMENT_POINT.y - FROM_ELEMENT_POINT.y
+      //   < ELEMENT_LINK_MARGIN * (sourceIndex + targetIndex + 2)
+      //   && TO_ELEMENT_POINT.y - FROM_ELEMENT_POINT.y > 0
+      // ) {
+      //   midPoint0.y += fromElement.height * 2;
+      //   midPoint1.y += fromElement.height * 2;
+      // }
+    }
+
     return [
       sourcePoint,
       midPoint0,
@@ -99,6 +120,7 @@ export const calcPointsBetweenElement = (
     ];
   }
 
+  // 通常情况直接取中间值即可
   const midPoint2: Point = {
     x: sourcePoint.x,
     y: (sourcePoint.y + targetPoint.y) / 2,
