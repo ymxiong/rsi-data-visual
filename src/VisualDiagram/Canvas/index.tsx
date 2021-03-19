@@ -4,12 +4,12 @@ import { Store } from '../store';
 import { refreshCanvas } from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
-import { VisualComponentStyles, VisualToolbarState } from '../../../types';
+import { VisualElementComponents, VisualToolbarState } from '../../../types';
 import { refreshToolbarItemBatch } from '../store/diagram/actions';
 import { values } from 'lodash-es';
 
 type CanvasContainerProps = {
-  componentStyles: VisualComponentStyles;
+  elementComponents: VisualElementComponents;
   toolbarState: VisualToolbarState;
 };
 
@@ -39,7 +39,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   }, []);
 
   return (
-    <Canvas componentStyles={props.componentStyles} handleRef={handleRef} />
+    <Canvas elementComponents={props.elementComponents} handleRef={handleRef} />
   );
 };
 

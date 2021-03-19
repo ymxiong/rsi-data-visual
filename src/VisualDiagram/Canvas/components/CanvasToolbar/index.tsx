@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { Store } from '../../../store';
 
 import styled from 'styled-components';
-import { buildVisualToolbarStyles } from './VisualToolbarStyles';
+import { buildElementComponents } from './elementComponents';
 
 const ToolbarStyle = styled.div`
   position: absolute;
@@ -34,7 +34,7 @@ const CanvasToolbar: React.FC<CanvasToolbarProps> = ({ hide }) => {
     (state: Store) => state.diagram.toolbarShowItems,
   );
 
-  const styles: JSX.Element[] = buildVisualToolbarStyles(
+  const styles: JSX.Element[] = buildElementComponents(
     toolbarShowItems,
     toolbar,
   );

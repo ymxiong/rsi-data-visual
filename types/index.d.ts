@@ -1,6 +1,6 @@
 import {
   VisualComponentProps,
-  VisualComponentStyles,
+  VisualElementComponents,
   VisualToolbarProps,
   VisualToolbarState,
   VisualDiagramProps,
@@ -17,7 +17,7 @@ import LinkState from '../src/VisualDiagram/logic/link/LinkState';
 
 export {
   VisualComponentProps,
-  VisualComponentStyles,
+  VisualElementComponents,
   VisualToolbarProps,
   VisualToolbarState,
   VisualDiagramProps,

@@ -2,9 +2,9 @@ import { VisualToolbarState } from 'types';
 import { ViewState } from '../../../src/VisualDiagram/logic/view/ViewState';
 import ViewMode from './components/ViewMode';
 
-const componentStyles = {
+const elementComponents = {
   model: {
-    style: ViewMode,
+    component: ViewMode,
   },
 };
 
@@ -80,4 +80,4 @@ const viewStateTemplate: ViewState = {
   ],
 };
 
-export { componentStyles, toolbarState, viewStateTemplate };
+export { elementComponents, toolbarState, viewStateTemplate };

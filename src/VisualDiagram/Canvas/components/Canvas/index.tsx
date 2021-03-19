@@ -19,13 +19,13 @@ import {
   refreshElement,
   selectElement,
 } from '../../../store/canvas/actions';
-import { VisualComponentStyles } from '../../../../../types';
+import { VisualElementComponents } from '../../../../../types';
 import { newElementPoint, Point } from '../../../logic/utils/Point';
 import { zoomLevels } from '../../../logic/utils/Scale';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
 
 type CanvasProps = {
-  componentStyles: VisualComponentStyles;
+  elementComponents: VisualElementComponents;
   handleRef: (element: HTMLDivElement) => void;
 };
 
@@ -244,7 +244,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             const vProps: LinkContainerProps = {
               view,
               link,
-              SubComponent: props.componentStyles.model.style,
+              SubComponent: props.elementComponents.model.component,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}
@@ -253,7 +253,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
             element,
-            SubComponent: props.componentStyles[element.state.type].style,
+            SubComponent: props.elementComponents[element.state.type].component,
           };
           return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}

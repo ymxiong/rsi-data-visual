@@ -23,7 +23,7 @@ const defaultIconMap: { [name: string]: string } = {
   redo: redoIcon,
 };
 
-export const buildVisualToolbarStyles = (
+export const buildElementComponents = (
   toolbarItems: string[] = [],
   toolbarState: VisualToolbarState,
 ): JSX.Element[] => {

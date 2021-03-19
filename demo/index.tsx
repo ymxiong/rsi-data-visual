@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import VisualDiagram from '../src';
 import {
-  componentStyles,
+  elementComponents,
   toolbarState,
   viewStateTemplate,
 } from './test/TEST_SIMPLE_VIEW/ViewStateTemplate';
@@ -24,7 +24,7 @@ const App = () => {
   return (
     <div style={{ width: '100%', height: '900px' }}>
       <VisualDiagram
-        componentStyles={componentStyles}
+        elementComponents={elementComponents}
         toolbarState={toolbarState}
         ref={visualDiagramRef}
         onChange={handleChange}

@@ -6,9 +6,9 @@ export type VisualComponentProps = {
   element: ElementView;
 };
 
-export type VisualComponentStyles = {
+export type VisualElementComponents = {
   [type: string]: {
-    style: ComponentType<VisualComponentProps>;
+    component: ComponentType<any>;
   };
 };
 
@@ -22,7 +22,7 @@ export type VisualToolbarProps = {
 export type VisualToolbarState = { [id: string]: VisualToolbarProps };
 
 export type VisualDiagramProps = {
-  componentStyles: VisualComponentStyles;
+  elementComponents: VisualElementComponents;
   toolbarState: VisualToolbarState;
   onChange?: (viewState: ViewState) => void;
 };
