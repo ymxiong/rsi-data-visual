@@ -4,13 +4,16 @@ import { Store } from '../store';
 import { refreshCanvas } from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
-import { VisualElementComponents, VisualToolbarConfig } from '../../../types';
+import {
+  VisualCanvasConfig,
+  VisualElementComponents,
+  VisualToolbarConfig,
+} from '../../../types';
 import { refreshToolbarItemBatch } from '../store/diagram/actions';
 import { values } from 'lodash-es';
 
 type CanvasContainerProps = {
-  elementComponents: VisualElementComponents;
-  toolbarConfig: VisualToolbarConfig;
+  canvasConfig: VisualCanvasConfig;
 };
 
 const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
@@ -35,11 +38,15 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   };
 
   useEffect(() => {
-    dispatch(refreshToolbarItemBatch(values(props.toolbarConfig)));
+    dispatch(refreshToolbarItemBatch(values(props.canvasConfig.toolbarConfig)));
   }, []);
 
   return (
-    <Canvas elementComponents={props.elementComponents} handleRef={handleRef} />
+    <Canvas
+      elementConfig={props.canvasConfig.elementConfig}
+      linkConfig={props.canvasConfig.linkConfig}
+      handleRef={handleRef}
+    />
   );
 };
 

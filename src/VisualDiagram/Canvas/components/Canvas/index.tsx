@@ -19,13 +19,14 @@ import {
   refreshElement,
   selectElement,
 } from '../../../store/canvas/actions';
-import { VisualElementComponents } from '../../../../../types';
+import { VisualElementConfig, VisualLinkConfig } from '../../../../../types';
 import { newElementPoint, Point } from '../../../logic/utils/Point';
 import { zoomLevels } from '../../../logic/utils/Scale';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
 
 type CanvasProps = {
-  elementComponents: VisualElementComponents;
+  elementConfig: VisualElementConfig;
+  linkConfig: VisualLinkConfig;
   handleRef: (element: HTMLDivElement) => void;
 };
 
@@ -244,7 +245,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             const vProps: LinkContainerProps = {
               view,
               link,
-              SubComponent: props.elementComponents.model.component,
+              linkConfig: props.linkConfig,
+              SubComponent: props.elementConfig.components.model.component,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}
@@ -253,7 +255,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         {values(view.elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
             element,
-            SubComponent: props.elementComponents[element.state.type].component,
+            SubComponent:
+              props.elementConfig.components[element.state.type].component,
           };
           return <ElementContainer key={vProps.element.id} {...vProps} />;
         })}

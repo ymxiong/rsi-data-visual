@@ -7,10 +7,12 @@ import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
 import { View } from '../logic/view/View';
+import { VisualLinkConfig } from 'types';
 
 export type LinkContainerProps = {
   view: View;
   link: LinkView;
+  linkConfig: VisualLinkConfig;
   SubComponent: ComponentType<any>;
 };
 
@@ -44,6 +46,7 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
   return (
     <g key={props.link.id} onClick={onClick}>
       <Body
+        hasArrow={props.linkConfig.hasArrow}
         color={color}
         points={calcPointsBetweenElement(
           props.view,

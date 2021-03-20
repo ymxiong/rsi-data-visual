@@ -44,12 +44,7 @@ const VisualDiagram: React.ForwardRefRenderFunction<
     [dispatch],
   );
 
-  return (
-    <CanvasContainer
-      elementComponents={canvasConfig.elementConfig.components}
-      toolbarConfig={canvasConfig.toolbarConfig}
-    />
-  );
+  return <CanvasContainer canvasConfig={canvasConfig} />;
 };
 
 export default React.memo(React.forwardRef(VisualDiagram));

@@ -4,6 +4,7 @@ import Arrow from '../Arrow';
 import { Line } from '../Line';
 
 type BodyProps = {
+  hasArrow: boolean;
   color: string;
   points: Point[];
 };
@@ -50,7 +51,9 @@ const Body: React.FC<BodyProps> = (props: BodyProps) => {
   return (
     <g>
       <Line d={linePointsStr} fill="none" color={props.color} />
-      <Arrow color={props.color} d={pointsToString(arrowPoints)} />
+      {props.hasArrow && (
+        <Arrow color={props.color} d={pointsToString(arrowPoints)} />
+      )}
     </g>
   );
 };
