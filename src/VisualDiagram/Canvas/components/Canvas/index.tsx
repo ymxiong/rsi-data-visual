@@ -25,6 +25,7 @@ import { VisualElementConfig, VisualLinkConfig } from '../../../../../types';
 import { newElementPoint, Point } from '../../../logic/utils/Point';
 import { zoomLevels } from '../../../logic/utils/Scale';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
+import CanvasLoading from '../CanvasLoading';
 
 type CanvasProps = {
   elementConfig: VisualElementConfig;
@@ -273,6 +274,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>
+      <CanvasLoading />
       <CanvasArtboard
         {...canvasArtboardProps}
         onMouseDown={onMouseDown}
