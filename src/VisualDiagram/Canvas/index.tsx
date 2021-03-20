@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { refreshCanvas } from '../store/canvas/actions';
@@ -21,24 +21,26 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
 
   const canvas = useSelector((state: Store) => state.canvas.canvas);
 
-  let canvasDOM: HTMLDivElement | undefined;
-
-  const handleRef = (div: HTMLDivElement) => {
-    canvasDOM = div;
-    if (canvasDOM) {
-      const domRect = canvasDOM.getBoundingClientRect();
-      if (domRect.x !== canvas.margin.x || domRect.y !== canvas.margin.y) {
-        // 如果被铆钉，计算新的x，y值
-        const newCanvas = { ...canvas };
-        newCanvas.margin.x = domRect.x;
-        newCanvas.margin.y = domRect.y;
-        dispatch(refreshCanvas(newCanvas));
+  const handleRef = useCallback(
+    (div: HTMLDivElement) => {
+      const canvasDOM = div;
+      if (canvasDOM) {
+        const domRect = canvasDOM.getBoundingClientRect();
+        if (domRect.x !== canvas.margin.x || domRect.y !== canvas.margin.y) {
+          // 如果被铆钉，计算新的x，y值
+          const newCanvas = { ...canvas };
+          newCanvas.margin.x = domRect.x;
+          newCanvas.margin.y = domRect.y;
+          dispatch(refreshCanvas(newCanvas));
+        }
       }
-    }
-  };
+    },
+    [canvas, dispatch],
+  );
 
   useEffect(() => {
     dispatch(refreshToolbarItemBatch(values(props.canvasConfig.toolbarConfig)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

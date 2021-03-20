@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../../../store';
 import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
@@ -39,7 +39,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const [hideToolbar, setToolbarHide] = useState(false);
 
-  const onCreateElement = () => {
+  const onCreateElement = useCallback(() => {
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
       name: '新增元素',
@@ -50,29 +50,29 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       select: false,
     });
     dispatch(addElement(elementView));
-  };
+  }, [dispatch]);
 
-  const onZoomIn = () => {
+  const onZoomIn = useCallback(() => {
     if (canvas.state.scale > zoomLevels.length - 2) {
       canvas.state.scale = zoomLevels.length - 1;
     } else {
       canvas.state.scale += 1;
     }
     dispatch(refreshCanvas({ ...canvas }));
-  };
+  }, [canvas, dispatch]);
 
-  const onZoomOut = () => {
+  const onZoomOut = useCallback(() => {
     if (canvas.state.scale < 1) {
       canvas.state.scale = 0;
     } else {
       canvas.state.scale -= 1;
     }
     dispatch(refreshCanvas({ ...canvas }));
-  };
+  }, [canvas, dispatch]);
 
-  const onSort = () => {
+  const onSort = useCallback(() => {
     dispatch(refreshCanvas(canvas));
-  };
+  }, [canvas, dispatch]);
 
   const canvasArtboardProps: CanvasArtboardProps = {
     offsetX: canvas.offset.x,
@@ -82,30 +82,33 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     height: canvas.size.height,
   };
 
-  const handleKey = (ev: KeyboardEvent) => {
-    if (ev.getModifierState('Meta') || ev.getModifierState('Control')) {
-      switch (ev.key) {
-        case 'z':
-          ev.preventDefault();
-          break;
-        case 'y':
-          ev.preventDefault();
-          break;
-        case 's':
-          ev.preventDefault();
-          break;
-        case 'i':
-          ev.preventDefault();
-          onZoomIn();
-          break;
-        case 'o':
-          ev.preventDefault();
-          onZoomOut();
-          break;
-        // no default
+  const handleKey = useCallback(
+    (ev: KeyboardEvent) => {
+      if (ev.getModifierState('Meta') || ev.getModifierState('Control')) {
+        switch (ev.key) {
+          case 'z':
+            ev.preventDefault();
+            break;
+          case 'y':
+            ev.preventDefault();
+            break;
+          case 's':
+            ev.preventDefault();
+            break;
+          case 'i':
+            ev.preventDefault();
+            onZoomIn();
+            break;
+          case 'o':
+            ev.preventDefault();
+            onZoomOut();
+            break;
+          // no default
+        }
       }
-    }
-  };
+    },
+    [onZoomIn, onZoomOut],
+  );
 
   const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (canvas.anchored) {
@@ -182,6 +185,13 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       window.history.scrollRestoration = 'manual';
     }
     window.document.addEventListener('keydown', handleKey);
+
+    return () => {
+      window.document.removeEventListener('keydown', handleKey);
+    };
+  }, [handleKey]);
+
+  useEffect(() => {
     dispatch(
       refreshToolbarItemBatch([
         {
@@ -228,7 +238,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         },
       ]),
     );
-  }, []);
+  }, [dispatch, onCreateElement, onSort, onZoomIn, onZoomOut]);
 
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>
@@ -267,4 +277,4 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   );
 };
 
-export default Canvas;
+export default React.memo(Canvas);

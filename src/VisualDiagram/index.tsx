@@ -41,7 +41,7 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         dispatch(selectToolbarItems(items));
       },
     }),
-    [dispatch],
+    [dispatch, view],
   );
 
   return <CanvasContainer canvasConfig={canvasConfig} />;
