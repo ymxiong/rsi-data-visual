@@ -23,7 +23,6 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'react/no-array-index-key': 'warn',
     'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-    'react-hooks/exhaustive-deps': 'warn', // Checks deps of Hooks
     'react/require-default-props': 0,
     'react/jsx-fragments': 0,
     'react/jsx-wrap-multilines': 0,
