@@ -62,6 +62,7 @@ const LinkContainer: React.FC<LinkContainerProps> = (props) => {
           offset,
         )}
         name={linkName}
+        showName={props.linkConfig.showName}
       />
     </g>
   );

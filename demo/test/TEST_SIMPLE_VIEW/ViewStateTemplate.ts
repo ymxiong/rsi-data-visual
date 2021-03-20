@@ -28,6 +28,7 @@ const canvas: VisualCanvasConfig = {
   toolbarConfig: toolbarState,
   linkConfig: {
     hasArrow: true,
+    showName: false,
   },
 };
 

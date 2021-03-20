@@ -1,6 +1,6 @@
 import React from 'react';
 import style from 'styled-components';
-import { Point } from 'src/VisualDiagram/logic/utils/Point';
+import { Point } from '../../../logic/utils/Point';
 
 const LineStyle = style.path`
   min-height:10px;
@@ -18,6 +18,7 @@ type LineProps = {
   name: string;
   namePoint: Point;
   direction: string;
+  showName: boolean;
 };
 
 const Line: React.FC<LineProps> = (props: LineProps) => {
@@ -31,14 +32,16 @@ const Line: React.FC<LineProps> = (props: LineProps) => {
         </filter>
       </defs>
       <LineStyle {...props} filter="url(#linkShadow)" />
-      <text
-        x={props.namePoint.x}
-        y={props.namePoint.y}
-        stroke={props.color}
-        writingMode={props.direction === 'v' ? 'tb' : ''}
-      >
-        {props.name}
-      </text>
+      {props.showName && (
+        <text
+          x={props.namePoint.x}
+          y={props.namePoint.y}
+          stroke={props.color}
+          writingMode={props.direction === 'v' ? 'tb' : ''}
+        >
+          {props.name}
+        </text>
+      )}
     </>
   );
 };

@@ -24,7 +24,7 @@ export type VisualToolbarConfig = { [id: string]: VisualToolbarProps };
 
 export type VisualElementConfig = { components: VisualElementComponents };
 
-export type VisualLinkConfig = { hasArrow: boolean };
+export type VisualLinkConfig = { hasArrow: boolean; showName: boolean };
 
 export type VisualCanvasConfig = {
   elementConfig: VisualElementConfig;

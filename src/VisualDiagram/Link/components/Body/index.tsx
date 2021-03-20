@@ -5,6 +5,7 @@ import { Line } from '../Line';
 
 type BodyProps = {
   hasArrow: boolean;
+  showName: boolean;
   color: string;
   points: Point[];
   name: string;
@@ -86,6 +87,7 @@ const Body: React.FC<BodyProps> = (props: BodyProps) => {
         name={props.name}
         namePoint={namePoint.point}
         direction={namePoint.direction}
+        showName={props.showName}
       />
       {props.hasArrow && (
         <Arrow color={props.color} d={pointsToString(arrowPoints)} />
