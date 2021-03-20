@@ -114,6 +114,14 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
         view: { ...action.payload },
       };
     }
+    case 'canvas/element/anchored/refresh': {
+      const refreshState = state;
+      refreshState.view.elements[action.payload.elementId] = {
+        ...refreshState.view.elements[action.payload.elementId],
+        anchored: action.payload.anchored,
+      };
+      return refreshState;
+    }
     case 'canvas/element/add': {
       const refreshState = { ...state };
       refreshState.view = { ...state.view };

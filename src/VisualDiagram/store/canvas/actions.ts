@@ -3,7 +3,7 @@ import { View } from '../../logic/view/View';
 import { ElementView } from '../../logic/element/ElementView';
 import { LinkView } from '../../logic/link/LinkView';
 import { Canvas } from '../../logic/canvas/Canvas';
-import { Point } from 'src/VisualDiagram/logic/utils/Point';
+import { Point } from '../../logic/utils/Point';
 
 export const refreshCanvas = (canvas: Canvas): CanvasAction => ({
   type: 'canvas/refresh',
@@ -45,9 +45,15 @@ export const refreshElement = (element: ElementView): CanvasAction => ({
   payload: element,
 });
 
-export const refreshElementAnchored = (anchored: boolean): CanvasAction => ({
+export const refreshElementAnchored = (
+  elementId: string,
+  anchored: boolean,
+): CanvasAction => ({
   type: 'canvas/element/anchored/refresh',
-  payload: anchored,
+  payload: {
+    elementId,
+    anchored,
+  },
 });
 
 export const selectElement = (

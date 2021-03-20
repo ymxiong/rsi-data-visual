@@ -34,6 +34,14 @@ export type CanvasElementRefeshAction = ActionShape<
   ElementView
 >;
 
+export type CanvasElementAnchoredRefeshAction = ActionShape<
+  'canvas/element/anchored/refresh',
+  {
+    elementId: string;
+    anchored: boolean;
+  }
+>;
+
 export type CanvasElementAddAction = ActionShape<
   'canvas/element/add',
   ElementView
@@ -61,6 +69,7 @@ export type CanvasAction =
   | CanvasOffsetRefeshAction
   | CanvasMarginRefeshAction
   | CanvasViewRefeshAction
+  | CanvasElementAnchoredRefeshAction
   | CanvasElementAddAction
   | CanvasElementRefeshAction
   | CanvasElementSelectAction
