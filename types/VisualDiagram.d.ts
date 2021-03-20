@@ -4,6 +4,7 @@ import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
 
 export type VisualComponentProps = {
   element: ElementView;
+  onElementChange(element: ElementView): () => void;
 };
 
 export type VisualElementComponents = {

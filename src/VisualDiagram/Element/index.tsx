@@ -32,6 +32,10 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   const viewOffset = useSelector((state: Store) => state.canvas.view.offset);
 
+  const onElementChange = (elementView: ElementView) => {
+    dispatch(refreshElement({ ...elementView }));
+  };
+
   const MOVE_FREQUENCY = 2;
 
   const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -92,7 +96,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
-      <props.SubComponent {...props} />
+      <props.SubComponent {...props} onElementChange={onElementChange} />
     </Element>
   );
 };
