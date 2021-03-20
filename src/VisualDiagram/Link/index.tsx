@@ -7,16 +7,21 @@ import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
 import { View } from '../logic/view/View';
-import { VisualLinkConfig } from '../../../types';
+import { ElementView, VisualLinkConfig } from '../../../types';
 
 export type LinkContainerProps = {
-  view: View;
+  elements: {
+    [id: string]: ElementView;
+  };
+  links: {
+    [id: string]: LinkView;
+  };
   link: LinkView;
   linkConfig: VisualLinkConfig;
   SubComponent: ComponentType<any>;
 };
 
-export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
+const LinkContainer: React.FC<LinkContainerProps> = (props) => {
   const dispatch = useDispatch();
 
   const linkName = props.link.state.name;
@@ -49,7 +54,8 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
         hasArrow={props.linkConfig.hasArrow}
         color={color}
         points={calcPointsBetweenElement(
-          props.view,
+          props.elements,
+          props.links,
           elementFrom,
           elementTo,
           props.link,
@@ -59,3 +65,5 @@ export const LinkContainer: React.FC<LinkContainerProps> = (props) => {
     </g>
   );
 };
+
+export default React.memo(LinkContainer);

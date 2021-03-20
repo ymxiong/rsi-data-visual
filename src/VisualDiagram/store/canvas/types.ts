@@ -3,8 +3,29 @@ import { ActionShape } from '..';
 import { ElementView } from '../../logic/element/ElementView';
 import { LinkView } from '../../logic/link/LinkView';
 import { Canvas } from '../../logic/canvas/Canvas';
+import { Point } from 'src/VisualDiagram/logic/utils/Point';
 
 export type CanvasRefeshAction = ActionShape<'canvas/refresh', Canvas>;
+
+export type CanvasScaleRefeshAction = ActionShape<
+  'canvas/scale/refresh',
+  number
+>;
+
+export type CanvasAnchoredRefeshAction = ActionShape<
+  'canvas/anchored/refresh',
+  boolean
+>;
+
+export type CanvasOffsetRefeshAction = ActionShape<
+  'canvas/offset/refresh',
+  Point
+>;
+
+export type CanvasMarginRefeshAction = ActionShape<
+  'canvas/margin/refresh',
+  Point
+>;
 
 export type CanvasViewRefeshAction = ActionShape<'canvas/view/refresh', View>;
 
@@ -35,6 +56,10 @@ export type CanvasLinkRefeshAction = ActionShape<
 
 export type CanvasAction =
   | CanvasRefeshAction
+  | CanvasScaleRefeshAction
+  | CanvasAnchoredRefeshAction
+  | CanvasOffsetRefeshAction
+  | CanvasMarginRefeshAction
   | CanvasViewRefeshAction
   | CanvasElementAddAction
   | CanvasElementRefeshAction

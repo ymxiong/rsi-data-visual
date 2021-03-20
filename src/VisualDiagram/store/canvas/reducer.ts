@@ -51,6 +51,63 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       }
       return refreshState;
     }
+    case 'canvas/scale/refresh': {
+      const refreshState = state;
+      refreshState.canvas.state = {
+        ...refreshState.canvas.state,
+        scale: action.payload,
+      };
+      return refreshState;
+    }
+    case 'canvas/anchored/refresh': {
+      const refreshState = state;
+      refreshState.canvas = {
+        ...refreshState.canvas,
+        anchored: action.payload,
+      };
+      return refreshState;
+    }
+    case 'canvas/offset/refresh': {
+      const refreshState = state;
+      refreshState.canvas.offset = {
+        ...refreshState.canvas.offset,
+        ...action.payload,
+      };
+      if (
+        refreshState.canvas.size.width + refreshState.canvas.offset.x
+          < refreshState.canvas.viewport.width
+            / zoomLevels[refreshState.canvas.state.scale]
+        || refreshState.canvas.size.height + refreshState.canvas.offset.y
+          < refreshState.canvas.viewport.height
+            / zoomLevels[refreshState.canvas.state.scale]
+      ) {
+        refreshState.canvas.size = { ...refreshState.canvas.size };
+        refreshState.canvas.size.width -= standardOffset.x;
+        refreshState.canvas.size.height -= standardOffset.y;
+      }
+      if (
+        refreshState.canvas.offset.x > 0
+        || refreshState.canvas.offset.y > 0
+      ) {
+        refreshState.canvas.size = { ...refreshState.canvas.size };
+        refreshState.view.offset = { ...refreshState.view.offset };
+        refreshState.canvas.offset.x += standardOffset.x;
+        refreshState.canvas.offset.y += standardOffset.y;
+        refreshState.canvas.size.width -= standardOffset.x;
+        refreshState.canvas.size.height -= standardOffset.y;
+        refreshState.view.offset.x += standardOffset.x;
+        refreshState.view.offset.y += standardOffset.y;
+      }
+      return refreshState;
+    }
+    case 'canvas/margin/refresh': {
+      const refreshState = state;
+      refreshState.canvas.margin = {
+        ...refreshState.canvas.margin,
+        ...action.payload,
+      };
+      return refreshState;
+    }
     case 'canvas/view/refresh': {
       return {
         ...state,

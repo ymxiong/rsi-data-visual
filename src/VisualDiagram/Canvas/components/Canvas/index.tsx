@@ -4,20 +4,22 @@ import { Store } from '../../../store';
 import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
 import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
-import { ElementContainer, ElementContainerProps } from '../../../Element';
+import ElementContainer, { ElementContainerProps } from '../../../Element';
 import {
   buildFromElementState,
   ElementView,
 } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
 import { values } from 'lodash-es';
-import { LinkContainer, LinkContainerProps } from '../../../Link';
+import LinkContainer, { LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
 import {
-  refreshCanvas,
   addElement,
   refreshElement,
   selectElement,
+  refreshCanvasScale,
+  refreshCanvasAnchored,
+  refreshCanvasOffset,
 } from '../../../store/canvas/actions';
 import { VisualElementConfig, VisualLinkConfig } from '../../../../../types';
 import { newElementPoint, Point } from '../../../logic/utils/Point';
@@ -33,9 +35,33 @@ type CanvasProps = {
 const Canvas = (props: CanvasProps): JSX.Element => {
   const dispatch = useDispatch();
 
-  const canvas = useSelector((state: Store) => state.canvas.canvas);
+  const elements = useSelector((state: Store) => state.canvas.view.elements);
 
-  const view = useSelector((state: Store) => state.canvas.view);
+  const links = useSelector((state: Store) => state.canvas.view.links);
+
+  const selectElementId = useSelector(
+    (state: Store) => state.canvas.view.selectedElementId,
+  );
+
+  const canvasAnchored = useSelector(
+    (state: Store) => state.canvas.canvas.anchored,
+  );
+
+  const canvasSize = useSelector((state: Store) => state.canvas.canvas.size);
+
+  const canvasOffset = useSelector(
+    (state: Store) => state.canvas.canvas.offset,
+  );
+
+  const canvasMargin = useSelector(
+    (state: Store) => state.canvas.canvas.margin,
+  );
+
+  const canvasScale = useSelector(
+    (state: Store) => state.canvas.canvas.state.scale,
+  );
+
+  const viewOffset = useSelector((state: Store) => state.canvas.view.offset);
 
   const [hideToolbar, setToolbarHide] = useState(false);
 
@@ -53,33 +79,35 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   }, [dispatch]);
 
   const onZoomIn = useCallback(() => {
-    if (canvas.state.scale > zoomLevels.length - 2) {
-      canvas.state.scale = zoomLevels.length - 1;
+    let scale = canvasScale;
+    if (scale > zoomLevels.length - 2) {
+      scale = zoomLevels.length - 1;
     } else {
-      canvas.state.scale += 1;
+      scale += 1;
     }
-    dispatch(refreshCanvas({ ...canvas }));
-  }, [canvas, dispatch]);
+    dispatch(refreshCanvasScale(scale));
+  }, [canvasScale, dispatch]);
 
   const onZoomOut = useCallback(() => {
-    if (canvas.state.scale < 1) {
-      canvas.state.scale = 0;
+    let scale = canvasScale;
+    if (scale < 1) {
+      scale = 0;
     } else {
-      canvas.state.scale -= 1;
+      scale -= 1;
     }
-    dispatch(refreshCanvas({ ...canvas }));
-  }, [canvas, dispatch]);
+    dispatch(refreshCanvasScale(scale));
+  }, [canvasScale, dispatch]);
 
   const onSort = useCallback(() => {
-    dispatch(refreshCanvas(canvas));
-  }, [canvas, dispatch]);
+    dispatch(refreshCanvasScale(canvasScale));
+  }, [canvasScale, dispatch]);
 
   const canvasArtboardProps: CanvasArtboardProps = {
-    offsetX: canvas.offset.x,
-    offsetY: canvas.offset.y,
-    scale: zoomLevels[canvas.state.scale],
-    width: canvas.size.width,
-    height: canvas.size.height,
+    offsetX: canvasOffset.x,
+    offsetY: canvasOffset.y,
+    scale: zoomLevels[canvasScale],
+    width: canvasSize.width,
+    height: canvasSize.height,
   };
 
   const handleKey = useCallback(
@@ -110,64 +138,67 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     [onZoomIn, onZoomOut],
   );
 
+  const onElementMove = useCallback(
+    (
+      ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
+      element: ElementView,
+    ) => {
+      if (element.anchored) {
+        if (ev.buttons !== 1) {
+          // 如果被铆钉但鼠标已松开，释放铆钉
+          dispatch(refreshElement({ ...element, anchored: false }));
+        } else {
+          // 如果被铆钉，计算新的x，y值
+          const refreshView = { ...element };
+          refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
+            - canvasOffset.x
+            + viewOffset.x
+            - element.width / 2;
+          refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
+            - canvasOffset.y
+            + viewOffset.y
+            - element.height / 2;
+          dispatch(refreshElement(refreshView));
+        }
+      }
+    },
+    [canvasMargin, canvasOffset, canvasScale, viewOffset, dispatch],
+  );
+
   const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (canvas.anchored) {
+    if (canvasAnchored) {
       setToolbarHide(false);
       if (ev.buttons !== 1) {
         // 如果被铆钉但鼠标已松开，释放铆钉
-        dispatch(refreshCanvas({ ...canvas, anchored: false }));
+        dispatch(refreshCanvasAnchored(false));
       } else {
         // 如果被铆钉，计算新的x，y值
-        const newCanvas = { ...canvas };
-        newCanvas.offset.x
-          += ev.movementX * zoomLevels[zoomLevels.length - 1 - canvas.state.scale];
-        newCanvas.offset.y
-          += ev.movementY * zoomLevels[zoomLevels.length - 1 - canvas.state.scale];
-        dispatch(refreshCanvas(newCanvas));
+        const offset = canvasOffset;
+        offset.x
+          += ev.movementX * zoomLevels[zoomLevels.length - 1 - canvasScale];
+        offset.y
+          += ev.movementY * zoomLevels[zoomLevels.length - 1 - canvasScale];
+        dispatch(refreshCanvasOffset(offset));
       }
     }
 
     // 滑出画布的监听问题
-    if (
-      view.selectedElementId
-      && view.elements[view.selectedElementId].anchored
-    ) {
+    if (selectElementId && elements[selectElementId].anchored) {
       setToolbarHide(true);
-      const anchoredElement = view.elements[view.selectedElementId];
-      if (ev.buttons !== 1) {
-        // 如果被铆钉但鼠标已松开，释放铆钉
-        dispatch(refreshElement({ ...anchoredElement, anchored: false }));
-      } else {
-        // 如果被铆钉，计算新的x，y值
-        const refreshViewElement = { ...anchoredElement };
-        const point: Point = {
-          x:
-            (ev.pageX - canvas.margin.x) / zoomLevels[canvas.state.scale]
-            - canvas.offset.x
-            + view.offset.x
-            - anchoredElement.width / 2,
-          y:
-            (ev.pageY - canvas.margin.y) / zoomLevels[canvas.state.scale]
-            - canvas.offset.y
-            + view.offset.y
-            - anchoredElement.height / 2,
-        };
-        refreshViewElement.state.x = point.x;
-        refreshViewElement.state.y = point.y;
-        dispatch(refreshElement(refreshViewElement));
-      }
+      const anchoredElement = elements[selectElementId];
+      onElementMove(ev, anchoredElement);
     }
   };
 
   const onMouseDown = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     ev.stopPropagation();
-    dispatch(refreshCanvas({ ...canvas, anchored: true }));
+    dispatch(refreshCanvasAnchored(true));
   };
 
   const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     ev.stopPropagation();
     dispatch(selectElement('', false));
-    dispatch(refreshCanvas({ ...canvas, anchored: false }));
+    dispatch(refreshCanvasAnchored(false));
   };
 
   const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -177,7 +208,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     ev.stopPropagation();
     dispatch(selectElement('', false));
-    dispatch(refreshCanvas({ ...canvas, anchored: false }));
+    dispatch(refreshCanvasAnchored(false));
   };
 
   useEffect(() => {
@@ -251,9 +282,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       >
         {/* link drawer */}
         <CanvasLinkSvgLand width="100%" height="100%">
-          {values(view.links).map((link: LinkView) => {
+          {values(links).map((link: LinkView) => {
             const vProps: LinkContainerProps = {
-              view,
+              elements,
+              links,
               link,
               linkConfig: props.linkConfig,
               SubComponent: props.elementConfig.components.model.component,
@@ -262,9 +294,11 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           })}
         </CanvasLinkSvgLand>
 
-        {values(view.elements).map((element: ElementView) => {
+        {values(elements).map((element: ElementView) => {
           const vProps: ElementContainerProps = {
             element,
+            viewOffset,
+            onElementMove,
             SubComponent:
               props.elementConfig.components[element.state.type].component,
           };

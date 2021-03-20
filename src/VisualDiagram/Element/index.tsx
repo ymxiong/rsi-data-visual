@@ -4,33 +4,24 @@ import { Store } from '../store';
 import { refreshElement, selectElement } from '../store/canvas/actions';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
-import { zoomLevels } from '../logic/utils/Scale';
+import { Point } from '../logic/utils/Point';
 
 export type ElementContainerProps = {
   element: ElementView;
+  viewOffset: Point;
+  onElementMove: (
+    ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    element: ElementView,
+  ) => void;
   SubComponent: ComponentType<any>;
 };
 
-export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
+const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const dispatch = useDispatch();
 
   const element = useSelector(
     (state: Store) => state.canvas.view.elements[props.element.id],
   );
-
-  const canvasOffset = useSelector(
-    (state: Store) => state.canvas.canvas.offset,
-  );
-
-  const canvasMargin = useSelector(
-    (state: Store) => state.canvas.canvas.margin,
-  );
-
-  const canvasScale = useSelector(
-    (state: Store) => state.canvas.canvas.state.scale,
-  );
-
-  const viewOffset = useSelector((state: Store) => state.canvas.view.offset);
 
   const onElementChange = (elementView: ElementView) => {
     dispatch(refreshElement({ ...elementView }));
@@ -51,24 +42,25 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   };
 
   const onElementMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (element.anchored) {
-      if (ev.buttons !== 1) {
-        // 如果被铆钉但鼠标已松开，释放铆钉
-        dispatch(refreshElement({ ...element, anchored: false }));
-      } else {
-        // 如果被铆钉，计算新的x，y值
-        const refreshView = { ...element };
-        refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
-          - canvasOffset.x
-          + viewOffset.x
-          - element.width / 2;
-        refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
-          - canvasOffset.y
-          + viewOffset.y
-          - element.height / 2;
-        dispatch(refreshElement(refreshView));
-      }
-    }
+    props.onElementMove(ev, props.element);
+    // if (element.anchored) {
+    //   if (ev.buttons !== 1) {
+    //     // 如果被铆钉但鼠标已松开，释放铆钉
+    //     dispatch(refreshElement({ ...element, anchored: false }));
+    //   } else {
+    //     // 如果被铆钉，计算新的x，y值
+    //     const refreshView = { ...element };
+    //     refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
+    //       - canvasOffset.x
+    //       + viewOffset.x
+    //       - element.width / 2;
+    //     refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
+    //       - canvasOffset.y
+    //       + viewOffset.y
+    //       - element.height / 2;
+    //     dispatch(refreshElement(refreshView));
+    //   }
+    // }
   };
 
   let moveEventTime = 0;
@@ -90,7 +82,7 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     <Element
       key={element.id}
       element={element}
-      offset={viewOffset}
+      offset={props.viewOffset}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}
@@ -100,3 +92,5 @@ export const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     </Element>
   );
 };
+
+export default React.memo(ElementContainer);

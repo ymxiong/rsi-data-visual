@@ -5,7 +5,12 @@ import { Point } from '../../logic/utils/Point';
 
 // TODO: 位置排序与线条交错问题
 export const calcPointsBetweenElement = (
-  view: View,
+  elements: {
+    [id: string]: ElementView;
+  },
+  links: {
+    [id: string]: LinkView;
+  },
   fromElement: ElementView,
   toElement: ElementView,
   link: LinkView,
@@ -26,8 +31,8 @@ export const calcPointsBetweenElement = (
   let sourceIndex = 0;
   for (let index = 0; index < fromElement.linkSourceIds.length; index += 1) {
     const linkId = fromElement.linkSourceIds[index];
-    const linkView = view.links[linkId];
-    const elementToNeedSort = view.elements[linkView.state.toElementId];
+    const linkView = links[linkId];
+    const elementToNeedSort = elements[linkView.state.toElementId];
     if (elementToNeedSort.state.x < toElement.state.x) {
       sourceIndex += 1;
     }
@@ -36,8 +41,8 @@ export const calcPointsBetweenElement = (
   let targetIndex = 0;
   for (let index = 0; index < toElement.linkTargetIds.length; index += 1) {
     const linkId = toElement.linkTargetIds[index];
-    const linkView = view.links[linkId];
-    const elementFromNeedSort = view.elements[linkView.state.fromElementId];
+    const linkView = links[linkId];
+    const elementFromNeedSort = elements[linkView.state.fromElementId];
     if (elementFromNeedSort.state.x < fromElement.state.x) {
       targetIndex += 1;
     }
