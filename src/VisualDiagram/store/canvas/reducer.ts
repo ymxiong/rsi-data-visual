@@ -10,13 +10,15 @@ export interface CanvasState {
   view: View;
 }
 
-const initialCanvasState: CanvasState = {
-  canvas: buildCanvasFromCanvasState(),
-  view: buildViewFromViewState(),
-};
+function getInitialCanvasState(): CanvasState {
+  return {
+    canvas: buildCanvasFromCanvasState(),
+    view: buildViewFromViewState(),
+  };
+}
 
 const canvasReducer: Reducer<CanvasState, CanvasAction> = (
-  state = initialCanvasState,
+  state = getInitialCanvasState(),
   action,
 ) => {
   switch (action.type) {

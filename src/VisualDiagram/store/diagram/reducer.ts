@@ -7,13 +7,15 @@ export interface DiagramState {
   toolbarShowItems: string[];
 }
 
-const initialDiagramState: DiagramState = {
-  toolbar: {},
-  toolbarShowItems: ['plus', 'zoomIn', 'zoomOut'],
-};
+function getInitialDiagramState(): DiagramState {
+  return {
+    toolbar: {},
+    toolbarShowItems: ['plus', 'zoomIn', 'zoomOut'],
+  };
+}
 
 const diagramReducer: Reducer<DiagramState, DiagramAction> = (
-  state = initialDiagramState,
+  state = getInitialDiagramState(),
   action,
 ) => {
   switch (action.type) {
