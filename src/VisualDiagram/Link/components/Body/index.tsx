@@ -7,6 +7,7 @@ type BodyProps = {
   hasArrow: boolean;
   color: string;
   points: Point[];
+  name: string;
 };
 
 const Body: React.FC<BodyProps> = (props: BodyProps) => {
@@ -48,9 +49,44 @@ const Body: React.FC<BodyProps> = (props: BodyProps) => {
   const linePointsStr = pointsToString(props.points);
   const arrowPoints = calArrowPoints(props.points[props.points.length - 1]);
 
+  const calTextWidth = (text: string) => {
+    const dom = document.createElement('span');
+    dom.style.display = 'inline-block';
+    dom.textContent = text;
+    document.body.appendChild(dom);
+    const width = dom.clientWidth;
+    document.body.removeChild(dom);
+    return width;
+  };
+
+  const calTextPoints = (points: Point[]) => {
+    const first = points[1];
+    const second = points[2];
+
+    if (first.x === second.x) {
+      return { point: { x: second.x + 14, y: second.y }, direction: 'v' };
+    }
+    return {
+      point:
+        first.x > second.x
+          ? { x: first.x - calTextWidth(props.name), y: first.y - 5 }
+          : { ...first, y: first.y - 5 },
+      direction: 'h',
+    };
+  };
+
+  const namePoint = calTextPoints(props.points);
+
   return (
     <g>
-      <Line d={linePointsStr} fill="none" color={props.color} />
+      <Line
+        d={linePointsStr}
+        fill="none"
+        color={props.color}
+        name={props.name}
+        namePoint={namePoint.point}
+        direction={namePoint.direction}
+      />
       {props.hasArrow && (
         <Arrow color={props.color} d={pointsToString(arrowPoints)} />
       )}
