@@ -7,7 +7,7 @@ import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
 import { View } from '../logic/view/View';
-import { VisualLinkConfig } from 'types';
+import { VisualLinkConfig } from '../../../types';
 
 export type LinkContainerProps = {
   view: View;
