@@ -1,3 +1,4 @@
+import { Size, defaultElementSize } from '../utils/Size';
 import ElementState from './ElementState';
 
 type ElementView = {
@@ -10,12 +11,15 @@ type ElementView = {
   linkTargetIds: string[];
 };
 
-function buildFromElementState(state: ElementState): ElementView {
+function buildFromElementState(
+  state: ElementState,
+  size: Size = { ...defaultElementSize },
+): ElementView {
   return {
     id: state.id,
     state,
-    width: 160,
-    height: 62,
+    width: size.width,
+    height: size.height,
     anchored: false,
     linkSourceIds: [],
     linkTargetIds: [],

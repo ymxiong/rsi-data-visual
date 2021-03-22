@@ -14,7 +14,7 @@ const App = () => {
       visualDiagramRef.current.setView(viewStateTemplate);
       visualDiagramRef.current.selectToolbarItems([
         'create',
-        // 'plus',
+        'plus',
         'zoomIn',
         'zoomOut',
         'undo',

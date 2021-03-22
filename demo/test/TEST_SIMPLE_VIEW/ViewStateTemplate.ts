@@ -9,6 +9,10 @@ const onNaN = () => {
 const elementComponents = {
   model: {
     component: ViewMode,
+    defaultSize: {
+      width: 162,
+      height: 65,
+    },
   },
 };
 

@@ -1,3 +1,4 @@
+import { VisualCanvasConfig } from 'types';
 import ElementState from '../element/ElementState';
 import { buildFromElementState, ElementView } from '../element/ElementView';
 import LinkState from '../link/LinkState';
@@ -18,13 +19,14 @@ type View = {
 };
 
 const viewStateTemplate: ViewState = {
-  id: 'testView',
+  id: 'defaultView',
   elements: [
     {
-      id: 'testElement',
-      name: 'testElement',
+      id: 'defaultElement',
+      name: '新建组件',
+      // TODO: 处理element type问题
       type: 'model',
-      color: '#ff7875',
+      color: '#ff4d4f',
       x: newElementPoint.x,
       y: newElementPoint.y,
       select: false,
@@ -35,11 +37,19 @@ const viewStateTemplate: ViewState = {
 
 const buildViewFromViewState = (
   viewState: ViewState = { ...viewStateTemplate },
+  canvasConfig: VisualCanvasConfig | undefined = undefined,
 ): View => {
   const elements: { [id: string]: ElementView } = {};
   const links: { [id: string]: LinkView } = {};
   viewState.elements.forEach((element: ElementState) => {
-    elements[element.id] = buildFromElementState(element);
+    if (canvasConfig) {
+      const { defaultSize } = canvasConfig.elementConfig.components[
+        element.type
+      ];
+      elements[element.id] = buildFromElementState(element, defaultSize);
+    } else {
+      elements[element.id] = buildFromElementState(element);
+    }
   });
   viewState.links.forEach((link: LinkState) => {
     links[link.id] = buildFromLinkState(link);

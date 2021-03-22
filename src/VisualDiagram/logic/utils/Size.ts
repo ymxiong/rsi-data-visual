@@ -8,4 +8,9 @@ const standardSize: Size = {
   height: 900,
 };
 
-export { Size, standardSize };
+const defaultElementSize: Size = {
+  width: 200,
+  height: 100,
+};
+
+export { Size, standardSize, defaultElementSize };

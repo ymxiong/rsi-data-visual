@@ -67,10 +67,11 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const [hideToolbar, setToolbarHide] = useState(false);
 
   const onCreateElement = useCallback(() => {
+    const type = 'model';
     const elementView: ElementView = buildFromElementState({
       id: 'test-new',
       name: '新增元素',
-      type: 'model',
+      type,
       color: '#2f3ffa',
       x: newElementPoint.x,
       y: newElementPoint.y,

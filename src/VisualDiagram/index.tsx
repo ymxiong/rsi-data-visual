@@ -30,7 +30,7 @@ const VisualDiagram: React.ForwardRefRenderFunction<
     ref,
     () => ({
       setView: (viewState: ViewState) => {
-        dispatch(refreshView(buildViewFromViewState(viewState)));
+        dispatch(refreshView(buildViewFromViewState(viewState, canvasConfig)));
         // 这里返回布尔是想让外层能感知是否设置成功，上面这部份逻辑要做一下判断
         return true;
       },
@@ -41,7 +41,7 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         dispatch(selectToolbarItems(items));
       },
     }),
-    [dispatch, view],
+    [dispatch, view, canvasConfig],
   );
 
   return <CanvasContainer canvasConfig={canvasConfig} />;
