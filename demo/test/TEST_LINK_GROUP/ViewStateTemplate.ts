@@ -11,6 +11,7 @@ const viewStateTemplate: ViewState = {
       x: 200,
       y: 100,
       select: false,
+      locked: true,
     },
     {
       id: '2',
@@ -20,6 +21,7 @@ const viewStateTemplate: ViewState = {
       x: 400,
       y: 100,
       select: false,
+      locked: true,
     },
     {
       id: '3',
@@ -29,6 +31,7 @@ const viewStateTemplate: ViewState = {
       x: 600,
       y: 100,
       select: false,
+      locked: true,
     },
     {
       id: '4',
@@ -38,6 +41,7 @@ const viewStateTemplate: ViewState = {
       x: 400,
       y: 400,
       select: false,
+      locked: true,
     },
   ],
   links: [

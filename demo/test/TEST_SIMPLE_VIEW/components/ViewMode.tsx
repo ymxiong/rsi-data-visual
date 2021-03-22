@@ -23,12 +23,6 @@ const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
     minHeight: `${height}px`,
   });
 
-  let isCollapsed = true;
-
-  const onChange = (collapsed: boolean) => {
-    isCollapsed = collapsed;
-  };
-
   return (
     <ul
       style={computeStyle(props.element.size.width, props.element.size.height)}

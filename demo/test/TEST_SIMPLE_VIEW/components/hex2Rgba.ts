@@ -1,5 +1,5 @@
 /* eslint-disable radix */
-const hex2Rgba = (str: string, opacity = 1) => {
+const hex2Rgba = (str: string, opacity = 1): string => {
   let sColor = str.toLowerCase();
   if (sColor) {
     if (sColor.length === 4) {

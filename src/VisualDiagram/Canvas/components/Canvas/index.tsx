@@ -5,16 +5,12 @@ import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasViewport from '../CanvasViewport';
 import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
 import ElementContainer, { ElementContainerProps } from '../../../Element';
-import {
-  buildFromElementState,
-  ElementView,
-} from '../../../logic/element/ElementView';
+import { ElementView } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
 import { values } from 'lodash-es';
 import LinkContainer, { LinkContainerProps } from '../../../Link';
 import CanvasToolbar from '../CanvasToolbar';
 import {
-  addElement,
   refreshElement,
   selectElement,
   refreshCanvasScale,
@@ -22,7 +18,6 @@ import {
   refreshCanvasOffset,
 } from '../../../store/canvas/actions';
 import { VisualElementConfig, VisualLinkConfig } from '../../../../../types';
-import { newElementPoint, Point } from '../../../logic/utils/Point';
 import { zoomLevels } from '../../../logic/utils/Scale';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
 import CanvasLoading from '../CanvasLoading';

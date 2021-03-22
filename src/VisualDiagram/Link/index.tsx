@@ -1,12 +1,10 @@
 import React, { ComponentType } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
-import { refreshElement, selectElement } from '../store/canvas/actions';
 import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
-import { View } from '../logic/view/View';
 import { ElementView, VisualLinkConfig } from '../../../types';
 
 export type LinkContainerProps = {
