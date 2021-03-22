@@ -1,7 +1,7 @@
 import React, { ComponentType } from 'react';
 import { ViewState } from '../src/VisualDiagram/logic/view/ViewState';
 import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
-import { Size } from 'src/VisualDiagram/logic/utils/Size';
+import { Size } from '../src/VisualDiagram/logic/utils/Size';
 
 export type VisualComponentProps = {
   element: ElementView;

@@ -48,12 +48,12 @@ export const calcPointsBetweenElement = (
     }
   }
 
-  const FROM_ELEMENT_PADDING = (fromElement.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
-  const TO_ELEMENT_PADDING = (fromElement.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
+  const FROM_ELEMENT_PADDING = (fromElement.size.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
+  const TO_ELEMENT_PADDING = (fromElement.size.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
 
   const fromElementB: Point = {
     x: FROM_ELEMENT_POINT.x,
-    y: FROM_ELEMENT_POINT.y + fromElement.height,
+    y: FROM_ELEMENT_POINT.y + fromElement.size.height,
   };
 
   const toElementA: Point = {
@@ -99,19 +99,19 @@ export const calcPointsBetweenElement = (
     };
     // 当x值靠的很近的时候，需要对x进行范围扩展
     if (
-      FROM_ELEMENT_POINT.x - TO_ELEMENT_POINT.x < fromElement.width
-      && TO_ELEMENT_POINT.x - FROM_ELEMENT_POINT.x < fromElement.width
+      FROM_ELEMENT_POINT.x - TO_ELEMENT_POINT.x < fromElement.size.width
+      && TO_ELEMENT_POINT.x - FROM_ELEMENT_POINT.x < fromElement.size.width
     ) {
-      midPoint1.x += fromElement.width;
-      midPoint2.x += fromElement.width;
+      midPoint1.x += fromElement.size.width;
+      midPoint2.x += fromElement.size.width;
       // 当x值靠的很近且当y值靠的很近的时候，需要对y进行范围扩展
       // if (
       //   TO_ELEMENT_POINT.y - FROM_ELEMENT_POINT.y
       //   < ELEMENT_LINK_MARGIN * (sourceIndex + targetIndex + 2)
       //   && TO_ELEMENT_POINT.y - FROM_ELEMENT_POINT.y > 0
       // ) {
-      //   midPoint0.y += fromElement.height * 2;
-      //   midPoint1.y += fromElement.height * 2;
+      //   midPoint0.y += fromElement.size.height * 2;
+      //   midPoint1.y += fromElement.size.height * 2;
       // }
     }
 

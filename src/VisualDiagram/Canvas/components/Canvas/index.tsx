@@ -155,11 +155,11 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
             - canvasOffset.x
             + viewOffset.x
-            - element.width / 2;
+            - element.size.width / 2;
           refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
             - canvasOffset.y
             + viewOffset.y
-            - element.height / 2;
+            - element.size.height / 2;
           dispatch(refreshElement(refreshView));
         }
       }

@@ -31,7 +31,7 @@ const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
 
   return (
     <ul
-      style={computeStyle(props.element.width, props.element.height)}
+      style={computeStyle(props.element.size.width, props.element.size.height)}
       draggable="false"
     >
       {props.element.state.name && (

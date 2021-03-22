@@ -4,8 +4,7 @@ import ElementState from './ElementState';
 type ElementView = {
   id: string;
   state: ElementState;
-  width: number;
-  height: number;
+  size: Size;
   anchored: boolean;
   linkSourceIds: string[];
   linkTargetIds: string[];
@@ -18,8 +17,7 @@ function buildFromElementState(
   return {
     id: state.id,
     state,
-    width: size.width,
-    height: size.height,
+    size: { ...size },
     anchored: false,
     linkSourceIds: [],
     linkTargetIds: [],
