@@ -1,5 +1,5 @@
 import { Size, defaultElementSize } from '../utils/Size';
-import ElementState from './ElementState';
+import { ElementState } from './ElementState';
 
 type ElementView = {
   id: string;

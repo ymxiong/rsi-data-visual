@@ -1,4 +1,4 @@
-import LinkState from './LinkState';
+import { LinkState } from './LinkState';
 
 type LinkView = {
   id: string;

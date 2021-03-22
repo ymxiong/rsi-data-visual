@@ -1,5 +1,5 @@
-import ElementState from '../element/ElementState';
-import LinkState from '../link/LinkState';
+import { ElementState } from '../element/ElementState';
+import { LinkState } from '../link/LinkState';
 import { Point } from '../utils/Point';
 import { Canvas } from './Canvas';
 

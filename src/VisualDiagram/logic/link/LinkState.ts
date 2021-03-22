@@ -10,4 +10,4 @@ type LinkState = {
   toElementId: string;
 };
 
-export default LinkState;
+export { LinkState };

@@ -5,6 +5,7 @@ import { refreshElement, selectElement } from '../store/canvas/actions';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
+import { VisualComponentProps } from '../../../types';
 
 export type ElementContainerProps = {
   element: ElementView;
@@ -13,7 +14,9 @@ export type ElementContainerProps = {
     ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
     element: ElementView,
   ) => void;
-  SubComponent: ComponentType<any>;
+  SubComponent: ComponentType<VisualComponentProps>;
+  data?: any;
+  onDataChange?: (data: any) => void;
 };
 
 const ElementContainer: React.FC<ElementContainerProps> = (props) => {

@@ -1,5 +1,5 @@
 import { Point } from '../../utils/Point';
-import LinkState from '../LinkState';
+import { LinkState } from '../LinkState';
 
 type LinkGroupState = {
   id: string;

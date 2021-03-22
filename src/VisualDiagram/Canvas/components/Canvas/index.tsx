@@ -282,6 +282,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             element,
             viewOffset,
             onElementMove,
+            data: element.state.data,
+            onDataChange: element.state.onDataChange,
             SubComponent:
               props.elementConfig.components[element.state.type].component,
           };

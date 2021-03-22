@@ -6,6 +6,8 @@ type ElementState = {
   x: number;
   y: number;
   select: boolean;
+  data?: any;
+  onDataChange?: (data: any) => void;
 };
 
-export default ElementState;
+export { ElementState };

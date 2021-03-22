@@ -6,12 +6,14 @@ import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
 
 export type VisualComponentProps = {
   element: ElementView;
-  onElementChange(element: ElementView): () => void;
+  onElementChange: (element: ElementView) => void;
+  data?: any;
+  onDataChange?: (data: any) => void;
 };
 
 export type VisualElementComponents = {
   [type: string]: {
-    component: ComponentType<any>;
+    component: ComponentType<VisualComponentProps>;
     defaultSize: Size;
   };
 };
