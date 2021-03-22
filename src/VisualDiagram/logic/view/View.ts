@@ -1,4 +1,4 @@
-import { VisualCanvasConfig } from 'types';
+import { VisualCanvasConfig } from '../../../../types';
 import ElementState from '../element/ElementState';
 import { buildFromElementState, ElementView } from '../element/ElementView';
 import LinkState from '../link/LinkState';
