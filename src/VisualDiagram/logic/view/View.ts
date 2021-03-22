@@ -30,6 +30,7 @@ const viewStateTemplate: ViewState = {
       x: newElementPoint.x,
       y: newElementPoint.y,
       select: false,
+      locked: false,
     },
   ],
   links: [],

@@ -1,8 +1,8 @@
-import { VisualCanvasConfig } from 'types';
+import { VisualCanvasConfig, VisualElementComponents } from 'types';
 import { ViewState } from '../../../src/VisualDiagram/logic/view/ViewState';
 import ViewMode from './components/ViewMode';
 
-const elementComponents = {
+const elementComponents: VisualElementComponents = {
   model: {
     component: ViewMode,
     defaultSize: {
@@ -21,6 +21,7 @@ const canvasConfig: VisualCanvasConfig = {
     hasArrow: true,
     showName: false,
   },
+  gridSize: 25,
 };
 
 const viewStateTemplate: ViewState = {
@@ -34,6 +35,7 @@ const viewStateTemplate: ViewState = {
       x: 375,
       y: 275,
       select: false,
+      locked: true,
     },
     {
       id: 'userInfo',
@@ -43,6 +45,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 275,
       select: false,
+      locked: true,
     },
     {
       id: 'role',
@@ -52,6 +55,7 @@ const viewStateTemplate: ViewState = {
       x: 700,
       y: 50,
       select: false,
+      locked: true,
     },
     {
       id: 'permission',
@@ -61,6 +65,7 @@ const viewStateTemplate: ViewState = {
       x: 300,
       y: 50,
       select: false,
+      locked: true,
     },
     {
       id: 'userRole',
@@ -70,6 +75,7 @@ const viewStateTemplate: ViewState = {
       x: 700,
       y: 200,
       select: false,
+      locked: true,
     },
     {
       id: 'userPermission',
@@ -79,6 +85,7 @@ const viewStateTemplate: ViewState = {
       x: 500,
       y: 150,
       select: false,
+      locked: true,
     },
     {
       id: 'rolePermission',
@@ -88,6 +95,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 150,
       select: false,
+      locked: true,
     },
     {
       id: 'space',
@@ -97,6 +105,7 @@ const viewStateTemplate: ViewState = {
       x: 800,
       y: 550,
       select: false,
+      locked: true,
     },
     {
       id: 'department',
@@ -106,6 +115,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 575,
       select: false,
+      locked: true,
     },
     {
       id: 'userDepartment',
@@ -115,6 +125,7 @@ const viewStateTemplate: ViewState = {
       x: 225,
       y: 425,
       select: false,
+      locked: true,
     },
     {
       id: 'userSpace',
@@ -124,6 +135,7 @@ const viewStateTemplate: ViewState = {
       x: 575,
       y: 425,
       select: false,
+      locked: true,
     },
     {
       id: 'spacePermission',
@@ -133,6 +145,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 950,
       select: false,
+      locked: true,
     },
     {
       id: 'spaceRole',
@@ -142,6 +155,7 @@ const viewStateTemplate: ViewState = {
       x: 600,
       y: 825,
       select: false,
+      locked: true,
     },
     {
       id: 'userSpaceRole',
@@ -151,6 +165,7 @@ const viewStateTemplate: ViewState = {
       x: 350,
       y: 700,
       select: false,
+      locked: true,
     },
     {
       id: 'userSpacePermission',
@@ -160,6 +175,7 @@ const viewStateTemplate: ViewState = {
       x: 350,
       y: 825,
       select: false,
+      locked: true,
     },
     {
       id: 'spaceRolePermission',
@@ -169,6 +185,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 825,
       select: false,
+      locked: true,
     },
     {
       id: 'documentation',
@@ -178,6 +195,7 @@ const viewStateTemplate: ViewState = {
       x: 600,
       y: 700,
       select: false,
+      locked: true,
     },
     {
       id: 'announcement',
@@ -187,6 +205,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 700,
       select: false,
+      locked: true,
     },
     {
       id: 'dict',
@@ -196,6 +215,7 @@ const viewStateTemplate: ViewState = {
       x: -800,
       y: 1575,
       select: false,
+      locked: true,
     },
     {
       id: 'model',
@@ -205,6 +225,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 75,
       select: false,
+      locked: true,
     },
     {
       id: 'modelJson',
@@ -214,6 +235,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 75,
       select: false,
+      locked: true,
     },
     {
       id: 'modelTemplate',
@@ -223,6 +245,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 75,
       select: false,
+      locked: true,
     },
     {
       id: 'modelJsonTemplate',
@@ -232,6 +255,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 195,
       select: false,
+      locked: true,
     },
     {
       id: 'modelBuildRecord',
@@ -241,6 +265,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 195,
       select: false,
+      locked: true,
     },
     {
       id: 'modelTestRecord',
@@ -250,6 +275,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 195,
       select: false,
+      locked: true,
     },
     {
       id: 'modelDeploymentRecord',
@@ -259,6 +285,7 @@ const viewStateTemplate: ViewState = {
       x: 1125,
       y: 400,
       select: false,
+      locked: true,
     },
     {
       id: 'modelRunningRecord',
@@ -268,6 +295,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 315,
       select: false,
+      locked: true,
     },
     {
       id: 'account',
@@ -277,6 +305,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 525,
       select: false,
+      locked: true,
     },
     {
       id: 'accountPurchasedProduct',
@@ -286,6 +315,7 @@ const viewStateTemplate: ViewState = {
       x: 1575,
       y: 775,
       select: false,
+      locked: true,
     },
     {
       id: 'accountPurchasedDiscount',
@@ -295,6 +325,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 515,
       select: false,
+      locked: true,
     },
     {
       id: 'flow',
@@ -304,6 +335,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 635,
       select: false,
+      locked: true,
     },
     {
       id: 'order',
@@ -313,6 +345,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 635,
       select: false,
+      locked: true,
     },
     {
       id: 'product',
@@ -322,6 +355,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 635,
       select: false,
+      locked: true,
     },
     {
       id: 'discount',
@@ -331,6 +365,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 755,
       select: false,
+      locked: true,
     },
     {
       id: 'orderProductDiscount',
@@ -340,6 +375,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 755,
       select: false,
+      locked: true,
     },
   ],
   links: [

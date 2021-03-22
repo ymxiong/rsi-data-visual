@@ -35,6 +35,9 @@ export type VisualCanvasConfig = {
   elementConfig: VisualElementConfig;
   linkConfig: VisualLinkConfig;
   toolbarConfig: VisualToolbarConfig;
+
+  gridSize?: number;
+
 };
 
 export type VisualDiagramProps = {

@@ -6,6 +6,7 @@ type ElementState = {
   x: number;
   y: number;
   select: boolean;
+  locked: boolean;
   data?: any;
   onDataChange?: (data: any) => void;
 };

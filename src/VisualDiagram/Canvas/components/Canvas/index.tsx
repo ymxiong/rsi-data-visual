@@ -135,7 +135,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         if (ev.buttons !== 1) {
           // 如果被铆钉但鼠标已松开，释放铆钉
           dispatch(refreshElement({ ...element, anchored: false }));
-        } else {
+        } else if (!element.state.locked) {
           // 如果被铆钉，计算新的x，y值
           const refreshView = { ...element };
           refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
