@@ -21,7 +21,9 @@ const canvasConfig: VisualCanvasConfig = {
     hasArrow: true,
     showName: false,
   },
-  gridSize: 25,
+  globalConfig: {
+    gridSize: 25,
+  },
 };
 
 const viewStateTemplate: ViewState = {

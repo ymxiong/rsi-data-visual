@@ -1,21 +1,22 @@
+import { Point } from 'src/VisualDiagram/logic/utils/Point';
+import { Size } from 'src/VisualDiagram/logic/utils/Size';
 import styled from 'styled-components';
 
 type CanvasArtboardProps = {
-  offsetX: number;
-  offsetY: number;
   scale: number;
-  width: number;
-  height: number;
+  size: Size;
+  offset: Point;
+  gridSize?: number;
 };
 
 const CanvasArtboard = styled.div.attrs((props: CanvasArtboardProps) => {
   return {
     style: {
-      transform: `translate(${props.offsetX * props.scale}px, ${
-        props.offsetY * props.scale
+      transform: `translate(${props.offset.x * props.scale}px, ${
+        props.offset.y * props.scale
       }px) scale(${props.scale})`,
-      width: `${props.width}px`,
-      height: `${props.height}px`,
+      width: `${props.size.width}px`,
+      height: `${props.size.height}px`,
     },
   };
 })`

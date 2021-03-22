@@ -17,7 +17,11 @@ import {
   refreshCanvasAnchored,
   refreshCanvasOffset,
 } from '../../../store/canvas/actions';
-import { VisualElementConfig, VisualLinkConfig } from '../../../../../types';
+import {
+  VisualElementConfig,
+  VisualLinkConfig,
+  VisualGlobalConfig,
+} from '../../../../../types';
 import { zoomLevels } from '../../../logic/utils/Scale';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
 import CanvasLoading from '../CanvasLoading';
@@ -25,6 +29,7 @@ import CanvasLoading from '../CanvasLoading';
 type CanvasProps = {
   elementConfig: VisualElementConfig;
   linkConfig: VisualLinkConfig;
+  globalConfig: VisualGlobalConfig;
   handleRef: (element: HTMLDivElement) => void;
 };
 
@@ -86,11 +91,16 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   }, [canvasScale, dispatch]);
 
   const canvasArtboardProps: CanvasArtboardProps = {
-    offsetX: canvasOffset.x,
-    offsetY: canvasOffset.y,
     scale: zoomLevels[canvasScale],
-    width: canvasSize.width,
-    height: canvasSize.height,
+    offset: {
+      x: canvasOffset.x,
+      y: canvasOffset.y,
+    },
+    size: {
+      width: canvasSize.width,
+      height: canvasSize.height,
+    },
+    gridSize: props.globalConfig.gridSize,
   };
 
   const handleKey = useCallback(

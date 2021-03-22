@@ -31,13 +31,15 @@ export type VisualElementConfig = { components: VisualElementComponents };
 
 export type VisualLinkConfig = { hasArrow: boolean; showName: boolean };
 
+export type VisualGlobalConfig = {
+  gridSize?: number;
+};
+
 export type VisualCanvasConfig = {
   elementConfig: VisualElementConfig;
   linkConfig: VisualLinkConfig;
   toolbarConfig: VisualToolbarConfig;
-
-  gridSize?: number;
-
+  globalConfig: VisualGlobalConfig;
 };
 
 export type VisualDiagramProps = {
