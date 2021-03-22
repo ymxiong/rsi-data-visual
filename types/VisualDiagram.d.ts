@@ -3,12 +3,12 @@ import { ViewState } from '../src/VisualDiagram/logic/view/ViewState';
 import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
 import { Size } from '../src/VisualDiagram/logic/utils/Size';
 import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
+import { Pendant } from '../src/VisualDiagram/logic/utils/Pendant';
 
 export type VisualComponentProps = {
   element: ElementView;
   onElementChange: (element: ElementView) => void;
-  data?: any;
-  onDataChange?: (data: any) => void;
+  pendent?: Pendant;
 };
 
 export type VisualElementComponents = {

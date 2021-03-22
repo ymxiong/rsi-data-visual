@@ -1,3 +1,5 @@
+import { Pendant } from '../utils/Pendant';
+
 type ElementState = {
   id: string;
   name: string;
@@ -7,8 +9,7 @@ type ElementState = {
   y: number;
   select: boolean;
   locked: boolean;
-  data?: any;
-  onDataChange?: (data: any) => void;
+  pendant?: Pendant;
 };
 
 export { ElementState };

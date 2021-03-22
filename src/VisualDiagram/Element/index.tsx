@@ -6,6 +6,7 @@ import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
 import { VisualComponentProps } from '../../../types';
+import { Pendant } from '../logic/utils/Pendant';
 
 export type ElementContainerProps = {
   element: ElementView;
@@ -15,8 +16,7 @@ export type ElementContainerProps = {
     element: ElementView,
   ) => void;
   SubComponent: ComponentType<VisualComponentProps>;
-  data?: any;
-  onDataChange?: (data: any) => void;
+  pendent?: Pendant;
 };
 
 const ElementContainer: React.FC<ElementContainerProps> = (props) => {
