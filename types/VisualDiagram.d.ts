@@ -2,6 +2,7 @@ import React, { ComponentType } from 'react';
 import { ViewState } from '../src/VisualDiagram/logic/view/ViewState';
 import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
 import { Size } from '../src/VisualDiagram/logic/utils/Size';
+import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
 
 export type VisualComponentProps = {
   element: ElementView;
@@ -42,6 +43,7 @@ export type VisualDiagramProps = {
 export type VisualDiagramHandle = {
   setView: (viewState: ViewState) => boolean;
   getView: () => ViewState;
+  createElement: (elementState: ElementState) => boolean;
   selectToolbarItems: (items: string[]) => void;
 };
 

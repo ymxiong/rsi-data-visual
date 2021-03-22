@@ -1,12 +1,17 @@
 import React, { useEffect, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
-import { refreshView } from './store/canvas/actions';
+import { addElement, refreshView } from './store/canvas/actions';
 import { selectToolbarItems } from './store/diagram/actions';
 import CanvasContainer from './Canvas';
 import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
 import { buildViewFromViewState } from './logic/view/View';
-import { VisualDiagramHandle, VisualDiagramProps } from '../../types';
+import {
+  ElementState,
+  VisualDiagramHandle,
+  VisualDiagramProps,
+} from '../../types';
+import { buildFromElementState } from './logic/element/ElementView';
 
 const VisualDiagram: React.ForwardRefRenderFunction<
   VisualDiagramHandle,
@@ -32,6 +37,19 @@ const VisualDiagram: React.ForwardRefRenderFunction<
       setView: (viewState: ViewState) => {
         dispatch(refreshView(buildViewFromViewState(viewState, canvasConfig)));
         // 这里返回布尔是想让外层能感知是否设置成功，上面这部份逻辑要做一下判断
+        return true;
+      },
+      createElement: (elementState: ElementState) => {
+        if (canvasConfig) {
+          const { defaultSize } = canvasConfig.elementConfig.components[
+            elementState.type
+          ];
+          dispatch(
+            addElement(buildFromElementState(elementState, defaultSize)),
+          );
+        } else {
+          dispatch(addElement(buildFromElementState(elementState)));
+        }
         return true;
       },
       getView: (): ViewState => {

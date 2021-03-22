@@ -10,7 +10,7 @@ export interface DiagramState {
 function getInitialDiagramState(): DiagramState {
   return {
     toolbar: {},
-    toolbarShowItems: ['plus', 'zoomIn', 'zoomOut'],
+    toolbarShowItems: ['zoomIn', 'zoomOut'],
   };
 }
 

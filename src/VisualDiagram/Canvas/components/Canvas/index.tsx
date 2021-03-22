@@ -66,20 +66,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const [hideToolbar, setToolbarHide] = useState(false);
 
-  const onCreateElement = useCallback(() => {
-    const type = 'model';
-    const elementView: ElementView = buildFromElementState({
-      id: 'test-new',
-      name: '新增元素',
-      type,
-      color: '#2f3ffa',
-      x: newElementPoint.x,
-      y: newElementPoint.y,
-      select: false,
-    });
-    dispatch(addElement(elementView));
-  }, [dispatch]);
-
   const onZoomIn = useCallback(() => {
     let scale = canvasScale;
     if (scale > zoomLevels.length - 2) {
@@ -228,12 +214,6 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     dispatch(
       refreshToolbarItemBatch([
         {
-          id: 'plus',
-          onClick: onCreateElement,
-          icon: 'plus',
-          tips: '新增元素',
-        },
-        {
           id: 'zoomIn',
           onClick: onZoomIn,
           icon: 'zoomIn',
@@ -271,7 +251,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         },
       ]),
     );
-  }, [dispatch, onCreateElement, onSort, onZoomIn, onZoomOut]);
+  }, [dispatch, onSort, onZoomIn, onZoomOut]);
 
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>

@@ -1,10 +1,6 @@
-import { VisualCanvasConfig, VisualToolbarConfig } from 'types';
+import { VisualCanvasConfig } from 'types';
 import { ViewState } from '../../../src/VisualDiagram/logic/view/ViewState';
 import ViewMode from './components/ViewMode';
-
-const onNaN = () => {
-  console.log('新增测试');
-};
 
 const elementComponents = {
   model: {
@@ -16,20 +12,11 @@ const elementComponents = {
   },
 };
 
-const toolbarState: VisualToolbarConfig = {
-  create: {
-    id: 'create',
-    onClick: onNaN,
-    icon: 'plus',
-    tips: '新增',
-  },
-};
-
-const canvas: VisualCanvasConfig = {
+const canvasConfig: VisualCanvasConfig = {
   elementConfig: {
     components: elementComponents,
   },
-  toolbarConfig: toolbarState,
+  toolbarConfig: {},
   linkConfig: {
     hasArrow: true,
     showName: false,
@@ -527,4 +514,4 @@ const viewStateTemplate: ViewState = {
   ],
 };
 
-export { canvas, viewStateTemplate };
+export { canvasConfig, viewStateTemplate };

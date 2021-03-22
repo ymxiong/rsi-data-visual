@@ -1,6 +1,10 @@
 import React, { useImperativeHandle, useRef } from 'react';
 import { Provider } from 'react-redux';
-import { VisualDiagramHandle, VisualDiagramProps } from '../types';
+import {
+  ElementState,
+  VisualDiagramHandle,
+  VisualDiagramProps,
+} from '../types';
 import VisualDiagram from './VisualDiagram';
 import { ViewState } from './VisualDiagram/logic/view/ViewState';
 import { configureStore } from './VisualDiagram/store';
@@ -30,6 +34,12 @@ const App: React.ForwardRefRenderFunction<
           elements: [],
           links: [],
         };
+      },
+      createElement: (elementState: ElementState) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.createElement(elementState);
+        }
+        return false;
       },
       selectToolbarItems: (items: string[]) => {
         if (visualDiagramRef.current) {

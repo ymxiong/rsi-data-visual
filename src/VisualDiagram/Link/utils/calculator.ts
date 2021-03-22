@@ -47,9 +47,11 @@ export const calcPointsBetweenElement = (
       targetIndex += 1;
     }
   }
+  const FROM_ELEMENT_PADDING_SINGLE = fromElement.size.width / (SOURCE_LINK_TOTAL + 1);
+  const FROM_ELEMENT_PADDING = FROM_ELEMENT_PADDING_SINGLE * (sourceIndex + 1);
 
-  const FROM_ELEMENT_PADDING = (fromElement.size.width / (SOURCE_LINK_TOTAL + 1)) * (sourceIndex + 1);
-  const TO_ELEMENT_PADDING = (fromElement.size.width / (TARGET_LINK_TOTAL + 1)) * (targetIndex + 1);
+  const TO_ELEMENT_PADDING_SINGLE = fromElement.size.width / (TARGET_LINK_TOTAL + 1);
+  const TO_ELEMENT_PADDING = TO_ELEMENT_PADDING_SINGLE * (targetIndex + 1);
 
   const fromElementB: Point = {
     x: FROM_ELEMENT_POINT.x,
