@@ -1,5 +1,5 @@
-import { Point } from 'src/VisualDiagram/logic/utils/Point';
-import { Size } from 'src/VisualDiagram/logic/utils/Size';
+import { Point } from '../../../logic/utils/Point';
+import { Size } from '../../../logic/utils/Size';
 import styled from 'styled-components';
 
 type CanvasArtboardProps = {

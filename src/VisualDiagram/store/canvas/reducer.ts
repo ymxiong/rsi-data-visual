@@ -122,6 +122,11 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       };
       return refreshState;
     }
+    case 'canvas/element/size/refresh': {
+      const refreshState = state;
+      refreshState.view.elements[action.payload.elementId].size = action.payload.size;
+      return refreshState;
+    }
     case 'canvas/element/add': {
       const refreshState = state;
       refreshState.view.elements = { ...state.view.elements };

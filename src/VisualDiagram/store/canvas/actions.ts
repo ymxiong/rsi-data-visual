@@ -4,6 +4,7 @@ import { ElementView } from '../../logic/element/ElementView';
 import { LinkView } from '../../logic/link/LinkView';
 import { Canvas } from '../../logic/canvas/Canvas';
 import { Point } from '../../logic/utils/Point';
+import { Size } from '../../logic/utils/Size';
 
 export const refreshCanvas = (canvas: Canvas): CanvasAction => ({
   type: 'canvas/refresh',
@@ -53,6 +54,17 @@ export const refreshElementAnchored = (
   payload: {
     elementId,
     anchored,
+  },
+});
+
+export const refreshElementSize = (
+  elementId: string,
+  size: Size,
+): CanvasAction => ({
+  type: 'canvas/element/size/refresh',
+  payload: {
+    elementId,
+    size,
   },
 });
 

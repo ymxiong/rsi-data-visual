@@ -1,7 +1,11 @@
-import React, { ComponentType } from 'react';
+import React, { ComponentType, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
-import { refreshElement, selectElement } from '../store/canvas/actions';
+import {
+  refreshElement,
+  selectElement,
+  refreshElementSize,
+} from '../store/canvas/actions';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
@@ -24,6 +28,10 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   const element = useSelector(
     (state: Store) => state.canvas.view.elements[props.element.id],
+  );
+
+  const elementSize = useSelector(
+    (state: Store) => state.canvas.view.elements[props.element.id].size,
   );
 
   const onElementChange = (elementView: ElementView) => {
@@ -63,11 +71,27 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     onElementMove(ev);
   };
 
+  const handleRef = useCallback(
+    (div: HTMLDivElement) => {
+      const canvasDOM = div;
+      console.log('canvasDom', canvasDOM);
+      if (canvasDOM) {
+        const domRect = canvasDOM.getBoundingClientRect();
+        elementSize.width = domRect.width;
+        elementSize.height = domRect.height;
+        console.log('domRect', domRect);
+        dispatch(refreshElementSize(props.element.id, elementSize));
+      }
+    },
+    [dispatch, elementSize, props.element.id],
+  );
+
   return (
     <Element
       key={element.id}
       element={element}
       offset={props.viewOffset}
+      handleRef={handleRef}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseMove={onMouseMove}

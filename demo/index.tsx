@@ -17,7 +17,7 @@ const App = () => {
 
   const onCreateModel = () => {
     const type = 'model';
-    const id = randomString(6);
+    const id = randomString(32);
     const elementState = {
       id,
       name: `新增${id}`,

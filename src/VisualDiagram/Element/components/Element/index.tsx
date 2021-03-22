@@ -7,6 +7,7 @@ type ElementProps = {
   element: ElementView;
   offset: Point;
   children: ReactNode;
+  handleRef: (element: HTMLDivElement) => void;
   onMouseUp: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseDown: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   onMouseMove: (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
@@ -33,6 +34,7 @@ export const Element = (props: ElementProps): JSX.Element => {
         onMouseMove={props.onMouseMove}
         onMouseLeave={props.onMouseLeave}
         role="presentation"
+        ref={(div: HTMLDivElement) => props.handleRef(div)}
       >
         {props.children}
       </div>
