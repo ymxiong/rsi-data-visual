@@ -20,7 +20,7 @@ export type ElementContainerProps = {
     element: ElementView,
   ) => void;
   SubComponent: ComponentType<VisualComponentProps>;
-  pendent?: Pendant;
+  pendant?: Pendant;
 };
 
 const ElementContainer: React.FC<ElementContainerProps> = (props) => {
@@ -74,12 +74,10 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const handleRef = useCallback(
     (div: HTMLDivElement) => {
       const canvasDOM = div;
-      console.log('canvasDom', canvasDOM);
       if (canvasDOM) {
         const domRect = canvasDOM.getBoundingClientRect();
         elementSize.width = domRect.width;
         elementSize.height = domRect.height;
-        console.log('domRect', domRect);
         dispatch(refreshElementSize(props.element.id, elementSize));
       }
     },

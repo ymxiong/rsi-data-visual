@@ -19,6 +19,8 @@ import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
 
 import { LinkState } from '../src/VisualDiagram/logic/link/LinkState';
 
+import { Pendant, PendantData } from '../src/VisualDiagram/logic/utils/Pendant';
+
 export {
   VisualComponentProps,
   VisualElementComponents,
@@ -34,6 +36,8 @@ export {
   ElementState,
   ElementView,
   LinkState,
+  Pendant,
+  PendantData,
 };
 
 export default VisualDiagram;

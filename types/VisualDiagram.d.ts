@@ -8,7 +8,7 @@ import { Pendant } from '../src/VisualDiagram/logic/utils/Pendant';
 export type VisualComponentProps = {
   element: ElementView;
   onElementChange: (element: ElementView) => void;
-  pendent?: Pendant;
+  pendant?: Pendant;
 };
 
 export type VisualElementComponents = {
