@@ -41,6 +41,12 @@ const App: React.ForwardRefRenderFunction<
         }
         return false;
       },
+      deleteElement: (elementId: string) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.deleteElement(elementId);
+        }
+        return false;
+      },
       selectToolbarItems: (items: string[]) => {
         if (visualDiagramRef.current) {
           visualDiagramRef.current.selectToolbarItems(items);

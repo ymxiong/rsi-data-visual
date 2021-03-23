@@ -1,7 +1,11 @@
 import React, { useEffect, useImperativeHandle } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
-import { addElement, refreshView } from './store/canvas/actions';
+import {
+  createElement,
+  deleteElement,
+  refreshView,
+} from './store/canvas/actions';
 import { selectToolbarItems } from './store/diagram/actions';
 import CanvasContainer from './Canvas';
 import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
@@ -44,10 +48,14 @@ const VisualDiagram: React.ForwardRefRenderFunction<
           const { minSize } = canvasConfig.elementConfig.components[
             elementState.type
           ];
-          dispatch(addElement(buildFromElementState(elementState, minSize)));
+          dispatch(createElement(buildFromElementState(elementState, minSize)));
         } else {
-          dispatch(addElement(buildFromElementState(elementState)));
+          dispatch(createElement(buildFromElementState(elementState)));
         }
+        return true;
+      },
+      deleteElement: (elementId: string) => {
+        dispatch(deleteElement(elementId));
         return true;
       },
       getView: (): ViewState => {

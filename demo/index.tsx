@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { VisualToolbarConfig } from 'types';
+import { ViewState, VisualToolbarConfig } from 'types';
 import VisualDiagram from '../src';
 import { randomString } from './test/TEST_SIMPLE_VIEW/utils/RandomUtils';
 import {
@@ -32,12 +32,24 @@ const App = () => {
     }
   };
 
+  const onDeleteModel = () => {
+    if (visualDiagramRef.current) {
+      visualDiagramRef.current.deleteElement('user');
+    }
+  };
+
   const toolbarConfig: VisualToolbarConfig = {
     create: {
       id: 'create',
       onClick: onCreateModel,
       icon: 'plus',
       tips: '新增模型',
+    },
+    delete: {
+      id: 'delete',
+      onClick: onDeleteModel,
+      icon: 'delete',
+      tips: '删除模型',
     },
   };
 
@@ -48,6 +60,7 @@ const App = () => {
       visualDiagramRef.current.setView(viewStateTemplate);
       visualDiagramRef.current.selectToolbarItems([
         'create',
+        'delete',
         'zoomIn',
         'zoomOut',
         'undo',
@@ -58,7 +71,7 @@ const App = () => {
     }
   }, []);
 
-  const handleChange = (viewState: any) => {
+  const handleChange = (viewState: ViewState) => {
     console.log('onChange', viewState);
   };
 

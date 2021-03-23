@@ -50,9 +50,14 @@ export type CanvasElementSizeRefeshAction = ActionShape<
   }
 >;
 
-export type CanvasElementAddAction = ActionShape<
-  'canvas/element/add',
+export type CanvasElementCreateAction = ActionShape<
+  'canvas/element/create',
   ElementView
+>;
+
+export type CanvasElementDeleteAction = ActionShape<
+  'canvas/element/delete',
+  string
 >;
 
 export type CanvasElementSelectType = {
@@ -79,7 +84,8 @@ export type CanvasAction =
   | CanvasViewRefeshAction
   | CanvasElementAnchoredRefeshAction
   | CanvasElementSizeRefeshAction
-  | CanvasElementAddAction
+  | CanvasElementCreateAction
+  | CanvasElementDeleteAction
   | CanvasElementRefeshAction
   | CanvasElementSelectAction
   | CanvasLinkRefeshAction;

@@ -127,10 +127,46 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       refreshState.view.elements[action.payload.elementId].size = action.payload.size;
       return refreshState;
     }
-    case 'canvas/element/add': {
+    case 'canvas/element/create': {
       const refreshState = state;
       refreshState.view.elements = { ...state.view.elements };
       refreshState.view.elements[action.payload.id] = action.payload;
+      return refreshState;
+    }
+    case 'canvas/element/delete': {
+      const refreshState = state;
+      refreshState.view.elements = { ...state.view.elements };
+      refreshState.view.links = { ...state.view.links };
+      const preDeleteElement = refreshState.view.elements[action.payload];
+      const preDeleteLinkIds: string[] = [];
+      const preRefactorElementIds: string[] = [];
+      preDeleteElement.linkSourceIds.forEach((linkId) => {
+        preDeleteLinkIds.push(linkId);
+        preRefactorElementIds.push(
+          refreshState.view.links[linkId].state.toElementId,
+        );
+        delete refreshState.view.links[linkId];
+      });
+      preDeleteElement.linkTargetIds.forEach((linkId) => {
+        preDeleteLinkIds.push(linkId);
+        preRefactorElementIds.push(
+          refreshState.view.links[linkId].state.fromElementId,
+        );
+        delete refreshState.view.links[linkId];
+      });
+      preRefactorElementIds.forEach((elementId: string) => {
+        refreshState.view.elements[
+          elementId
+        ].linkSourceIds = refreshState.view.elements[
+          elementId
+        ].linkSourceIds.filter((item) => !preDeleteLinkIds.includes(item));
+        refreshState.view.elements[
+          elementId
+        ].linkTargetIds = refreshState.view.elements[
+          elementId
+        ].linkTargetIds.filter((item) => !preDeleteLinkIds.includes(item));
+      });
+      delete refreshState.view.elements[action.payload];
       return refreshState;
     }
     case 'canvas/element/refresh': {

@@ -36,9 +36,14 @@ export const refreshView = (view: View): CanvasAction => ({
   payload: view,
 });
 
-export const addElement = (element: ElementView): CanvasAction => ({
-  type: 'canvas/element/add',
+export const createElement = (element: ElementView): CanvasAction => ({
+  type: 'canvas/element/create',
   payload: element,
+});
+
+export const deleteElement = (elementId: string): CanvasAction => ({
+  type: 'canvas/element/delete',
+  payload: elementId,
 });
 
 export const refreshElement = (element: ElementView): CanvasAction => ({

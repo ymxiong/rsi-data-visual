@@ -5,7 +5,11 @@ import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
-import { ElementView, VisualLinkConfig } from '../../../types';
+import {
+  ElementView,
+  VisualComponentProps,
+  VisualLinkConfig,
+} from '../../../types';
 
 export type LinkContainerProps = {
   elements: {
@@ -16,7 +20,7 @@ export type LinkContainerProps = {
   };
   link: LinkView;
   linkConfig: VisualLinkConfig;
-  SubComponent: ComponentType<any>;
+  SubComponent: ComponentType<VisualComponentProps>;
 };
 
 const LinkContainer: React.FC<LinkContainerProps> = (props) => {

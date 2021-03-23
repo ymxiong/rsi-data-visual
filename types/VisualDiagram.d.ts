@@ -51,6 +51,7 @@ export type VisualDiagramHandle = {
   setView: (viewState: ViewState) => boolean;
   getView: () => ViewState;
   createElement: (elementState: ElementState) => boolean;
+  deleteElement: (elementId: string) => boolean;
   selectToolbarItems: (items: string[]) => void;
 };
 
