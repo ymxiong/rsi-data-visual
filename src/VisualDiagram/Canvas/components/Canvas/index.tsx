@@ -288,6 +288,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             viewOffset,
             onElementMove,
             pendant: element.state.pendant,
+            minSize: props.elementConfig.components[element.state.type].minSize,
             SubComponent:
               props.elementConfig.components[element.state.type].component,
           };

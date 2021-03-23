@@ -41,12 +41,10 @@ const VisualDiagram: React.ForwardRefRenderFunction<
       },
       createElement: (elementState: ElementState) => {
         if (canvasConfig) {
-          const { defaultSize } = canvasConfig.elementConfig.components[
+          const { minSize } = canvasConfig.elementConfig.components[
             elementState.type
           ];
-          dispatch(
-            addElement(buildFromElementState(elementState, defaultSize)),
-          );
+          dispatch(addElement(buildFromElementState(elementState, minSize)));
         } else {
           dispatch(addElement(buildFromElementState(elementState)));
         }

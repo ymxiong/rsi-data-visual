@@ -5,7 +5,7 @@ import ViewMode from './components/ViewMode';
 const elementComponents: VisualElementComponents = {
   model: {
     component: ViewMode,
-    defaultSize: {
+    minSize: {
       width: 162,
       height: 65,
     },

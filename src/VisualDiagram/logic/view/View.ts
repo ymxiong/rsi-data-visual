@@ -44,10 +44,8 @@ const buildViewFromViewState = (
   const links: { [id: string]: LinkView } = {};
   viewState.elements.forEach((element: ElementState) => {
     if (canvasConfig) {
-      const { defaultSize } = canvasConfig.elementConfig.components[
-        element.type
-      ];
-      elements[element.id] = buildFromElementState(element, defaultSize);
+      const { minSize } = canvasConfig.elementConfig.components[element.type];
+      elements[element.id] = buildFromElementState(element, minSize);
     } else {
       elements[element.id] = buildFromElementState(element);
     }

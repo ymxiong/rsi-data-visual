@@ -11,6 +11,7 @@ import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
 import { VisualComponentProps } from '../../../types';
 import { Pendant } from '../logic/utils/Pendant';
+import { Size } from '../logic/utils/Size';
 
 export type ElementContainerProps = {
   element: ElementView;
@@ -19,6 +20,7 @@ export type ElementContainerProps = {
     ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
     element: ElementView,
   ) => void;
+  minSize: Size;
   SubComponent: ComponentType<VisualComponentProps>;
   pendant?: Pendant;
 };
@@ -76,12 +78,17 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
       const canvasDOM = div;
       if (canvasDOM) {
         const domRect = canvasDOM.getBoundingClientRect();
-        elementSize.width = domRect.width;
-        elementSize.height = domRect.height;
-        dispatch(refreshElementSize(props.element.id, elementSize));
+        if (
+          domRect.width > props.minSize.width
+          && domRect.height > props.minSize.height
+        ) {
+          elementSize.width = domRect.width;
+          elementSize.height = domRect.height;
+          dispatch(refreshElementSize(props.element.id, elementSize));
+        }
       }
     },
-    [dispatch, elementSize, props.element.id],
+    [dispatch, elementSize, props.element.id, props.minSize],
   );
 
   return (

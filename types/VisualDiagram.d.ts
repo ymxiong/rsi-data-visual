@@ -14,7 +14,7 @@ export type VisualComponentProps = {
 export type VisualElementComponents = {
   [type: string]: {
     component: ComponentType<VisualComponentProps>;
-    defaultSize: Size;
+    minSize: Size;
   };
 };
 
