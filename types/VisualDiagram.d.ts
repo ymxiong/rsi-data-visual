@@ -53,6 +53,8 @@ export type VisualDiagramHandle = {
   createElement: (elementState: ElementState) => boolean;
   deleteElement: (elementId: string) => boolean;
   selectToolbarItems: (items: string[]) => void;
+  startLoading: () => boolean;
+  endLoading: () => boolean;
 };
 
 export declare const VisualDiagram: React.ForwardRefExoticComponent<

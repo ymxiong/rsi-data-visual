@@ -20,19 +20,7 @@ type View = {
 
 const viewStateTemplate: ViewState = {
   id: 'defaultView',
-  elements: [
-    {
-      id: 'defaultElement',
-      name: '新建组件',
-      // TODO: 处理element type问题
-      type: 'model',
-      color: '#ff4d4f',
-      x: newElementPoint.x,
-      y: newElementPoint.y,
-      select: false,
-      locked: false,
-    },
-  ],
+  elements: [],
   links: [],
 };
 

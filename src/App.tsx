@@ -52,6 +52,18 @@ const App: React.ForwardRefRenderFunction<
           visualDiagramRef.current.selectToolbarItems(items);
         }
       },
+      startLoading() {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.startLoading();
+        }
+        return false;
+      },
+      endLoading() {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.endLoading();
+        }
+        return false;
+      },
     }),
     [],
   );

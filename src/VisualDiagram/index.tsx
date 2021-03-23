@@ -1,4 +1,4 @@
-import React, { useEffect, useImperativeHandle } from 'react';
+import React, { useEffect, useImperativeHandle, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
 import {
@@ -24,6 +24,8 @@ const VisualDiagram: React.ForwardRefRenderFunction<
   const dispatch = useDispatch();
 
   const view = useSelector((state: Store) => state.canvas.view);
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (onChange) {
@@ -64,11 +66,19 @@ const VisualDiagram: React.ForwardRefRenderFunction<
       selectToolbarItems(items: string[]) {
         dispatch(selectToolbarItems(items));
       },
+      startLoading() {
+        setLoading(true);
+        return true;
+      },
+      endLoading() {
+        setLoading(false);
+        return true;
+      },
     }),
     [dispatch, view, canvasConfig],
   );
 
-  return <CanvasContainer canvasConfig={canvasConfig} />;
+  return <CanvasContainer canvasConfig={canvasConfig} loading={loading} />;
 };
 
 export default React.memo(React.forwardRef(VisualDiagram));

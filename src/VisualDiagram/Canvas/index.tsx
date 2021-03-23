@@ -10,6 +10,7 @@ import { values } from 'lodash-es';
 
 type CanvasContainerProps = {
   canvasConfig: VisualCanvasConfig;
+  loading: boolean;
 };
 
 const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
@@ -44,6 +45,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
       elementConfig={props.canvasConfig.elementConfig}
       linkConfig={props.canvasConfig.linkConfig}
       globalConfig={props.canvasConfig.toolbarConfig}
+      loading={props.loading}
       handleRef={handleRef}
     />
   );

@@ -30,6 +30,7 @@ type CanvasProps = {
   elementConfig: VisualElementConfig;
   linkConfig: VisualLinkConfig;
   globalConfig: VisualGlobalConfig;
+  loading: boolean;
   handleRef: (element: HTMLDivElement) => void;
 };
 
@@ -260,7 +261,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   return (
     <CanvasViewport ref={(div: HTMLDivElement) => props.handleRef(div)}>
-      <CanvasLoading />
+      <CanvasLoading loading={props.loading} />
       <CanvasArtboard
         {...canvasArtboardProps}
         onMouseDown={onMouseDown}

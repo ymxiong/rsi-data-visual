@@ -57,6 +57,7 @@ const App = () => {
 
   useEffect(() => {
     if (visualDiagramRef.current) {
+      visualDiagramRef.current.startLoading();
       visualDiagramRef.current.setView(viewStateTemplate);
       visualDiagramRef.current.selectToolbarItems([
         'create',
@@ -68,6 +69,7 @@ const App = () => {
         'sort',
         'cut',
       ]);
+      setTimeout(() => visualDiagramRef.current.endLoading(), 3000);
     }
   }, []);
 
