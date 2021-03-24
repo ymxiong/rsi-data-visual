@@ -1,5 +1,6 @@
 import {
-  VisualComponentProps,
+  VisualElementProps,
+  VisualLinkProps,
   VisualElementComponents,
   VisualLinkComponents,
   VisualToolbarProps,
@@ -23,7 +24,8 @@ import { LinkState } from '../src/VisualDiagram/logic/link/LinkState';
 import { Pendant, PendantData } from '../src/VisualDiagram/logic/utils/Pendant';
 
 export {
-  VisualComponentProps,
+  VisualElementProps,
+  VisualLinkProps,
   VisualElementComponents,
   VisualLinkComponents,
   VisualToolbarProps,

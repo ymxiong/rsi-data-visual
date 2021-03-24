@@ -9,7 +9,7 @@ import {
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
-import { VisualComponentProps } from '../../../types';
+import { VisualElementProps } from '../../../types';
 import { Pendant } from '../logic/utils/Pendant';
 import { Size } from '../logic/utils/Size';
 
@@ -21,7 +21,7 @@ export type ElementContainerProps = {
     element: ElementView,
   ) => void;
   minSize: Size;
-  SubComponent: ComponentType<VisualComponentProps>;
+  SubComponent: ComponentType<VisualElementProps>;
   pendant?: Pendant;
 };
 

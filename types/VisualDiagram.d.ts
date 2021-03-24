@@ -4,8 +4,9 @@ import { ElementView } from '../src/VisualDiagram/logic/element/ElementView';
 import { Size } from '../src/VisualDiagram/logic/utils/Size';
 import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
 import { Pendant } from '../src/VisualDiagram/logic/utils/Pendant';
+import { LinkView } from '../src/VisualDiagram/logic/link/LinkView';
 
-export type VisualComponentProps = {
+export type VisualElementProps = {
   element: ElementView;
   onElementChange: (element: ElementView) => void;
   pendant?: Pendant;
@@ -13,12 +14,14 @@ export type VisualComponentProps = {
 
 export type VisualElementComponents = {
   [type: string]: {
-    component: ComponentType<VisualComponentProps>;
+    component: ComponentType<VisualElementProps>;
     minSize: Size;
   };
 };
 
 export type VisualLinkProps = {
+  link: LinkView;
+  onLinkChange: (link: LinkView) => void;
   pendant?: Pendant;
 };
 

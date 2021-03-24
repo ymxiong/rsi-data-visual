@@ -1,5 +1,5 @@
 import React from 'react';
-import { VisualComponentProps } from '../../../../types';
+import { VisualElementProps } from '../../../../types';
 import ModelFooter from './ModelFooter';
 import { ModelTitle } from './ModelTitle';
 
@@ -14,7 +14,7 @@ const modelStyle = {
   color: '#333',
 };
 
-export type ViewModeProps = VisualComponentProps;
+export type ViewModeProps = VisualElementProps;
 
 const ViewMode: React.FC<ViewModeProps> = (props: ViewModeProps) => {
   const computeStyle = (width = 160, height = 62) => ({

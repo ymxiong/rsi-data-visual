@@ -5,8 +5,7 @@ import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
-import { ElementView } from '../../../types';
-import { VisualLinkProps } from 'types/VisualDiagram';
+import { ElementView, VisualLinkProps } from '../../../types';
 
 export type LinkContainerProps = {
   elements: {
