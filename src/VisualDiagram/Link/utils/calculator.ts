@@ -2,7 +2,8 @@ import { ElementView } from '../../../VisualDiagram/logic/element/ElementView';
 import { LinkView } from '../../../VisualDiagram/logic/link/LinkView';
 import { Point } from '../../logic/utils/Point';
 
-// TODO: 位置排序与线条交错问题
+const ELEMENT_LINK_MARGIN = 25;
+
 export const calcPointsBetweenElement = (
   elements: {
     [id: string]: ElementView;
@@ -23,7 +24,6 @@ export const calcPointsBetweenElement = (
     x: toElement.state.x - offset.x,
     y: toElement.state.y - offset.y,
   };
-  const ELEMENT_LINK_MARGIN = 25;
   const SOURCE_LINK_TOTAL = fromElement.linkSourceIds.length;
   const TARGET_LINK_TOTAL = toElement.linkTargetIds.length;
 
@@ -49,7 +49,7 @@ export const calcPointsBetweenElement = (
   const FROM_ELEMENT_PADDING_SINGLE = fromElement.size.width / (SOURCE_LINK_TOTAL + 1);
   const FROM_ELEMENT_PADDING = FROM_ELEMENT_PADDING_SINGLE * (sourceIndex + 1);
 
-  const TO_ELEMENT_PADDING_SINGLE = fromElement.size.width / (TARGET_LINK_TOTAL + 1);
+  const TO_ELEMENT_PADDING_SINGLE = toElement.size.width / (TARGET_LINK_TOTAL + 1);
   const TO_ELEMENT_PADDING = TO_ELEMENT_PADDING_SINGLE * (targetIndex + 1);
 
   const fromElementB: Point = {
