@@ -34,7 +34,6 @@ export const Element = (props: ElementProps): JSX.Element => {
       >
         {props.children}
       </div>
-      {/* {props.isSelected && <ContextMenu actions={contextMenuActions(props)} />} */}
     </ElementStyle>
   );
 };
