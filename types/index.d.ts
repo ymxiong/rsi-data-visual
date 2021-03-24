@@ -1,6 +1,7 @@
 import {
   VisualComponentProps,
   VisualElementComponents,
+  VisualLinkComponents,
   VisualToolbarProps,
   VisualToolbarConfig,
   VisualElementConfig,
@@ -24,6 +25,7 @@ import { Pendant, PendantData } from '../src/VisualDiagram/logic/utils/Pendant';
 export {
   VisualComponentProps,
   VisualElementComponents,
+  VisualLinkComponents,
   VisualToolbarProps,
   VisualToolbarConfig,
   VisualElementConfig,

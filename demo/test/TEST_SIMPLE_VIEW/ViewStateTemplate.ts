@@ -1,6 +1,17 @@
-import { VisualCanvasConfig, VisualElementComponents } from 'types';
+import {
+  VisualCanvasConfig,
+  VisualElementComponents,
+  VisualLinkComponents,
+} from 'types';
 import { ViewState } from '../../../src/VisualDiagram/logic/view/ViewState';
 import ViewMode from './components/ViewMode';
+
+const linkComponents: VisualLinkComponents = {
+  relation: {
+    hasArrow: true,
+    showName: true,
+  },
+};
 
 const elementComponents: VisualElementComponents = {
   model: {
@@ -18,8 +29,7 @@ const canvasConfig: VisualCanvasConfig = {
   },
   toolbarConfig: {},
   linkConfig: {
-    hasArrow: true,
-    showName: false,
+    components: linkComponents,
   },
   globalConfig: {
     gridSize: 25,
@@ -37,7 +47,7 @@ const viewStateTemplate: ViewState = {
       x: 375,
       y: 275,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userInfo',
@@ -47,7 +57,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 275,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'role',
@@ -57,7 +67,7 @@ const viewStateTemplate: ViewState = {
       x: 700,
       y: 50,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'permission',
@@ -67,7 +77,7 @@ const viewStateTemplate: ViewState = {
       x: 300,
       y: 50,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userRole',
@@ -77,7 +87,7 @@ const viewStateTemplate: ViewState = {
       x: 700,
       y: 200,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userPermission',
@@ -87,7 +97,7 @@ const viewStateTemplate: ViewState = {
       x: 500,
       y: 150,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'rolePermission',
@@ -97,7 +107,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 150,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'space',
@@ -107,7 +117,7 @@ const viewStateTemplate: ViewState = {
       x: 800,
       y: 550,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'department',
@@ -117,7 +127,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 575,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userDepartment',
@@ -127,7 +137,7 @@ const viewStateTemplate: ViewState = {
       x: 225,
       y: 425,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userSpace',
@@ -137,7 +147,7 @@ const viewStateTemplate: ViewState = {
       x: 575,
       y: 425,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'spacePermission',
@@ -147,7 +157,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 950,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'spaceRole',
@@ -157,7 +167,7 @@ const viewStateTemplate: ViewState = {
       x: 600,
       y: 825,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userSpaceRole',
@@ -167,7 +177,7 @@ const viewStateTemplate: ViewState = {
       x: 350,
       y: 700,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'userSpacePermission',
@@ -177,7 +187,7 @@ const viewStateTemplate: ViewState = {
       x: 350,
       y: 825,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'spaceRolePermission',
@@ -187,7 +197,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 825,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'documentation',
@@ -197,7 +207,7 @@ const viewStateTemplate: ViewState = {
       x: 600,
       y: 700,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'announcement',
@@ -207,7 +217,7 @@ const viewStateTemplate: ViewState = {
       x: 75,
       y: 700,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'dict',
@@ -217,7 +227,7 @@ const viewStateTemplate: ViewState = {
       x: -800,
       y: 1575,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'model',
@@ -227,7 +237,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 75,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelJson',
@@ -237,7 +247,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 75,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelTemplate',
@@ -247,7 +257,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 75,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelJsonTemplate',
@@ -257,7 +267,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 195,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelBuildRecord',
@@ -267,7 +277,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 195,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelTestRecord',
@@ -277,7 +287,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 195,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelDeploymentRecord',
@@ -287,7 +297,7 @@ const viewStateTemplate: ViewState = {
       x: 1125,
       y: 400,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'modelRunningRecord',
@@ -297,7 +307,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 315,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'account',
@@ -307,7 +317,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 525,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'accountPurchasedProduct',
@@ -317,7 +327,7 @@ const viewStateTemplate: ViewState = {
       x: 1575,
       y: 775,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'accountPurchasedDiscount',
@@ -327,7 +337,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 515,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'flow',
@@ -337,7 +347,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 635,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'order',
@@ -347,7 +357,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 635,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'product',
@@ -357,7 +367,7 @@ const viewStateTemplate: ViewState = {
       x: 1550,
       y: 635,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'discount',
@@ -367,7 +377,7 @@ const viewStateTemplate: ViewState = {
       x: 950,
       y: 755,
       select: false,
-      locked: true,
+      locked: false,
     },
     {
       id: 'orderProductDiscount',
@@ -377,7 +387,7 @@ const viewStateTemplate: ViewState = {
       x: 1250,
       y: 755,
       select: false,
-      locked: true,
+      locked: false,
     },
   ],
   links: [
@@ -385,6 +395,7 @@ const viewStateTemplate: ViewState = {
       id: 'user2info',
       name: 'info',
       color: '#ffc53d',
+      type: 'relation',
       points: [],
       fromElementId: 'user',
       toElementId: 'userInfo',
@@ -393,6 +404,7 @@ const viewStateTemplate: ViewState = {
       id: 'user2userPermission',
       name: 'permissions',
       color: '#ff7a45',
+      type: 'relation',
       points: [],
       fromElementId: 'user',
       toElementId: 'userPermission',
@@ -401,6 +413,7 @@ const viewStateTemplate: ViewState = {
       id: 'userPermission2permission',
       name: 'permission',
       color: '#ffc069',
+      type: 'relation',
       points: [],
       fromElementId: 'userPermission',
       toElementId: 'permission',
@@ -409,6 +422,7 @@ const viewStateTemplate: ViewState = {
       id: 'user2userRole',
       name: 'roles',
       color: '#40a9ff',
+      type: 'relation',
       points: [],
       fromElementId: 'user',
       toElementId: 'userRole',
@@ -417,6 +431,7 @@ const viewStateTemplate: ViewState = {
       id: 'userRole2role',
       name: 'role',
       color: '#ff85c0',
+      type: 'relation',
       points: [],
       fromElementId: 'userRole',
       toElementId: 'role',
@@ -425,6 +440,7 @@ const viewStateTemplate: ViewState = {
       id: 'role2rolePermission',
       name: 'permissions',
       color: '#73d13d',
+      type: 'relation',
       points: [],
       fromElementId: 'role',
       toElementId: 'rolePermission',
@@ -433,6 +449,7 @@ const viewStateTemplate: ViewState = {
       id: 'rolePermission2permission',
       name: 'permission',
       color: '#f759ab',
+      type: 'relation',
       points: [],
       fromElementId: 'rolePermission',
       toElementId: 'permission',
@@ -441,6 +458,7 @@ const viewStateTemplate: ViewState = {
       id: 'user2userCreatedSpace',
       name: 'userCreatedSpaces',
       color: '#597ef7',
+      type: 'relation',
       points: [],
       fromElementId: 'user',
       toElementId: 'space',
@@ -449,6 +467,7 @@ const viewStateTemplate: ViewState = {
       id: 'user2userSpace',
       name: 'userSpaces',
       color: '#b37feb',
+      type: 'relation',
       points: [],
       fromElementId: 'user',
       toElementId: 'userSpace',
@@ -457,6 +476,7 @@ const viewStateTemplate: ViewState = {
       id: 'userSpace2user',
       name: 'user',
       color: '#36cfc9',
+      type: 'relation',
       points: [],
       fromElementId: 'userSpace',
       toElementId: 'user',
@@ -465,6 +485,7 @@ const viewStateTemplate: ViewState = {
       id: 'userSpace2space',
       name: 'space',
       color: '#ff4d4f',
+      type: 'relation',
       points: [],
       fromElementId: 'userSpace',
       toElementId: 'space',
@@ -473,6 +494,7 @@ const viewStateTemplate: ViewState = {
       id: 'space2userSpace',
       name: 'spaceUsers',
       color: '#d3f261',
+      type: 'relation',
       points: [],
       fromElementId: 'space',
       toElementId: 'userSpace',
@@ -481,6 +503,7 @@ const viewStateTemplate: ViewState = {
       id: 'user2userDepartment',
       name: 'userDepartments',
       color: '#ffd666',
+      type: 'relation',
       points: [],
       fromElementId: 'user',
       toElementId: 'userDepartment',
@@ -489,6 +512,7 @@ const viewStateTemplate: ViewState = {
       id: 'userDepartment2user',
       name: 'user',
       color: '#69c0ff',
+      type: 'relation',
       points: [],
       fromElementId: 'userDepartment',
       toElementId: 'user',
@@ -497,6 +521,7 @@ const viewStateTemplate: ViewState = {
       id: 'userDepartment2department',
       name: 'department',
       color: '#ffec3d',
+      type: 'relation',
       points: [],
       fromElementId: 'userDepartment',
       toElementId: 'department',
@@ -505,6 +530,7 @@ const viewStateTemplate: ViewState = {
       id: 'department2userDepartment',
       name: 'userDepartments',
       color: '#95de64',
+      type: 'relation',
       points: [],
       fromElementId: 'department',
       toElementId: 'userDepartment',
@@ -513,6 +539,7 @@ const viewStateTemplate: ViewState = {
       id: 'space2department',
       name: 'departments',
       color: '#fff566',
+      type: 'relation',
       points: [],
       fromElementId: 'space',
       toElementId: 'department',
@@ -521,6 +548,7 @@ const viewStateTemplate: ViewState = {
       id: 'space2model',
       name: 'models',
       color: '#85a5ff',
+      type: 'relation',
       points: [],
       fromElementId: 'space',
       toElementId: 'model',
@@ -529,6 +557,7 @@ const viewStateTemplate: ViewState = {
       id: 'space2account',
       name: 'account',
       color: '#ffa940',
+      type: 'relation',
       points: [],
       fromElementId: 'space',
       toElementId: 'account',
@@ -537,6 +566,7 @@ const viewStateTemplate: ViewState = {
       id: 'model2json',
       name: 'files',
       color: '#5cdbd3',
+      type: 'relation',
       points: [],
       fromElementId: 'model',
       toElementId: 'modelJson',
@@ -545,6 +575,7 @@ const viewStateTemplate: ViewState = {
       id: 'account2order',
       name: 'orders',
       color: '#ff9c6e',
+      type: 'relation',
       points: [],
       fromElementId: 'account',
       toElementId: 'order',

@@ -276,8 +276,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
               elements,
               links,
               link,
-              linkConfig: props.linkConfig,
-              SubComponent: props.elementConfig.components.model.component,
+              hasArrow: props.linkConfig.components[link.state.type].hasArrow,
+              showName: props.linkConfig.components[link.state.type].showName,
+              SubComponent:
+                props.linkConfig.components[link.state.type].component,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}

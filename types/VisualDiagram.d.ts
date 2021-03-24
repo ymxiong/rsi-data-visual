@@ -18,6 +18,18 @@ export type VisualElementComponents = {
   };
 };
 
+export type VisualLinkProps = {
+  pendant?: Pendant;
+};
+
+export type VisualLinkComponents = {
+  [type: string]: {
+    component?: ComponentType<VisualLinkProps>;
+    hasArrow: boolean;
+    showName: boolean;
+  };
+};
+
 export type VisualToolbarProps = {
   id: string;
   icon: string;
@@ -29,7 +41,9 @@ export type VisualToolbarConfig = { [id: string]: VisualToolbarProps };
 
 export type VisualElementConfig = { components: VisualElementComponents };
 
-export type VisualLinkConfig = { hasArrow: boolean; showName: boolean };
+export type VisualLinkConfig = {
+  components: VisualLinkComponents;
+};
 
 export type VisualGlobalConfig = {
   gridSize?: number;

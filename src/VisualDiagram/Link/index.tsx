@@ -5,11 +5,8 @@ import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
 import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
-import {
-  ElementView,
-  VisualComponentProps,
-  VisualLinkConfig,
-} from '../../../types';
+import { ElementView } from '../../../types';
+import { VisualLinkProps } from 'types/VisualDiagram';
 
 export type LinkContainerProps = {
   elements: {
@@ -19,8 +16,9 @@ export type LinkContainerProps = {
     [id: string]: LinkView;
   };
   link: LinkView;
-  linkConfig: VisualLinkConfig;
-  SubComponent: ComponentType<VisualComponentProps>;
+  hasArrow: boolean;
+  showName: boolean;
+  SubComponent?: ComponentType<VisualLinkProps>;
 };
 
 const LinkContainer: React.FC<LinkContainerProps> = (props) => {
@@ -53,7 +51,7 @@ const LinkContainer: React.FC<LinkContainerProps> = (props) => {
   return (
     <g key={props.link.id} onClick={onClick}>
       <Body
-        hasArrow={props.linkConfig.hasArrow}
+        hasArrow={props.hasArrow}
         color={color}
         points={calcPointsBetweenElement(
           props.elements,
@@ -64,7 +62,7 @@ const LinkContainer: React.FC<LinkContainerProps> = (props) => {
           offset,
         )}
         name={linkName}
-        showName={props.linkConfig.showName}
+        showName={props.showName}
       />
     </g>
   );
