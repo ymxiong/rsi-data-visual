@@ -6,43 +6,48 @@ import { Canvas } from '../../logic/canvas/Canvas';
 import { Point } from '../../logic/utils/Point';
 import { Size } from '../../logic/utils/Size';
 
-export type CanvasRefeshAction = ActionShape<'canvas/refresh', Canvas>;
+export type CanvasRefreshAction = ActionShape<'canvas/refresh', Canvas>;
 
-export type CanvasScaleRefeshAction = ActionShape<
+export type CanvasScaleRefreshAction = ActionShape<
   'canvas/scale/refresh',
   number
 >;
 
-export type CanvasAnchoredRefeshAction = ActionShape<
+export type CanvasAnchoredRefreshAction = ActionShape<
   'canvas/anchored/refresh',
   boolean
 >;
 
-export type CanvasOffsetRefeshAction = ActionShape<
+export type CanvasOffsetRerfeshAction = ActionShape<
   'canvas/offset/refresh',
   Point
 >;
 
-export type CanvasMarginRefeshAction = ActionShape<
+export type CanvasOffsetForElementRefreshAction = ActionShape<
+  'canvas/offset/for/element/refresh',
+  string
+>;
+
+export type CanvasMarginRefreshAction = ActionShape<
   'canvas/margin/refresh',
   Point
 >;
 
-export type CanvasViewRefeshAction = ActionShape<'canvas/view/refresh', View>;
+export type CanvasViewRefreshAction = ActionShape<'canvas/view/refresh', View>;
 
-export type CanvasElementRefeshAction = ActionShape<
+export type CanvasElementRefreshAction = ActionShape<
   'canvas/element/refresh',
   ElementView
 >;
 
-export type CanvasElementAnchoredRefeshAction = ActionShape<
+export type CanvasElementAnchoredRefreshAction = ActionShape<
   'canvas/element/anchored/refresh',
   {
     elementId: string;
     anchored: boolean;
   }
 >;
-export type CanvasElementSizeRefeshAction = ActionShape<
+export type CanvasElementSizeRefreshAction = ActionShape<
   'canvas/element/size/refresh',
   {
     elementId: string;
@@ -70,22 +75,23 @@ export type CanvasElementSelectAction = ActionShape<
   CanvasElementSelectType
 >;
 
-export type CanvasLinkRefeshAction = ActionShape<
+export type CanvasLinkRefreshAction = ActionShape<
   'canvas/link/refresh',
   LinkView
 >;
 
 export type CanvasAction =
-  | CanvasRefeshAction
-  | CanvasScaleRefeshAction
-  | CanvasAnchoredRefeshAction
-  | CanvasOffsetRefeshAction
-  | CanvasMarginRefeshAction
-  | CanvasViewRefeshAction
-  | CanvasElementAnchoredRefeshAction
-  | CanvasElementSizeRefeshAction
+  | CanvasRefreshAction
+  | CanvasScaleRefreshAction
+  | CanvasAnchoredRefreshAction
+  | CanvasOffsetRerfeshAction
+  | CanvasOffsetForElementRefreshAction
+  | CanvasMarginRefreshAction
+  | CanvasViewRefreshAction
+  | CanvasElementAnchoredRefreshAction
+  | CanvasElementSizeRefreshAction
   | CanvasElementCreateAction
   | CanvasElementDeleteAction
-  | CanvasElementRefeshAction
+  | CanvasElementRefreshAction
   | CanvasElementSelectAction
-  | CanvasLinkRefeshAction;
+  | CanvasLinkRefreshAction;

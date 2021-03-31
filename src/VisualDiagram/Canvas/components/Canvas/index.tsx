@@ -55,6 +55,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     (state: Store) => state.canvas.canvas.offset,
   );
 
+  const canvasOffsetForElement = useSelector(
+    (state: Store) => state.canvas.canvas.offsetForComponent,
+  );
+
   const canvasMargin = useSelector(
     (state: Store) => state.canvas.canvas.margin,
   );
@@ -145,18 +149,18 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           // 如果被铆钉，计算新的x，y值
           const refreshView = { ...element };
           refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
-            - canvasOffset.x
+            - canvasOffsetForElement.x
             + viewOffset.x
             - element.size.width / 2;
           refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
-            - canvasOffset.y
+            - canvasOffsetForElement.y
             + viewOffset.y
             - element.size.height / 2;
           dispatch(refreshElement(refreshView));
         }
       }
     },
-    [canvasMargin, canvasOffset, canvasScale, viewOffset, dispatch],
+    [canvasMargin, canvasOffsetForElement, canvasScale, viewOffset, dispatch],
   );
 
   const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -169,9 +173,9 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         // 如果被铆钉，计算新的x，y值
         const offset = canvasOffset;
         offset.x
-          += ev.movementX * zoomLevels[zoomLevels.length - 1 - canvasScale];
+          += ev.movementX * 1.2 * zoomLevels[zoomLevels.length - 1 - canvasScale];
         offset.y
-          += ev.movementY * zoomLevels[zoomLevels.length - 1 - canvasScale];
+          += ev.movementY * 1.2 * zoomLevels[zoomLevels.length - 1 - canvasScale];
         dispatch(refreshCanvasOffset(offset));
       }
     }

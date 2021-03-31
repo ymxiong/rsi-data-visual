@@ -12,6 +12,8 @@ type Canvas = {
   // offset是canvas向左上角扩展的的差值（canvas逻辑差），用于计算画布相对初始值扩展了多少
   offset: Point;
   // margin是canvas相对左上角样式的的差值（canvas样式差），用于处理canvas与屏幕的相对位置
+  offsetForComponent: Point;
+  // 值等于offset，只在释放画布时刷新，用于提供给组件监听，解决画布移动性能问题
   margin: Point;
   // viewport是canvas外层显示的大小
   viewport: Size;
@@ -33,7 +35,9 @@ const buildCanvasFromCanvasState = (
     anchored: false,
     offset: {
       ...standardOffset,
-      // ...zeroOffset,
+    },
+    offsetForComponent: {
+      ...standardOffset,
     },
     margin: {
       ...zeroOffset,

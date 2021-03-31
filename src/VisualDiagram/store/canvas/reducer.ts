@@ -64,6 +64,7 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       refreshState.canvas = {
         ...refreshState.canvas,
         anchored: action.payload,
+        offsetForComponent: refreshState.canvas.offset,
       };
       return refreshState;
     }
@@ -98,6 +99,13 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
         refreshState.view.offset.x += standardOffset.x;
         refreshState.view.offset.y += standardOffset.y;
       }
+      return refreshState;
+    }
+    case 'canvas/offset/for/element/refresh': {
+      const refreshState = state;
+      refreshState.canvas.offsetForComponent = {
+        ...refreshState.canvas.offset,
+      };
       return refreshState;
     }
     case 'canvas/margin/refresh': {

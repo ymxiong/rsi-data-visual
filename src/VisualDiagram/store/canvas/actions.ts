@@ -26,6 +26,13 @@ export const refreshCanvasOffset = (offset: Point): CanvasAction => ({
   payload: offset,
 });
 
+export const refreshCanvasOffsetForElement = (
+  canvasId: string,
+): CanvasAction => ({
+  type: 'canvas/offset/for/element/refresh',
+  payload: canvasId,
+});
+
 export const refreshCanvasMargin = (margin: Point): CanvasAction => ({
   type: 'canvas/margin/refresh',
   payload: margin,
