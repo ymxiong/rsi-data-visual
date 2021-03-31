@@ -4,6 +4,7 @@ import { Store } from './store';
 import {
   createElement,
   deleteElement,
+  refreshElementLocked,
   refreshView,
 } from './store/canvas/actions';
 import { selectToolbarItems } from './store/diagram/actions';
@@ -55,6 +56,9 @@ const VisualDiagram: React.ForwardRefRenderFunction<
           dispatch(createElement(buildFromElementState(elementState)));
         }
         return true;
+      },
+      refreshElementLocked: (elementId: string, locked: boolean) => {
+        dispatch(refreshElementLocked(elementId, locked));
       },
       deleteElement: (elementId: string) => {
         dispatch(deleteElement(elementId));

@@ -26,7 +26,6 @@ export type ElementContainerProps = {
 };
 
 const ElementContainer: React.FC<ElementContainerProps> = (props) => {
-  console.log('element', props.element.id);
   const dispatch = useDispatch();
 
   const element = useSelector(

@@ -40,6 +40,14 @@ export type CanvasElementRefreshAction = ActionShape<
   ElementView
 >;
 
+export type CanvasRefreshElementLocked = ActionShape<
+  'canvas/element/locked/refresh',
+  {
+    elementId: string;
+    locked: boolean;
+  }
+>;
+
 export type CanvasElementAnchoredRefreshAction = ActionShape<
   'canvas/element/anchored/refresh',
   {
@@ -88,6 +96,7 @@ export type CanvasAction =
   | CanvasOffsetForElementRefreshAction
   | CanvasMarginRefreshAction
   | CanvasViewRefreshAction
+  | CanvasRefreshElementLocked
   | CanvasElementAnchoredRefreshAction
   | CanvasElementSizeRefreshAction
   | CanvasElementCreateAction

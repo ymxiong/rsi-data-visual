@@ -41,6 +41,11 @@ const App: React.ForwardRefRenderFunction<
         }
         return false;
       },
+      refreshElementLocked: (elementId: string, locked: boolean) => {
+        if (visualDiagramRef.current) {
+          visualDiagramRef.current.refreshElementLocked(elementId, locked);
+        }
+      },
       deleteElement: (elementId: string) => {
         if (visualDiagramRef.current) {
           return visualDiagramRef.current.deleteElement(elementId);

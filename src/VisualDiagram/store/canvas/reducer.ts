@@ -122,6 +122,14 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
         view: { ...action.payload },
       };
     }
+    case 'canvas/element/locked/refresh': {
+      const refreshState = state;
+      refreshState.view.elements[action.payload.elementId] = {
+        ...refreshState.view.elements[action.payload.elementId],
+      };
+      refreshState.view.elements[action.payload.elementId].state.locked = action.payload.locked;
+      return refreshState;
+    }
     case 'canvas/element/anchored/refresh': {
       const refreshState = state;
       refreshState.view.elements[action.payload.elementId] = {

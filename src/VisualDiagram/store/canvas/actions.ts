@@ -58,6 +58,17 @@ export const refreshElement = (element: ElementView): CanvasAction => ({
   payload: element,
 });
 
+export const refreshElementLocked = (
+  elementId: string,
+  locked: boolean,
+): CanvasAction => ({
+  type: 'canvas/element/locked/refresh',
+  payload: {
+    elementId,
+    locked,
+  },
+});
+
 export const refreshElementAnchored = (
   elementId: string,
   anchored: boolean,
