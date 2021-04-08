@@ -16,6 +16,11 @@ export const refreshCanvasScale = (scale: number): CanvasAction => ({
   payload: scale,
 });
 
+export const refreshCanvasLocked = (locked: boolean): CanvasAction => ({
+  type: 'canvas/locked/refresh',
+  payload: locked,
+});
+
 export const refreshCanvasAnchored = (anchored: boolean): CanvasAction => ({
   type: 'canvas/anchored/refresh',
   payload: anchored,

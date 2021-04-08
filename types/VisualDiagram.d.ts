@@ -68,6 +68,7 @@ export type VisualDiagramHandle = {
   setView: (viewState: ViewState) => boolean;
   getView: () => ViewState;
   createElement: (elementState: ElementState) => boolean;
+  refreshCanvasLocked: (canvasId: string, locked: boolean) => void;
   refreshElementLocked: (elementId: string, locked: boolean) => void;
   deleteElement: (elementId: string) => boolean;
   selectToolbarItems: (items: string[]) => void;

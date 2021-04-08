@@ -48,8 +48,7 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     dispatch(selectElement(element.id, true));
   };
 
-  const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    ev.stopPropagation();
+  const onMouseUp = () => {
     // 松开鼠标，释放铆钉状态，依旧选择元素
     dispatch(refreshElement({ ...element, anchored: false }));
   };
@@ -61,7 +60,6 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   let moveEventTime = 0;
 
   const onMouseMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    ev.stopPropagation();
     if (moveEventTime > MOVE_FREQUENCY) {
       onElementMove(ev);
     }
@@ -69,7 +67,6 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   };
 
   const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    ev.stopPropagation();
     onElementMove(ev);
   };
 

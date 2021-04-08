@@ -59,6 +59,14 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       };
       return refreshState;
     }
+    case 'canvas/locked/refresh': {
+      const refreshState = state;
+      refreshState.canvas.state = {
+        ...refreshState.canvas.state,
+        locked: action.payload,
+      };
+      return refreshState;
+    }
     case 'canvas/anchored/refresh': {
       const refreshState = state;
       refreshState.canvas = {

@@ -45,6 +45,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     (state: Store) => state.canvas.view.selectedElementId,
   );
 
+  const canvasLocked = useSelector(
+    (state: Store) => state.canvas.canvas.state.locked,
+  );
+
   const canvasAnchored = useSelector(
     (state: Store) => state.canvas.canvas.anchored,
   );
@@ -166,7 +170,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (canvasAnchored) {
       setToolbarHide(false);
-      if (ev.buttons !== 1) {
+      if (ev.buttons !== 1 || canvasLocked) {
         // 如果被铆钉但鼠标已松开，释放铆钉
         dispatch(refreshCanvasAnchored(false));
       } else {
@@ -193,8 +197,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     dispatch(refreshCanvasAnchored(true));
   };
 
-  const onMouseUp = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    ev.stopPropagation();
+  const onMouseUp = () => {
     dispatch(selectElement('', false));
     dispatch(refreshCanvasAnchored(false));
   };
@@ -203,8 +206,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     onCanvasMove(ev);
   };
 
-  const onMouseLeave = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    ev.stopPropagation();
+  const onMouseLeave = () => {
     dispatch(selectElement('', false));
     dispatch(refreshCanvasAnchored(false));
   };

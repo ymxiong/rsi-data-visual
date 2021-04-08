@@ -41,6 +41,11 @@ const App: React.ForwardRefRenderFunction<
         }
         return false;
       },
+      refreshCanvasLocked: (canvasId: string, locked: boolean) => {
+        if (visualDiagramRef.current) {
+          visualDiagramRef.current.refreshCanvasLocked(canvasId, locked);
+        }
+      },
       refreshElementLocked: (elementId: string, locked: boolean) => {
         if (visualDiagramRef.current) {
           visualDiagramRef.current.refreshElementLocked(elementId, locked);

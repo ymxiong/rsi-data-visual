@@ -24,6 +24,7 @@ type Canvas = {
 const canvasStateTemplate: CanvasState = {
   id: 'defaultCanvasState',
   scale: 3,
+  locked: false,
 };
 
 const buildCanvasFromCanvasState = (

@@ -13,6 +13,11 @@ export type CanvasScaleRefreshAction = ActionShape<
   number
 >;
 
+export type CanvasLockedRefreshAction = ActionShape<
+  'canvas/locked/refresh',
+  boolean
+>;
+
 export type CanvasAnchoredRefreshAction = ActionShape<
   'canvas/anchored/refresh',
   boolean
@@ -40,7 +45,7 @@ export type CanvasElementRefreshAction = ActionShape<
   ElementView
 >;
 
-export type CanvasRefreshElementLocked = ActionShape<
+export type CanvasElementLockedRefresh = ActionShape<
   'canvas/element/locked/refresh',
   {
     elementId: string;
@@ -91,12 +96,13 @@ export type CanvasLinkRefreshAction = ActionShape<
 export type CanvasAction =
   | CanvasRefreshAction
   | CanvasScaleRefreshAction
+  | CanvasLockedRefreshAction
   | CanvasAnchoredRefreshAction
   | CanvasOffsetRerfeshAction
   | CanvasOffsetForElementRefreshAction
   | CanvasMarginRefreshAction
   | CanvasViewRefreshAction
-  | CanvasRefreshElementLocked
+  | CanvasElementLockedRefresh
   | CanvasElementAnchoredRefreshAction
   | CanvasElementSizeRefreshAction
   | CanvasElementCreateAction
