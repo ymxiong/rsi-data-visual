@@ -1,10 +1,10 @@
 import React, { ComponentType } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Store } from '../store';
 import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
 import { selectRelationColor } from '../logic/utils/Color';
-import { ElementView, VisualLinkProps } from '../../../types';
+import { ElementView, Pendant, VisualLinkProps } from '../../../types';
 import { Link } from './components/Link';
 import { DefaultLink } from './components/Default';
 
@@ -19,11 +19,10 @@ export type LinkContainerProps = {
   hasArrow: boolean;
   showName: boolean;
   SubComponent?: ComponentType<VisualLinkProps>;
+  pendant?: Pendant;
 };
 
 const LinkContainer: React.FC<LinkContainerProps> = (props) => {
-  const dispatch = useDispatch();
-
   const linkName = props.link.state.name;
 
   const { link } = props;
@@ -60,7 +59,11 @@ const LinkContainer: React.FC<LinkContainerProps> = (props) => {
   return (
     <Link key={props.link.id} link={link}>
       {props.SubComponent && (
-        <props.SubComponent onLinkChange={onLinkChange} link={link} />
+        <props.SubComponent
+          onLinkChange={onLinkChange}
+          link={link}
+          pendant={props.pendant}
+        />
       )}
       {!props.SubComponent && (
         <DefaultLink

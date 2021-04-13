@@ -1,15 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Store } from '../../../store';
-import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
-import CanvasViewport from '../CanvasViewport';
-import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
-import ElementContainer, { ElementContainerProps } from '../../../Element';
-import { ElementView } from '../../../logic/element/ElementView';
-import { LinkView } from '../../../logic/link/LinkView';
 import { values } from 'lodash-es';
-import LinkContainer, { LinkContainerProps } from '../../../Link';
-import CanvasToolbar from '../CanvasToolbar';
+import {
+  VisualElementConfig,
+  VisualLinkConfig,
+  VisualGlobalConfig,
+} from '../../../../../types';
+import { Store } from '../../../store';
 import {
   refreshElement,
   selectElement,
@@ -17,13 +14,19 @@ import {
   refreshCanvasAnchored,
   refreshCanvasOffset,
 } from '../../../store/canvas/actions';
-import {
-  VisualElementConfig,
-  VisualLinkConfig,
-  VisualGlobalConfig,
-} from '../../../../../types';
-import { zoomLevels } from '../../../logic/utils/Scale';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
+
+import ElementContainer, { ElementContainerProps } from '../../../Element';
+import LinkContainer, { LinkContainerProps } from '../../../Link';
+import { ElementView } from '../../../logic/element/ElementView';
+import { LinkView } from '../../../logic/link/LinkView';
+import { zoomLevels } from '../../../logic/utils/Scale';
+
+import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
+import CanvasViewport from '../CanvasViewport';
+import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
+import CanvasToolbar from '../CanvasToolbar';
+import { toolbarConfig } from '../CanvasToolbar/defaultToolbar';
 import CanvasLoading from '../CanvasLoading';
 
 type CanvasProps = {
@@ -224,44 +227,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   useEffect(() => {
     dispatch(
-      refreshToolbarItemBatch([
-        {
-          id: 'zoomIn',
-          onClick: onZoomIn,
-          icon: 'zoomIn',
-          tips: '放大',
-        },
-        {
-          id: 'zoomOut',
-          onClick: onZoomOut,
-          icon: 'zoomOut',
-          tips: '缩小',
-        },
-        {
-          id: 'sort',
-          onClick: onSort,
-          icon: 'sort',
-          tips: '整理',
-        },
-        {
-          id: 'cut',
-          onClick: onSort,
-          icon: 'cut',
-          tips: '裁剪',
-        },
-        {
-          id: 'undo',
-          onClick: onSort,
-          icon: 'undo',
-          tips: '撤销',
-        },
-        {
-          id: 'redo',
-          onClick: onSort,
-          icon: 'redo',
-          tips: '重做',
-        },
-      ]),
+      refreshToolbarItemBatch(toolbarConfig(onZoomIn, onZoomOut, onSort)),
     );
   }, [dispatch, onSort, onZoomIn, onZoomOut]);
 
@@ -286,6 +252,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
               showName: props.linkConfig.components[link.state.type].showName,
               SubComponent:
                 props.linkConfig.components[link.state.type].component,
+              pendant: link.state.pendant,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
           })}

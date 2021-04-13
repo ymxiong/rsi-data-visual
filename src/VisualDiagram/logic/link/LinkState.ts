@@ -1,3 +1,4 @@
+import { Pendant } from '../utils/Pendant';
 import { Point } from '../utils/Point';
 
 type LinkState = {
@@ -9,6 +10,7 @@ type LinkState = {
   points: Point[];
   fromElementId: string;
   toElementId: string;
+  pendant?: Pendant;
 };
 
 export { LinkState };
