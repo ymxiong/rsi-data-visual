@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from '../store';
 import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';
-import Body from './components/Body';
 import { selectRelationColor } from '../logic/utils/Color';
 import { ElementView, VisualLinkProps } from '../../../types';
+import { Link } from './components/Link';
+import { DefaultLink } from './components/Default';
 
 export type LinkContainerProps = {
   elements: {
@@ -25,6 +26,8 @@ const LinkContainer: React.FC<LinkContainerProps> = (props) => {
 
   const linkName = props.link.state.name;
 
+  const { link } = props;
+
   const elementFrom = useSelector(
     (state: Store) => state.canvas.view.elements[props.link.state.fromElementId],
   );
@@ -43,27 +46,32 @@ const LinkContainer: React.FC<LinkContainerProps> = (props) => {
     color = selectRelationColor();
   }
 
-  const onClick = () => {
-    console.log('link on click');
-  };
+  const onLinkChange = () => {};
+
+  link.state.points = calcPointsBetweenElement(
+    props.elements,
+    props.links,
+    elementFrom,
+    elementTo,
+    props.link,
+    offset,
+  );
 
   return (
-    <g key={props.link.id} onClick={onClick}>
-      <Body
-        hasArrow={props.hasArrow}
-        color={color}
-        points={calcPointsBetweenElement(
-          props.elements,
-          props.links,
-          elementFrom,
-          elementTo,
-          props.link,
-          offset,
-        )}
-        name={linkName}
-        showName={props.showName}
-      />
-    </g>
+    <Link key={props.link.id} link={link}>
+      {props.SubComponent && (
+        <props.SubComponent onLinkChange={onLinkChange} link={link} />
+      )}
+      {!props.SubComponent && (
+        <DefaultLink
+          color={color}
+          hasArrow={props.hasArrow}
+          showName={props.showName}
+          linkName={linkName}
+          points={link.state.points}
+        />
+      )}
+    </Link>
   );
 };
 
