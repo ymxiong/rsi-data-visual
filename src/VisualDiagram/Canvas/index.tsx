@@ -36,9 +36,8 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
   );
 
   useEffect(() => {
-    dispatch(refreshToolbarItemBatch(values(props.canvasConfig.toolbarConfig)));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(refreshToolbarItemBatch(props.canvasConfig.toolbarConfig));
+  }, [dispatch, props.canvasConfig]);
 
   return (
     <Canvas

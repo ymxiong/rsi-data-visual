@@ -27,7 +27,7 @@ const canvasConfig: VisualCanvasConfig = {
   elementConfig: {
     components: elementComponents,
   },
-  toolbarConfig: {},
+  toolbarConfig: [],
   linkConfig: {
     components: linkComponents,
   },
