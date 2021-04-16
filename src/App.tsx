@@ -4,6 +4,7 @@ import {
   ElementState,
   VisualDiagramHandle,
   VisualDiagramProps,
+  VisualToolbarConfig,
 } from '../types';
 import VisualDiagram from './VisualDiagram';
 import { ViewState } from './VisualDiagram/logic/view/ViewState';
@@ -60,6 +61,11 @@ const App: React.ForwardRefRenderFunction<
       selectToolbarItems: (items: string[]) => {
         if (visualDiagramRef.current) {
           visualDiagramRef.current.selectToolbarItems(items);
+        }
+      },
+      refreshToolbarItems: (items: VisualToolbarConfig) => {
+        if (visualDiagramRef.current) {
+          visualDiagramRef.current.refreshToolbarItems(items);
         }
       },
       startLoading() {

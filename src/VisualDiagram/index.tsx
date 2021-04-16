@@ -8,7 +8,10 @@ import {
   refreshElementLocked,
   refreshView,
 } from './store/canvas/actions';
-import { selectToolbarItems } from './store/diagram/actions';
+import {
+  refreshToolbarItemBatch,
+  selectToolbarItems,
+} from './store/diagram/actions';
 import CanvasContainer from './Canvas';
 import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
 import { buildViewFromViewState } from './logic/view/View';
@@ -16,6 +19,7 @@ import {
   ElementState,
   VisualDiagramHandle,
   VisualDiagramProps,
+  VisualToolbarConfig,
 } from '../../types';
 import { buildFromElementState } from './logic/element/ElementView';
 
@@ -73,6 +77,9 @@ const VisualDiagram: React.ForwardRefRenderFunction<
       },
       selectToolbarItems(items: string[]) {
         dispatch(selectToolbarItems(items));
+      },
+      refreshToolbarItems: (items: VisualToolbarConfig) => {
+        dispatch(refreshToolbarItemBatch(items));
       },
       startLoading() {
         setLoading(true);

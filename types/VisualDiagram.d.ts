@@ -40,7 +40,7 @@ export type VisualToolbarProps = {
   onClick: () => void;
 };
 
-export type VisualToolbarConfig = { [id: string]: VisualToolbarProps };
+export type VisualToolbarConfig = VisualToolbarProps[];
 
 export type VisualElementConfig = { components: VisualElementComponents };
 
@@ -72,6 +72,7 @@ export type VisualDiagramHandle = {
   refreshElementLocked: (elementId: string, locked: boolean) => void;
   deleteElement: (elementId: string) => boolean;
   selectToolbarItems: (items: string[]) => void;
+  refreshToolbarItems: (items: VisualToolbarConfig) => void;
   startLoading: () => boolean;
   endLoading: () => boolean;
 };

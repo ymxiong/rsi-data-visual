@@ -44,7 +44,7 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
     <Canvas
       elementConfig={props.canvasConfig.elementConfig}
       linkConfig={props.canvasConfig.linkConfig}
-      globalConfig={props.canvasConfig.toolbarConfig}
+      globalConfig={props.canvasConfig.globalConfig}
       loading={props.loading}
       handleRef={handleRef}
     />

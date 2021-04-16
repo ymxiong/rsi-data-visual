@@ -38,20 +38,20 @@ const App = () => {
     }
   };
 
-  const toolbarConfig: VisualToolbarConfig = {
-    create: {
+  const toolbarConfig: VisualToolbarConfig = [
+    {
       id: 'create',
       onClick: onCreateModel,
       icon: 'plus',
       tips: '新增模型',
     },
-    delete: {
+    {
       id: 'delete',
       onClick: onDeleteModel,
       icon: 'delete',
       tips: '删除模型',
     },
-  };
+  ];
 
   visualCanvasConfig.toolbarConfig = toolbarConfig;
 
