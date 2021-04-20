@@ -2,6 +2,7 @@ import React, { useImperativeHandle, useRef } from 'react';
 import { Provider } from 'react-redux';
 import {
   ElementState,
+  LinkState,
   VisualDiagramHandle,
   VisualDiagramProps,
   VisualToolbarConfig,
@@ -42,6 +43,24 @@ const App: React.ForwardRefRenderFunction<
         }
         return false;
       },
+      deleteElement: (elementId: string) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.deleteElement(elementId);
+        }
+        return false;
+      },
+      createLink: (linkState: LinkState) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.createLink(linkState);
+        }
+        return false;
+      },
+      deleteLink: (linkId: string) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.deleteLink(linkId);
+        }
+        return false;
+      },
       refreshCanvasLocked: (canvasId: string, locked: boolean) => {
         if (visualDiagramRef.current) {
           visualDiagramRef.current.refreshCanvasLocked(canvasId, locked);
@@ -51,12 +70,6 @@ const App: React.ForwardRefRenderFunction<
         if (visualDiagramRef.current) {
           visualDiagramRef.current.refreshElementLocked(elementId, locked);
         }
-      },
-      deleteElement: (elementId: string) => {
-        if (visualDiagramRef.current) {
-          return visualDiagramRef.current.deleteElement(elementId);
-        }
-        return false;
       },
       selectToolbarItems: (items: string[]) => {
         if (visualDiagramRef.current) {

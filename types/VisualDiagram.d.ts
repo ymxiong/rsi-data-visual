@@ -5,6 +5,7 @@ import { Size } from '../src/VisualDiagram/logic/utils/Size';
 import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
 import { Pendant } from '../src/VisualDiagram/logic/utils/Pendant';
 import { LinkView } from '../src/VisualDiagram/logic/link/LinkView';
+import { LinkState } from 'src/VisualDiagram/logic/link/LinkState';
 
 export type VisualElementProps = {
   element: ElementView;
@@ -68,9 +69,11 @@ export type VisualDiagramHandle = {
   setView: (viewState: ViewState) => boolean;
   getView: () => ViewState;
   createElement: (elementState: ElementState) => boolean;
+  deleteElement: (elementId: string) => boolean;
+  createLink: (linkState: LinkState) => boolean;
+  deleteLink: (linkId: string) => boolean;
   refreshCanvasLocked: (canvasId: string, locked: boolean) => void;
   refreshElementLocked: (elementId: string, locked: boolean) => void;
-  deleteElement: (elementId: string) => boolean;
   selectToolbarItems: (items: string[]) => void;
   refreshToolbarItems: (items: VisualToolbarConfig) => void;
   startLoading: () => boolean;

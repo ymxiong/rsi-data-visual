@@ -216,6 +216,46 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       }
       return refreshState;
     }
+    case 'canvas/link/create': {
+      const refreshState = state;
+      const elementFrom = {
+        ...refreshState.view.elements[action.payload.state.fromElementId],
+      };
+      const elementTo = {
+        ...refreshState.view.elements[action.payload.state.toElementId],
+      };
+      elementFrom.linkSourceIds.push(action.payload.id);
+      elementTo.linkTargetIds.push(action.payload.id);
+      refreshState.view.elements = { ...state.view.elements };
+      refreshState.view.elements[
+        action.payload.state.fromElementId
+      ] = elementFrom;
+      refreshState.view.elements[action.payload.state.toElementId] = elementTo;
+      refreshState.view.links = { ...state.view.links };
+      refreshState.view.links[action.payload.id] = { ...action.payload };
+      return refreshState;
+    }
+    case 'canvas/link/delete': {
+      const refreshState = { ...state };
+      const linkId = action.payload;
+      const preDeleteLink = refreshState.view.links[action.payload];
+
+      const elementFrom = refreshState.view.elements[preDeleteLink.state.fromElementId];
+      const elementTo = refreshState.view.elements[preDeleteLink.state.toElementId];
+
+      elementFrom.linkTargetIds = elementFrom.linkTargetIds.filter(
+        (item) => linkId !== item,
+      );
+
+      elementTo.linkSourceIds = elementTo.linkSourceIds.filter(
+        (item) => linkId !== item,
+      );
+      refreshState.view.elements[elementFrom.id] = elementFrom;
+      refreshState.view.elements[elementTo.id] = elementTo;
+
+      delete refreshState.view.links[action.payload];
+      return refreshState;
+    }
     case 'canvas/link/refresh': {
       return {
         ...state,

@@ -88,6 +88,13 @@ export type CanvasElementSelectAction = ActionShape<
   CanvasElementSelectType
 >;
 
+export type CanvasLinkCreateAction = ActionShape<
+  'canvas/link/create',
+  LinkView
+>;
+
+export type CanvasLinkDeleteAction = ActionShape<'canvas/link/delete', string>;
+
 export type CanvasLinkRefreshAction = ActionShape<
   'canvas/link/refresh',
   LinkView
@@ -109,4 +116,6 @@ export type CanvasAction =
   | CanvasElementDeleteAction
   | CanvasElementRefreshAction
   | CanvasElementSelectAction
+  | CanvasLinkCreateAction
+  | CanvasLinkDeleteAction
   | CanvasLinkRefreshAction;

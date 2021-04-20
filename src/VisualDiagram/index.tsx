@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Store } from './store';
 import {
   createElement,
+  createLink,
   deleteElement,
+  deleteLink,
   refreshCanvasLocked,
   refreshElementLocked,
   refreshView,
@@ -17,11 +19,13 @@ import { ViewState, buildViewStateFromView } from './logic/view/ViewState';
 import { buildViewFromViewState } from './logic/view/View';
 import {
   ElementState,
+  LinkState,
   VisualDiagramHandle,
   VisualDiagramProps,
   VisualToolbarConfig,
 } from '../../types';
 import { buildFromElementState } from './logic/element/ElementView';
+import { buildFromLinkState } from './logic/link/LinkView';
 
 const VisualDiagram: React.ForwardRefRenderFunction<
   VisualDiagramHandle,
@@ -51,6 +55,9 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         // 这里返回布尔是想让外层能感知是否设置成功，上面这部份逻辑要做一下判断
         return true;
       },
+      getView: (): ViewState => {
+        return buildViewStateFromView(view);
+      },
       createElement: (elementState: ElementState) => {
         if (canvasConfig) {
           const { minSize } = canvasConfig.elementConfig.components[
@@ -62,18 +69,23 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         }
         return true;
       },
+      deleteElement: (elementId: string) => {
+        dispatch(deleteElement(elementId));
+        return true;
+      },
+      createLink: (linkState: LinkState) => {
+        dispatch(createLink(buildFromLinkState(linkState)));
+        return true;
+      },
+      deleteLink: (linkId: string) => {
+        dispatch(deleteLink(linkId));
+        return true;
+      },
       refreshCanvasLocked: (canvasId: string, locked: boolean) => {
         dispatch(refreshCanvasLocked(locked));
       },
       refreshElementLocked: (elementId: string, locked: boolean) => {
         dispatch(refreshElementLocked(elementId, locked));
-      },
-      deleteElement: (elementId: string) => {
-        dispatch(deleteElement(elementId));
-        return true;
-      },
-      getView: (): ViewState => {
-        return buildViewStateFromView(view);
       },
       selectToolbarItems(items: string[]) {
         dispatch(selectToolbarItems(items));

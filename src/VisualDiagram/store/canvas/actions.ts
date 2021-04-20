@@ -107,6 +107,16 @@ export const selectElement = (
   },
 });
 
+export const createLink = (link: LinkView): CanvasAction => ({
+  type: 'canvas/link/create',
+  payload: link,
+});
+
+export const deleteLink = (linkId: string): CanvasAction => ({
+  type: 'canvas/link/delete',
+  payload: linkId,
+});
+
 export const refreshLink = (link: LinkView): CanvasAction => ({
   type: 'canvas/link/refresh',
   payload: link,
