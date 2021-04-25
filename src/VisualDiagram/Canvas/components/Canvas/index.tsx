@@ -5,6 +5,7 @@ import {
   VisualElementConfig,
   VisualLinkConfig,
   VisualGlobalConfig,
+  Pendant,
 } from '../../../../../types';
 import { Store } from '../../../store';
 import {
@@ -259,11 +260,54 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         </CanvasLinkSvgLand>
 
         {values(elements).map((element: ElementView) => {
+          const linkIn: Pendant[] = [];
+          const linkOut: Pendant[] = [];
+
+          element.linkTargetIds.forEach((linkId) => {
+            const { pendant } = links[linkId].state;
+            if (pendant) {
+              linkIn.push(pendant);
+            }
+          });
+
+          element.linkSourceIds.forEach((linkId) => {
+            const { pendant } = links[linkId].state;
+            if (pendant) {
+              linkOut.push(pendant);
+            }
+          });
+
+          let pendant: Pendant;
+          if (element.state.pendant) {
+            pendant = {
+              data: {
+                type: element.state.pendant.data.type,
+                detail: {
+                  ...element.state.pendant.data.detail,
+                  linkIn,
+                  linkOut,
+                },
+              },
+              onDataChange: element.state.pendant.onDataChange,
+            };
+          } else {
+            pendant = {
+              data: {
+                type: 'model',
+                detail: {
+                  linkIn,
+                  linkOut,
+                },
+              },
+              onDataChange: () => {},
+            };
+          }
+
           const vProps: ElementContainerProps = {
             element,
             viewOffset,
             onElementMove,
-            pendant: element.state.pendant,
+            pendant,
             minSize: props.elementConfig.components[element.state.type].minSize,
             SubComponent:
               props.elementConfig.components[element.state.type].component,
