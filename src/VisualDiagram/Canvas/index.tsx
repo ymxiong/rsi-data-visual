@@ -6,7 +6,6 @@ import { refreshCanvasMargin } from '../store/canvas/actions';
 import Canvas from './components/Canvas';
 import { VisualCanvasConfig } from '../../../types';
 import { refreshToolbarItemBatch } from '../store/diagram/actions';
-import { values } from 'lodash-es';
 
 type CanvasContainerProps = {
   canvasConfig: VisualCanvasConfig;
