@@ -260,20 +260,20 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         </CanvasLinkSvgLand>
 
         {values(elements).map((element: ElementView) => {
-          const linkIn: Pendant[] = [];
-          const linkOut: Pendant[] = [];
+          const linksIn: Pendant[] = [];
+          const linksOut: Pendant[] = [];
 
           element.linkTargetIds.forEach((linkId) => {
             const { pendant } = links[linkId].state;
             if (pendant) {
-              linkIn.push(pendant);
+              linksIn.push(pendant);
             }
           });
 
           element.linkSourceIds.forEach((linkId) => {
             const { pendant } = links[linkId].state;
             if (pendant) {
-              linkOut.push(pendant);
+              linksOut.push(pendant);
             }
           });
 
@@ -284,8 +284,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
                 type: element.state.pendant.data.type,
                 detail: {
                   ...element.state.pendant.data.detail,
-                  linkIn,
-                  linkOut,
+                  linksIn,
+                  linksOut,
                 },
               },
               onDataChange: element.state.pendant.onDataChange,
@@ -295,8 +295,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
               data: {
                 type: 'model',
                 detail: {
-                  linkIn,
-                  linkOut,
+                  linksIn,
+                  linksOut,
                 },
               },
               onDataChange: () => {},
