@@ -1,5 +1,5 @@
 import React, { ComponentType } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../store/hooks';
 import { Store } from '../store';
 import { LinkView } from '../logic/link/LinkView';
 import { calcPointsBetweenElement } from './utils/calculator';

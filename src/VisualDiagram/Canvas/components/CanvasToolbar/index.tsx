@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../../store/hooks';
 import { Store } from '../../../store';
 
 import styled from 'styled-components';

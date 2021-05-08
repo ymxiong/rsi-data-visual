@@ -10,6 +10,7 @@ import {
 import VisualDiagram from './VisualDiagram';
 import { ViewState } from './VisualDiagram/logic/view/ViewState';
 import { configureStore } from './VisualDiagram/store';
+import { visualDiagramContext } from './VisualDiagram/store/context';
 
 const App: React.ForwardRefRenderFunction<
   VisualDiagramHandle,
@@ -98,7 +99,7 @@ const App: React.ForwardRefRenderFunction<
   );
 
   return (
-    <Provider store={storeRef.current}>
+    <Provider store={storeRef.current} context={visualDiagramContext}>
       <VisualDiagram {...props} ref={visualDiagramRef}></VisualDiagram>
     </Provider>
   );

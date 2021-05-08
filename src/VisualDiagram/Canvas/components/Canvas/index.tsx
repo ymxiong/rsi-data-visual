@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from '../../../store/hooks';
 import { values } from 'lodash-es';
 import {
   VisualElementConfig,
