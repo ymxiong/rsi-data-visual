@@ -1,5 +1,5 @@
 import { createSelectorHook, createDispatchHook } from 'react-redux';
-import { visualDiagramContext } from './context';
+import { visualCoreContext } from './context';
 
-export const useSelector = createSelectorHook(visualDiagramContext);
-export const useDispatch = createDispatchHook(visualDiagramContext);
+export const useSelector = createSelectorHook(visualCoreContext);
+export const useDispatch = createDispatchHook(visualCoreContext);
