@@ -79,6 +79,7 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
           domRect.width > props.minSize.width
           && domRect.height > props.minSize.height
         ) {
+          // TODO：展开之后没有缩回去的问题成因，具体调研此处
           elementSize.width = domRect.width;
           elementSize.height = domRect.height;
           dispatch(refreshElementSize(props.element.id, elementSize));
