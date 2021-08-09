@@ -46,6 +46,15 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     ev.stopPropagation();
     // 按下鼠标，选择元素
     dispatch(selectElement(element.id, true));
+    dispatch(
+      refreshElement({
+        ...element,
+        mouseOffset: {
+          x: ev.nativeEvent.offsetX,
+          y: ev.nativeEvent.offsetY,
+        },
+      }),
+    );
   };
 
   const onMouseUp = () => {
@@ -72,9 +81,10 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   const handleRef = useCallback(
     (div: HTMLDivElement) => {
-      const canvasDOM = div;
-      if (canvasDOM) {
-        const domRect = canvasDOM.getBoundingClientRect();
+      const elementDOM = div;
+      if (elementDOM) {
+        const domRect = elementDOM.getBoundingClientRect();
+
         if (
           domRect.width > props.minSize.width
           && domRect.height > props.minSize.height
@@ -86,7 +96,13 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         }
       }
     },
-    [dispatch, elementSize, props.element.id, props.minSize],
+    [
+      dispatch,
+      elementSize,
+      props.element.id,
+      props.minSize.height,
+      props.minSize.width,
+    ],
   );
 
   return (

@@ -29,6 +29,7 @@ import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasToolbar from '../CanvasToolbar';
 import { toolbarConfig } from '../CanvasToolbar/defaultToolbar';
 import CanvasLoading from '../CanvasLoading';
+import { Point } from '../../../logic/utils/Point';
 
 type CanvasProps = {
   elementConfig: VisualElementConfig;
@@ -157,18 +158,14 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           // 如果被铆钉，计算新的x，y值
           const refreshView = { ...element };
 
-          // TODO: 修改鼠标获取pageX的方式
-          refreshView.state.x = (ev.pageX - canvasMargin.x) / zoomLevels[canvasScale]
+          refreshView.state.x = (ev.clientX - canvasMargin.x) / zoomLevels[canvasScale]
             - canvasOffsetForElement.x
             + viewOffset.x
-            // TODO：计算鼠标相对元素的偏移量
-            - element.size.width / 2;
-          refreshView.state.y = (ev.pageY - canvasMargin.y) / zoomLevels[canvasScale]
+            - element.mouseOffset.x;
+          refreshView.state.y = (ev.clientY - canvasMargin.y) / zoomLevels[canvasScale]
             - canvasOffsetForElement.y
             + viewOffset.y
-            // TODO：计算鼠标相对元素的偏移量
-            - element.size.height / 2;
-          // TODO：计算相对滚轮的偏移量
+            - element.mouseOffset.y;
           dispatch(refreshElement(refreshView));
         }
       }
@@ -193,7 +190,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
       }
     }
 
-    // 滑出画布的监听问题
+    // 目标元素的监听问题
     if (selectElementId && elements[selectElementId].anchored) {
       setToolbarHide(true);
       const anchoredElement = elements[selectElementId];

@@ -60,6 +60,7 @@ export type CanvasElementAnchoredRefreshAction = ActionShape<
     anchored: boolean;
   }
 >;
+
 export type CanvasElementSizeRefreshAction = ActionShape<
   'canvas/element/size/refresh',
   {
