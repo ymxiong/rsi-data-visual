@@ -175,7 +175,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
 
   const onCanvasMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (canvasAnchored) {
-      setToolbarHide(false);
+      setToolbarHide(true);
       if (ev.buttons !== 1 || canvasLocked) {
         // 如果被铆钉但鼠标已松开，释放铆钉
         dispatch(refreshCanvasAnchored(false));
@@ -204,6 +204,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   };
 
   const onMouseUp = () => {
+    setToolbarHide(false);
     dispatch(selectElement('', false));
     dispatch(refreshCanvasAnchored(false));
   };
@@ -309,6 +310,7 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             element,
             viewOffset,
             onElementMove,
+            setToolbarHide,
             pendant,
             minSize: props.elementConfig.components[element.state.type].minSize,
             SubComponent:

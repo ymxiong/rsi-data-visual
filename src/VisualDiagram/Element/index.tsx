@@ -20,6 +20,7 @@ export type ElementContainerProps = {
     ev: React.MouseEvent<HTMLDivElement, MouseEvent>,
     element: ElementView,
   ) => void;
+  setToolbarHide: (hideToolbar: boolean) => void;
   minSize: Size;
   SubComponent: ComponentType<VisualElementProps>;
   pendant?: Pendant;
@@ -60,6 +61,7 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
   const onMouseUp = () => {
     // 松开鼠标，释放铆钉状态，依旧选择元素
     dispatch(refreshElement({ ...element, anchored: false }));
+    props.setToolbarHide(false);
   };
 
   const onElementMove = (ev: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
