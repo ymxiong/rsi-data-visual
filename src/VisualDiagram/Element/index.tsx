@@ -1,11 +1,7 @@
 import React, { ComponentType, useCallback } from 'react';
 import { useDispatch, useSelector } from '../store/hooks';
 import { Store } from '../store';
-import {
-  refreshElement,
-  selectElement,
-  refreshElementSize,
-} from '../store/canvas/actions';
+import { refreshElement, selectElement } from '../store/canvas/actions';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
@@ -88,23 +84,17 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         const domRect = elementDOM.getBoundingClientRect();
 
         if (
-          domRect.width > props.minSize.width
-          && domRect.height > props.minSize.height
+          domRect.width !== elementSize.width
+          && domRect.height !== elementSize.height
         ) {
           // TODO：展开之后没有缩回去的问题成因，具体调研此处
           elementSize.width = domRect.width;
           elementSize.height = domRect.height;
-          dispatch(refreshElementSize(props.element.id, elementSize));
+          // dispatch(refreshElement({ ...element, size: elementSize }));
         }
       }
     },
-    [
-      dispatch,
-      elementSize,
-      props.element.id,
-      props.minSize.height,
-      props.minSize.width,
-    ],
+    [elementSize],
   );
 
   return (

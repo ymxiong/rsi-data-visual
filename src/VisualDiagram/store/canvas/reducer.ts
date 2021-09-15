@@ -53,6 +53,9 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
     }
     case 'canvas/scale/refresh': {
       const refreshState = state;
+      refreshState.view.elements = {
+        ...refreshState.view.elements,
+      };
       refreshState.canvas.state = {
         ...refreshState.canvas.state,
         scale: action.payload,

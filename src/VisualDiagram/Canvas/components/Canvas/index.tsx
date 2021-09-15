@@ -29,7 +29,6 @@ import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasToolbar from '../CanvasToolbar';
 import { toolbarConfig } from '../CanvasToolbar/defaultToolbar';
 import CanvasLoading from '../CanvasLoading';
-import { Point } from '../../../logic/utils/Point';
 
 type CanvasProps = {
   elementConfig: VisualElementConfig;
