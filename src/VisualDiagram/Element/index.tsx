@@ -1,4 +1,4 @@
-import React, { ComponentType, useCallback } from 'react';
+import React, { ComponentType, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from '../store/hooks';
 import { Store } from '../store';
 import { refreshElement, selectElement } from '../store/canvas/actions';
@@ -33,9 +33,25 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
     (state: Store) => state.canvas.view.elements[props.element.id].size,
   );
 
-  const onElementChange = (elementView: ElementView) => {
-    dispatch(refreshElement({ ...elementView }));
-  };
+  const [elementDOM, setElementDOM] = useState<HTMLDivElement>();
+
+  const onElementChange = useCallback(() => {
+    // dispatch(refreshElement({ ...elementView }));
+    setTimeout(() => {
+      if (elementDOM) {
+        const domRect = elementDOM.getBoundingClientRect();
+
+        if (
+          domRect.width !== elementSize.width
+          || domRect.height !== elementSize.height
+        ) {
+          elementSize.width = domRect.width;
+          elementSize.height = domRect.height;
+          dispatch(refreshElement({ ...element, size: elementSize }));
+        }
+      }
+    }, 50);
+  }, [dispatch, element, elementDOM, elementSize]);
 
   const MOVE_FREQUENCY = 2;
 
@@ -79,22 +95,11 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   const handleRef = useCallback(
     (div: HTMLDivElement) => {
-      const elementDOM = div;
-      if (elementDOM) {
-        const domRect = elementDOM.getBoundingClientRect();
-
-        if (
-          domRect.width !== elementSize.width
-          && domRect.height !== elementSize.height
-        ) {
-          // TODO：展开之后没有缩回去的问题成因，具体调研此处
-          elementSize.width = domRect.width;
-          elementSize.height = domRect.height;
-          // dispatch(refreshElement({ ...element, size: elementSize }));
-        }
+      if (div !== elementDOM) {
+        setElementDOM(div);
       }
     },
-    [elementSize],
+    [elementDOM],
   );
 
   return (
