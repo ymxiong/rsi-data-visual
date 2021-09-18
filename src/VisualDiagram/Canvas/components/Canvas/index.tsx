@@ -19,6 +19,9 @@ import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
 
 import ElementContainer, { ElementContainerProps } from '../../../Element';
 import LinkContainer, { LinkContainerProps } from '../../../Link';
+import LinkGroupContainer, {
+  LinkGroupContainerProps,
+} from '../../../LinkGroup';
 import { ElementView } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
 import { zoomLevels } from '../../../logic/utils/Scale';
@@ -29,6 +32,7 @@ import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasToolbar from '../CanvasToolbar';
 import { toolbarConfig } from '../CanvasToolbar/defaultToolbar';
 import CanvasLoading from '../CanvasLoading';
+import { LinkGroupView } from 'src/VisualDiagram/logic/link/LinkGroupView';
 
 type CanvasProps = {
   elementConfig: VisualElementConfig;
@@ -44,6 +48,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const elements = useSelector((state: Store) => state.canvas.view.elements);
 
   const links = useSelector((state: Store) => state.canvas.view.links);
+
+  const linkGroups = useSelector(
+    (state: Store) => state.canvas.view.linkGroups,
+  );
 
   const selectElementId = useSelector(
     (state: Store) => state.canvas.view.selectedElementId,
@@ -258,6 +266,15 @@ const Canvas = (props: CanvasProps): JSX.Element => {
               pendant: link.state.pendant,
             };
             return <LinkContainer key={vProps.link.id} {...vProps} />;
+          })}
+          {values(linkGroups).map((linkGroup: LinkGroupView) => {
+            const vProps: LinkGroupContainerProps = {
+              linkGroup,
+              SubComponent:
+                props.linkConfig.components[linkGroup.links[0].state.type]
+                  .component,
+            };
+            return <LinkGroupContainer key={linkGroup.id} {...vProps} />;
           })}
         </CanvasLinkSvgLand>
 

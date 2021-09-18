@@ -1,6 +1,8 @@
+import { randomString } from 'demo/test/TEST_SIMPLE_VIEW/utils/RandomUtils';
 import { VisualCanvasConfig } from '../../../../types';
 import { ElementState } from '../element/ElementState';
 import { buildFromElementState, ElementView } from '../element/ElementView';
+import { LinkGroupView } from '../link/LinkGroupView';
 import { LinkState } from '../link/LinkState';
 import { buildFromLinkState, LinkView } from '../link/LinkView';
 import { Point, standardOffset } from '../utils/Point';
@@ -13,6 +15,9 @@ type View = {
   };
   links: {
     [id: string]: LinkView;
+  };
+  linkGroups: {
+    [id: string]: LinkGroupView;
   };
   offset: Point;
   selectedElementId?: string;
@@ -38,15 +43,31 @@ const buildViewFromViewState = (
       elements[element.id] = buildFromElementState(element);
     }
   });
+  const linkGroups: { [id: string]: LinkGroupView } = {};
+
   viewState.links.forEach((link: LinkState) => {
-    links[link.id] = buildFromLinkState(link);
+    const linkView: LinkView = buildFromLinkState(link);
     elements[link.fromElementId].linkSourceIds.push(link.id);
     elements[link.toElementId].linkTargetIds.push(link.id);
+    if (link.group) {
+      if (!linkGroups[link.group]) {
+        linkGroups[link.group] = {
+          id: randomString(6),
+          color: link.color,
+          points: [],
+          links: [],
+        };
+        linkGroups[link.group].links.push(linkView);
+      }
+    } else {
+      links[link.id] = linkView;
+    }
   });
   return {
     id: '',
     elements,
     links,
+    linkGroups,
     offset: {
       ...standardOffset,
       // ...zeroOffset,
