@@ -1,4 +1,4 @@
-import { randomString } from 'demo/test/TEST_SIMPLE_VIEW/utils/RandomUtils';
+import { randomString } from '../utils/RandomUtils';
 import { VisualCanvasConfig } from '../../../../types';
 import { ElementState } from '../element/ElementState';
 import { buildFromElementState, ElementView } from '../element/ElementView';

@@ -24,6 +24,7 @@ import LinkGroupContainer, {
 } from '../../../LinkGroup';
 import { ElementView } from '../../../logic/element/ElementView';
 import { LinkView } from '../../../logic/link/LinkView';
+import { LinkGroupView } from '../../../logic/link/LinkGroupView';
 import { zoomLevels } from '../../../logic/utils/Scale';
 
 import { CanvasLinkSvgLand } from '../CanvasLinkSvgLand';
@@ -32,7 +33,7 @@ import { CanvasArtboard, CanvasArtboardProps } from '../CanvasArtboard';
 import CanvasToolbar from '../CanvasToolbar';
 import { toolbarConfig } from '../CanvasToolbar/defaultToolbar';
 import CanvasLoading from '../CanvasLoading';
-import { LinkGroupView } from 'src/VisualDiagram/logic/link/LinkGroupView';
+import { onCanvasZoomIn, onCanvasZoomOut } from './handler/canvasHandler';
 
 type CanvasProps = {
   elementConfig: VisualElementConfig;
@@ -88,23 +89,11 @@ const Canvas = (props: CanvasProps): JSX.Element => {
   const [hideToolbar, setToolbarHide] = useState(false);
 
   const onZoomIn = useCallback(() => {
-    let scale = canvasScale;
-    if (scale > zoomLevels.length - 2) {
-      scale = zoomLevels.length - 1;
-    } else {
-      scale += 1;
-    }
-    dispatch(refreshCanvasScale(scale));
+    onCanvasZoomIn(dispatch, canvasScale);
   }, [canvasScale, dispatch]);
 
   const onZoomOut = useCallback(() => {
-    let scale = canvasScale;
-    if (scale < 1) {
-      scale = 0;
-    } else {
-      scale -= 1;
-    }
-    dispatch(refreshCanvasScale(scale));
+    onCanvasZoomOut(dispatch, canvasScale);
   }, [canvasScale, dispatch]);
 
   const onSort = useCallback(() => {
