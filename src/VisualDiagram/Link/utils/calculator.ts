@@ -24,12 +24,13 @@ export const calcPointsBetweenElement = (
     x: toElement.state.x - offset.x,
     y: toElement.state.y - offset.y,
   };
-  const SOURCE_LINK_TOTAL = fromElement.linkSourceIds.length;
-  const TARGET_LINK_TOTAL = toElement.linkTargetIds.length;
+
+  const SOURCE_LINK_TOTAL = fromElement.bottomSlots.length;
+  const TARGET_LINK_TOTAL = toElement.topSlots.length;
 
   let sourceIndex = 0;
-  for (let index = 0; index < fromElement.linkSourceIds.length; index += 1) {
-    const linkId = fromElement.linkSourceIds[index];
+  for (let index = 0; index < fromElement.bottomSlots.length; index += 1) {
+    const { linkId } = fromElement.bottomSlots[index];
     const linkView = links[linkId];
     const elementToNeedSort = elements[linkView.state.toElementId];
     if (elementToNeedSort.state.x < toElement.state.x) {
@@ -38,8 +39,8 @@ export const calcPointsBetweenElement = (
   }
 
   let targetIndex = 0;
-  for (let index = 0; index < toElement.linkTargetIds.length; index += 1) {
-    const linkId = toElement.linkTargetIds[index];
+  for (let index = 0; index < toElement.topSlots.length; index += 1) {
+    const { linkId } = toElement.topSlots[index];
     const linkView = links[linkId];
     const elementFromNeedSort = elements[linkView.state.fromElementId];
     if (elementFromNeedSort.state.x < fromElement.state.x) {

@@ -4,6 +4,7 @@ import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
 import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
 import { zoomLevels } from '../../logic/utils/Scale';
+import { buildSlotView } from '../../logic/slot/SlotView';
 
 export interface CanvasState {
   canvas: Canvas;
@@ -167,31 +168,31 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       const preDeleteElement = refreshState.view.elements[action.payload];
       const preDeleteLinkIds: string[] = [];
       const preRefactorElementIds: string[] = [];
-      preDeleteElement.linkSourceIds.forEach((linkId) => {
-        preDeleteLinkIds.push(linkId);
+      preDeleteElement.bottomSlots.forEach((slot) => {
+        preDeleteLinkIds.push(slot.linkId);
         preRefactorElementIds.push(
-          refreshState.view.links[linkId].state.toElementId,
+          refreshState.view.links[slot.linkId].state.toElementId,
         );
-        delete refreshState.view.links[linkId];
+        delete refreshState.view.links[slot.linkId];
       });
-      preDeleteElement.linkTargetIds.forEach((linkId) => {
-        preDeleteLinkIds.push(linkId);
+      preDeleteElement.topSlots.forEach((slot) => {
+        preDeleteLinkIds.push(slot.linkId);
         preRefactorElementIds.push(
-          refreshState.view.links[linkId].state.fromElementId,
+          refreshState.view.links[slot.linkId].state.fromElementId,
         );
-        delete refreshState.view.links[linkId];
+        delete refreshState.view.links[slot.linkId];
       });
       preRefactorElementIds.forEach((elementId: string) => {
         refreshState.view.elements[
           elementId
-        ].linkSourceIds = refreshState.view.elements[
+        ].bottomSlots = refreshState.view.elements[
           elementId
-        ].linkSourceIds.filter((item) => !preDeleteLinkIds.includes(item));
+        ].bottomSlots.filter((item) => !preDeleteLinkIds.includes(item.linkId));
         refreshState.view.elements[
           elementId
-        ].linkTargetIds = refreshState.view.elements[
-          elementId
-        ].linkTargetIds.filter((item) => !preDeleteLinkIds.includes(item));
+        ].topSlots = refreshState.view.elements[elementId].topSlots.filter(
+          (item) => !preDeleteLinkIds.includes(item.linkId),
+        );
       });
       delete refreshState.view.elements[action.payload];
       return refreshState;
@@ -227,8 +228,13 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       const elementTo = {
         ...refreshState.view.elements[action.payload.state.toElementId],
       };
-      elementFrom.linkSourceIds.push(action.payload.id);
-      elementTo.linkTargetIds.push(action.payload.id);
+
+      const slotFrom = buildSlotView(action.payload.id);
+      const slotTo = buildSlotView(action.payload.id);
+
+      elementFrom.bottomSlots.push(slotFrom);
+      elementTo.topSlots.push(slotTo);
+
       refreshState.view.elements = { ...state.view.elements };
       refreshState.view.elements[
         action.payload.state.fromElementId
@@ -246,12 +252,12 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       const elementFrom = refreshState.view.elements[preDeleteLink.state.fromElementId];
       const elementTo = refreshState.view.elements[preDeleteLink.state.toElementId];
 
-      elementFrom.linkTargetIds = elementFrom.linkTargetIds.filter(
-        (item) => linkId !== item,
+      elementFrom.topSlots = elementFrom.topSlots.filter(
+        (item) => linkId !== item.linkId,
       );
 
-      elementTo.linkSourceIds = elementTo.linkSourceIds.filter(
-        (item) => linkId !== item,
+      elementTo.bottomSlots = elementTo.bottomSlots.filter(
+        (item) => linkId !== item.linkId,
       );
       refreshState.view.elements[elementFrom.id] = elementFrom;
       refreshState.view.elements[elementTo.id] = elementTo;

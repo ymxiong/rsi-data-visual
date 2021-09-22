@@ -1,3 +1,4 @@
+import { SlotView } from '../slot/SlotView';
 import { Point } from '../utils/Point';
 import { Size, defaultElementSize } from '../utils/Size';
 import { ElementState } from './ElementState';
@@ -8,8 +9,9 @@ type ElementView = {
   size: Size;
   mouseOffset: Point;
   anchored: boolean;
-  linkSourceIds: string[];
-  linkTargetIds: string[];
+  topSlots: SlotView[];
+  bottomSlots: SlotView[];
+  slots: SlotView[];
 };
 
 function buildFromElementState(
@@ -22,8 +24,9 @@ function buildFromElementState(
     size: { ...size },
     mouseOffset: { x: 0, y: 0 },
     anchored: false,
-    linkSourceIds: [],
-    linkTargetIds: [],
+    topSlots: [],
+    bottomSlots: [],
+    slots: [],
   };
 }
 

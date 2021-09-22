@@ -271,15 +271,15 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           const linksIn: Pendant[] = [];
           const linksOut: Pendant[] = [];
 
-          element.linkTargetIds.forEach((linkId) => {
-            const { pendant } = links[linkId].state;
+          element.topSlots.forEach((slot) => {
+            const { pendant } = links[slot.linkId].state;
             if (pendant) {
               linksIn.push(pendant);
             }
           });
 
-          element.linkSourceIds.forEach((linkId) => {
-            const { pendant } = links[linkId].state;
+          element.bottomSlots.forEach((slot) => {
+            const { pendant } = links[slot.linkId].state;
             if (pendant) {
               linksOut.push(pendant);
             }

@@ -7,6 +7,7 @@ import { LinkState } from '../link/LinkState';
 import { buildFromLinkState, LinkView } from '../link/LinkView';
 import { Point, standardOffset } from '../utils/Point';
 import { ViewState } from './ViewState';
+import { buildSlotView } from '../slot/SlotView';
 
 type View = {
   id: string;
@@ -46,9 +47,14 @@ const buildViewFromViewState = (
   const linkGroups: { [id: string]: LinkGroupView } = {};
 
   viewState.links.forEach((link: LinkState) => {
+    const slotFrom = buildSlotView(link.id);
+    const slotTo = buildSlotView(link.id);
+
+    elements[link.fromElementId].bottomSlots.push(slotFrom);
+    elements[link.toElementId].topSlots.push(slotTo);
+
     const linkView: LinkView = buildFromLinkState(link);
-    elements[link.fromElementId].linkSourceIds.push(link.id);
-    elements[link.toElementId].linkTargetIds.push(link.id);
+
     if (link.group) {
       if (!linkGroups[link.group]) {
         linkGroups[link.group] = {
