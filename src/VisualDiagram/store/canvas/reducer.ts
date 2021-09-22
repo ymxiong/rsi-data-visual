@@ -1,10 +1,14 @@
 import { Reducer } from 'redux';
-import { standardOffset } from '../../logic/utils/Point';
+import { Point, standardOffset } from '../../logic/utils/Point';
 import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
 import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
 import { zoomLevels } from '../../logic/utils/Scale';
 import { buildSlotView } from '../../logic/slot/SlotView';
+import {
+  ElementView,
+  refreshElementSlot,
+} from '../../logic/element/ElementView';
 
 export interface CanvasState {
   canvas: Canvas;
@@ -199,7 +203,11 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
     }
     case 'canvas/element/refresh': {
       const refreshState = state;
-      refreshState.view.elements[action.payload.id] = action.payload;
+      const elementView: ElementView = action.payload;
+      refreshState.view.elements[elementView.id] = refreshElementSlot(
+        elementView,
+        state.view.offset,
+      );
       return refreshState;
     }
     case 'canvas/element/select': {
@@ -238,10 +246,16 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       refreshState.view.elements = { ...state.view.elements };
       refreshState.view.elements[
         action.payload.state.fromElementId
-      ] = elementFrom;
-      refreshState.view.elements[action.payload.state.toElementId] = elementTo;
+      ] = refreshElementSlot(elementFrom, state.view.offset);
+      refreshState.view.elements[
+        action.payload.state.toElementId
+      ] = refreshElementSlot(elementTo, state.view.offset);
       refreshState.view.links = { ...state.view.links };
-      refreshState.view.links[action.payload.id] = { ...action.payload };
+      refreshState.view.links[action.payload.id] = {
+        ...action.payload,
+        slotFrom,
+        slotTo,
+      };
       return refreshState;
     }
     case 'canvas/link/delete': {

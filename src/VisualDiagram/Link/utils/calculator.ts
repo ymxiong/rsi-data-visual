@@ -25,9 +25,6 @@ export const calcPointsBetweenElement = (
     y: toElement.state.y - offset.y,
   };
 
-  const SOURCE_LINK_TOTAL = fromElement.bottomSlots.length;
-  const TARGET_LINK_TOTAL = toElement.topSlots.length;
-
   let sourceIndex = 0;
   for (let index = 0; index < fromElement.bottomSlots.length; index += 1) {
     const { linkId } = fromElement.bottomSlots[index];
@@ -47,32 +44,17 @@ export const calcPointsBetweenElement = (
       targetIndex += 1;
     }
   }
-  const FROM_ELEMENT_PADDING_SINGLE = fromElement.size.width / (SOURCE_LINK_TOTAL + 1);
-  const FROM_ELEMENT_PADDING = FROM_ELEMENT_PADDING_SINGLE * (sourceIndex + 1);
-
-  const TO_ELEMENT_PADDING_SINGLE = toElement.size.width / (TARGET_LINK_TOTAL + 1);
-  const TO_ELEMENT_PADDING = TO_ELEMENT_PADDING_SINGLE * (targetIndex + 1);
-
-  const fromElementB: Point = {
-    x: FROM_ELEMENT_POINT.x,
-    y: FROM_ELEMENT_POINT.y + fromElement.size.height,
-  };
-
-  const toElementA: Point = {
-    x: TO_ELEMENT_POINT.x,
-    y: TO_ELEMENT_POINT.y,
-  };
 
   // 初始化源头点位置
   const sourcePoint: Point = {
-    x: fromElementB.x + FROM_ELEMENT_PADDING,
-    y: fromElementB.y,
+    x: link.slotFrom?.x || 100,
+    y: link.slotFrom?.y || 200,
   };
 
   // 初始化目标点位置
   const targetPoint: Point = {
-    x: toElementA.x + TO_ELEMENT_PADDING,
-    y: toElementA.y,
+    x: link.slotTo?.x || 100,
+    y: link.slotTo?.y || 300,
   };
 
   // （如果源头元素y值+偏执）大于（目标元素y值），既源头元素在下面，需要插点转向

@@ -1,13 +1,18 @@
 import { randomString } from '../utils/RandomUtils';
 import { VisualCanvasConfig } from '../../../../types';
 import { ElementState } from '../element/ElementState';
-import { buildFromElementState, ElementView } from '../element/ElementView';
+import {
+  buildFromElementState,
+  ElementView,
+  refreshElementSlot,
+} from '../element/ElementView';
 import { LinkGroupView } from '../link/LinkGroupView';
 import { LinkState } from '../link/LinkState';
 import { buildFromLinkState, LinkView } from '../link/LinkView';
 import { Point, standardOffset } from '../utils/Point';
 import { ViewState } from './ViewState';
 import { buildSlotView } from '../slot/SlotView';
+import { values } from 'lodash-es';
 
 type View = {
   id: string;
@@ -54,6 +59,8 @@ const buildViewFromViewState = (
     elements[link.toElementId].topSlots.push(slotTo);
 
     const linkView: LinkView = buildFromLinkState(link);
+    linkView.slotFrom = slotFrom;
+    linkView.slotTo = slotTo;
 
     if (link.group) {
       if (!linkGroups[link.group]) {
@@ -69,6 +76,11 @@ const buildViewFromViewState = (
       links[link.id] = linkView;
     }
   });
+
+  values(elements).forEach((element) => {
+    refreshElementSlot(element, { ...standardOffset });
+  });
+
   return {
     id: '',
     elements,
