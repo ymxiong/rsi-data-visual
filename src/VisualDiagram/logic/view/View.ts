@@ -78,7 +78,7 @@ const buildViewFromViewState = (
   });
 
   values(elements).forEach((element) => {
-    refreshElementSlot(element, { ...standardOffset });
+    refreshElementSlot(element);
   });
 
   return {

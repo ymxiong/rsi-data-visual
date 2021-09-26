@@ -30,10 +30,7 @@ const buildFromElementState = (
   };
 };
 
-const refreshElementSlot = (
-  element: ElementView,
-  offset: Point,
-): ElementView => {
+const refreshElementSlot = (element: ElementView): ElementView => {
   const FROM_LINK_TOTAL = element.bottomSlots.length;
   const TO_LINK_TOTAL = element.topSlots.length;
 
@@ -44,8 +41,8 @@ const refreshElementSlot = (
   for (let index = 0; index < element.bottomSlots.length; index += 1) {
     const slot = element.bottomSlots[index];
     const ELEMENT_POINT = {
-      x: element.state.x - offset.x,
-      y: element.state.y - offset.y,
+      x: element.state.x,
+      y: element.state.y,
     };
     const fromElementB: Point = {
       x: ELEMENT_POINT.x,
@@ -58,8 +55,8 @@ const refreshElementSlot = (
   for (let index = 0; index < element.topSlots.length; index += 1) {
     const slot = element.topSlots[index];
     const ELEMENT_POINT = {
-      x: element.state.x - offset.x,
-      y: element.state.y - offset.y,
+      x: element.state.x,
+      y: element.state.y,
     };
     const toElementA: Point = {
       x: ELEMENT_POINT.x,

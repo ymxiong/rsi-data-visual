@@ -1,5 +1,5 @@
 import { Reducer } from 'redux';
-import { Point, standardOffset } from '../../logic/utils/Point';
+import { standardOffset } from '../../logic/utils/Point';
 import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
 import { View, buildViewFromViewState } from '../../logic/view/View';
 import { CanvasAction } from './types';
@@ -206,7 +206,6 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       const elementView: ElementView = action.payload;
       refreshState.view.elements[elementView.id] = refreshElementSlot(
         elementView,
-        state.view.offset,
       );
       return refreshState;
     }
@@ -246,10 +245,10 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       refreshState.view.elements = { ...state.view.elements };
       refreshState.view.elements[
         action.payload.state.fromElementId
-      ] = refreshElementSlot(elementFrom, state.view.offset);
+      ] = refreshElementSlot(elementFrom);
       refreshState.view.elements[
         action.payload.state.toElementId
-      ] = refreshElementSlot(elementTo, state.view.offset);
+      ] = refreshElementSlot(elementTo);
       refreshState.view.links = { ...state.view.links };
       refreshState.view.links[action.payload.id] = {
         ...action.payload,

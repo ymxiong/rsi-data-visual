@@ -47,14 +47,14 @@ export const calcPointsBetweenElement = (
 
   // 初始化源头点位置
   const sourcePoint: Point = {
-    x: link.slotFrom?.x || 100,
-    y: link.slotFrom?.y || 200,
+    x: (link.slotFrom?.x || 0) - offset.x,
+    y: (link.slotFrom?.y || 0) - offset.y,
   };
 
   // 初始化目标点位置
   const targetPoint: Point = {
-    x: link.slotTo?.x || 100,
-    y: link.slotTo?.y || 300,
+    x: (link.slotTo?.x || 0) - offset.x,
+    y: (link.slotTo?.y || 0) - offset.y,
   };
 
   // （如果源头元素y值+偏执）大于（目标元素y值），既源头元素在下面，需要插点转向
