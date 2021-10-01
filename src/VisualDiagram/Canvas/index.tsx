@@ -27,7 +27,6 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
         if (domRect.x !== canvasMargin.x || domRect.y !== canvasMargin.y) {
           canvasMargin.x = domRect.x;
           canvasMargin.y = domRect.y;
-          // TODO: 修改画布相对左上角的位置处理方式
           dispatch(refreshCanvasMargin(canvasMargin));
         }
       }

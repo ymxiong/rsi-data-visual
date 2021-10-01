@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { standardOffset } from '../../logic/utils/Point';
 import { Canvas, buildCanvasFromCanvasState } from '../../logic/canvas/Canvas';
-import { View, buildViewFromViewState } from '../../logic/view/View';
+import { View, getViewTemplate } from '../../logic/view/View';
 import { CanvasAction } from './types';
 import { zoomLevels } from '../../logic/utils/Scale';
 import { buildSlotView } from '../../logic/slot/SlotView';
@@ -18,7 +18,7 @@ export interface CanvasState {
 function getInitialCanvasState(): CanvasState {
   return {
     canvas: buildCanvasFromCanvasState(),
-    view: buildViewFromViewState(),
+    view: getViewTemplate(),
   };
 }
 

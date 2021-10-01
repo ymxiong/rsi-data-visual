@@ -10,7 +10,7 @@ import { LinkGroupView } from '../link/LinkGroupView';
 import { LinkState } from '../link/LinkState';
 import { buildFromLinkState, LinkView } from '../link/LinkView';
 import { Point, standardOffset } from '../utils/Point';
-import { ViewState } from './ViewState';
+import { getViewStateTemplate, ViewState } from './ViewState';
 import { buildSlotView } from '../slot/SlotView';
 import { values } from 'lodash-es';
 
@@ -29,24 +29,33 @@ type View = {
   selectedElementId?: string;
 };
 
-const viewStateTemplate: ViewState = {
-  id: 'defaultView',
-  elements: [],
-  links: [],
+const getViewTemplate = (): View => {
+  return {
+    id: 'defaultView',
+    elements: {},
+    links: {},
+    linkGroups: {},
+    offset: {
+      ...standardOffset,
+      // ...zeroOffset,
+    },
+  };
 };
 
 const buildViewFromViewState = (
-  viewState: ViewState = { ...viewStateTemplate },
+  viewState: ViewState = getViewStateTemplate(),
+  view: View = getViewTemplate(),
   canvasConfig: VisualCanvasConfig | undefined = undefined,
 ): View => {
   const elements: { [id: string]: ElementView } = {};
   const links: { [id: string]: LinkView } = {};
   viewState.elements.forEach((element: ElementState) => {
+    const size = view.elements[element.id]?.size;
     if (canvasConfig) {
       const { minSize } = canvasConfig.elementConfig.components[element.type];
-      elements[element.id] = buildFromElementState(element, minSize);
+      elements[element.id] = buildFromElementState(element, size || minSize);
     } else {
-      elements[element.id] = buildFromElementState(element);
+      elements[element.id] = buildFromElementState(element, size);
     }
   });
   const linkGroups: { [id: string]: LinkGroupView } = {};
@@ -93,4 +102,4 @@ const buildViewFromViewState = (
   };
 };
 
-export { View, buildViewFromViewState };
+export { View, buildViewFromViewState, getViewTemplate };

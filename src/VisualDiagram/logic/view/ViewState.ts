@@ -9,6 +9,14 @@ type ViewState = {
   links: LinkState[];
 };
 
+const getViewStateTemplate = (): ViewState => {
+  return {
+    id: 'defaultView',
+    elements: [],
+    links: [],
+  };
+};
+
 const buildViewStateFromView = (view: View): ViewState => {
   const viewState = {
     id: view.id,
@@ -18,4 +26,4 @@ const buildViewStateFromView = (view: View): ViewState => {
   return viewState;
 };
 
-export { ViewState, buildViewStateFromView };
+export { ViewState, buildViewStateFromView, getViewStateTemplate };

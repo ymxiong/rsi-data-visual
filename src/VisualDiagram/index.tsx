@@ -51,7 +51,9 @@ const VisualDiagram: React.ForwardRefRenderFunction<
     ref,
     () => ({
       setView: (viewState: ViewState) => {
-        dispatch(refreshView(buildViewFromViewState(viewState, canvasConfig)));
+        dispatch(
+          refreshView(buildViewFromViewState(viewState, view, canvasConfig)),
+        );
         // 这里返回布尔是想让外层能感知是否设置成功，上面这部份逻辑要做一下判断
         return true;
       },
