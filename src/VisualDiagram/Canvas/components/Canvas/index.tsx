@@ -13,7 +13,7 @@ import {
   refreshCanvasScale,
   refreshCanvasAnchored,
   refreshCanvasOffset,
-  refreshElementPosition,
+  refreshElement,
 } from '../../../store/canvas/actions';
 import { refreshToolbarItemBatch } from '../../../store/diagram/actions';
 
@@ -152,20 +152,17 @@ const Canvas = (props: CanvasProps): JSX.Element => {
           dispatch(refreshCanvasAnchored(false));
         } else if (!element.state.locked) {
           // 如果被铆钉，计算新的x，y值
-          dispatch(
-            refreshElementPosition(element.id, {
-              x:
-                (ev.clientX - canvasMargin.x) / zoomLevels[canvasScale]
-                - canvasOffsetForElement.x
-                + viewOffset.x
-                - element.mouseOffset.x,
-              y:
-                (ev.clientY - canvasMargin.y) / zoomLevels[canvasScale]
-                - canvasOffsetForElement.y
-                + viewOffset.y
-                - element.mouseOffset.y,
-            }),
-          );
+          const refreshView = { ...element };
+
+          refreshView.state.x = (ev.clientX - canvasMargin.x) / zoomLevels[canvasScale]
+            - canvasOffsetForElement.x
+            + viewOffset.x
+            - element.mouseOffset.x;
+          refreshView.state.y = (ev.clientY - canvasMargin.y) / zoomLevels[canvasScale]
+            - canvasOffsetForElement.y
+            + viewOffset.y
+            - element.mouseOffset.y;
+          dispatch(refreshElement(refreshView));
         }
       }
     },
