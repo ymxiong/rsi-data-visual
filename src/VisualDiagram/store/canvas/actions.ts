@@ -96,6 +96,17 @@ export const refreshElementSize = (
   },
 });
 
+export const refreshElementPosition = (
+  elementId: string,
+  position: Point,
+): CanvasAction => ({
+  type: 'canvas/element/position/refresh',
+  payload: {
+    elementId,
+    position,
+  },
+});
+
 export const selectElement = (
   elementId: string,
   selected: boolean,

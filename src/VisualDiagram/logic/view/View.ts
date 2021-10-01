@@ -82,7 +82,7 @@ const buildViewFromViewState = (
   });
 
   return {
-    id: '',
+    id: viewState.id,
     elements,
     links,
     linkGroups,

@@ -1,7 +1,12 @@
 import React, { ComponentType, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from '../store/hooks';
 import { Store } from '../store';
-import { refreshElement, selectElement } from '../store/canvas/actions';
+import {
+  refreshElement,
+  refreshElementAnchored,
+  refreshElementSize,
+  selectElement,
+} from '../store/canvas/actions';
 import { Element } from './components/Element';
 import { ElementView } from '../logic/element/ElementView';
 import { Point } from '../logic/utils/Point';
@@ -47,7 +52,7 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
         ) {
           elementSize.width = domRect.width;
           elementSize.height = domRect.height;
-          dispatch(refreshElement({ ...element, size: elementSize }));
+          dispatch(refreshElementSize(element.id, elementSize));
         }
       }
     }, 50);
@@ -72,7 +77,7 @@ const ElementContainer: React.FC<ElementContainerProps> = (props) => {
 
   const onMouseUp = () => {
     // 松开鼠标，释放铆钉状态，依旧选择元素
-    dispatch(refreshElement({ ...element, anchored: false }));
+    dispatch(refreshElementAnchored(element.id, false));
     props.setToolbarHide(false);
   };
 

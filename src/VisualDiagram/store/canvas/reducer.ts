@@ -138,6 +138,14 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
         view: { ...action.payload },
       };
     }
+    case 'canvas/element/refresh': {
+      const refreshState = state;
+      const elementView: ElementView = action.payload;
+      refreshState.view.elements[elementView.id] = refreshElementSlot(
+        elementView,
+      );
+      return refreshState;
+    }
     case 'canvas/element/locked/refresh': {
       const refreshState = state;
       refreshState.view.elements[action.payload.elementId] = {
@@ -156,7 +164,22 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
     }
     case 'canvas/element/size/refresh': {
       const refreshState = state;
-      refreshState.view.elements[action.payload.elementId].size = action.payload.size;
+      refreshState.view.elements[action.payload.elementId] = {
+        ...refreshState.view.elements[action.payload.elementId],
+        size: action.payload.size,
+      };
+      refreshState.view.elements[action.payload.elementId] = refreshElementSlot(
+        refreshState.view.elements[action.payload.elementId],
+      );
+      return refreshState;
+    }
+    case 'canvas/element/position/refresh': {
+      const refreshState = state;
+      refreshState.view.elements[action.payload.elementId] = {
+        ...refreshState.view.elements[action.payload.elementId],
+      };
+      refreshState.view.elements[action.payload.elementId].state.x = action.payload.position.x;
+      refreshState.view.elements[action.payload.elementId].state.y = action.payload.position.y;
       return refreshState;
     }
     case 'canvas/element/create': {
@@ -199,14 +222,6 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
         );
       });
       delete refreshState.view.elements[action.payload];
-      return refreshState;
-    }
-    case 'canvas/element/refresh': {
-      const refreshState = state;
-      const elementView: ElementView = action.payload;
-      refreshState.view.elements[elementView.id] = refreshElementSlot(
-        elementView,
-      );
       return refreshState;
     }
     case 'canvas/element/select': {
