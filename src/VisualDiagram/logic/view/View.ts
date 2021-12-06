@@ -96,8 +96,7 @@ const buildViewFromViewState = (
     links,
     linkGroups,
     offset: {
-      ...standardOffset,
-      // ...zeroOffset,
+      ...view.offset,
     },
   };
 };
