@@ -1,6 +1,6 @@
 {
-  "name": "visual-core",
-  "version": "0.2.7",
+  "name": "@horsecoder/visual-core",
+  "version": "0.2.8",
   "description": "可视化核心",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -82,6 +82,6 @@
     "styled-components": "^5.2.1"
   },
   "publishConfig": {
-    "registry": "http://www.whase.org.cn:8081/repository/npm-private-horse-code/"
+    "registry": "http://central.horsecoder.com:8081/repository/npm-private-horse-code/"
   }
 }
