@@ -5,7 +5,7 @@ import { Size } from '../src/VisualDiagram/logic/utils/Size';
 import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
 import { Pendant } from '../src/VisualDiagram/logic/utils/Pendant';
 import { LinkView } from '../src/VisualDiagram/logic/link/LinkView';
-import { LinkState } from 'src/VisualDiagram/logic/link/LinkState';
+import { LinkState } from '../src/VisualDiagram/logic/link/LinkState';
 
 export type VisualElementProps = {
   element: ElementView;
