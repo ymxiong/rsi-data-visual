@@ -1,7 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from '../store/hooks';
 import { Store } from '../store';
-import { refreshCanvasMargin } from '../store/canvas/actions';
+import {
+  refreshCanvasMargin,
+  refreshCanvasViewportSize,
+} from '../store/canvas/actions';
 
 import Canvas from './components/Canvas';
 import { VisualCanvasConfig } from '../../../types';
@@ -28,6 +31,12 @@ const CanvasContainer: React.FC<CanvasContainerProps> = (props) => {
           canvasMargin.x = domRect.x;
           canvasMargin.y = domRect.y;
           dispatch(refreshCanvasMargin(canvasMargin));
+          dispatch(
+            refreshCanvasViewportSize({
+              height: domRect.height,
+              width: domRect.width,
+            }),
+          );
         }
       }
     },

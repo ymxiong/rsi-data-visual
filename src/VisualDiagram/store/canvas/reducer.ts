@@ -56,6 +56,31 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       }
       return refreshState;
     }
+    case 'canvas/viewport/size/refresh': {
+      const refreshState = state;
+      if (
+        refreshState.canvas.viewport.height < action.payload.height
+        || refreshState.canvas.viewport.width < action.payload.width
+      ) {
+        refreshState.canvas.viewport = {
+          ...refreshState.canvas.viewport,
+          ...action.payload,
+        };
+        if (
+          refreshState.canvas.size.height
+            < action.payload.height - 2 * standardOffset.y
+          || refreshState.canvas.size.width
+            < action.payload.width - 2 * standardOffset.x
+        ) {
+          refreshState.canvas.size = {
+            ...refreshState.canvas.size,
+            width: refreshState.canvas.viewport.width - 2 * standardOffset.x,
+            height: refreshState.canvas.viewport.height - 2 * standardOffset.y,
+          };
+        }
+      }
+      return refreshState;
+    }
     case 'canvas/scale/refresh': {
       const refreshState = state;
       refreshState.view.elements = {

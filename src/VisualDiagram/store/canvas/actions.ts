@@ -11,6 +11,11 @@ export const refreshCanvas = (canvas: Canvas): CanvasAction => ({
   payload: { ...canvas },
 });
 
+export const refreshCanvasViewportSize = (size: Size): CanvasAction => ({
+  type: 'canvas/viewport/size/refresh',
+  payload: size,
+});
+
 export const refreshCanvasScale = (scale: number): CanvasAction => ({
   type: 'canvas/scale/refresh',
   payload: scale,

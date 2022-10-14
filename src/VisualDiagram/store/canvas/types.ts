@@ -8,6 +8,11 @@ import { Size } from '../../logic/utils/Size';
 
 export type CanvasRefreshAction = ActionShape<'canvas/refresh', Canvas>;
 
+export type CanvasViewportSizeRefreshAction = ActionShape<
+  'canvas/viewport/size/refresh',
+  Size
+>;
+
 export type CanvasScaleRefreshAction = ActionShape<
   'canvas/scale/refresh',
   number
@@ -111,6 +116,7 @@ export type CanvasLinkRefreshAction = ActionShape<
 
 export type CanvasAction =
   | CanvasRefreshAction
+  | CanvasViewportSizeRefreshAction
   | CanvasScaleRefreshAction
   | CanvasLockedRefreshAction
   | CanvasAnchoredRefreshAction
