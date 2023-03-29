@@ -87,6 +87,11 @@ export type CanvasElementCreateAction = ActionShape<
   ElementView
 >;
 
+export type CanvasElementFilterAction = ActionShape<
+  'canvas/element/filter',
+  string[]
+>;
+
 export type CanvasElementDeleteAction = ActionShape<
   'canvas/element/delete',
   string
@@ -131,6 +136,7 @@ export type CanvasAction =
   | CanvasElementPositionRefreshAction
   | CanvasElementCreateAction
   | CanvasElementDeleteAction
+  | CanvasElementFilterAction
   | CanvasElementSelectAction
   | CanvasLinkCreateAction
   | CanvasLinkDeleteAction

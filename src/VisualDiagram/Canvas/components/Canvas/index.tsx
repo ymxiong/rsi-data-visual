@@ -58,6 +58,10 @@ const Canvas = (props: CanvasProps): JSX.Element => {
     (state: Store) => state.canvas.view.selectedElementId,
   );
 
+  const filterElementIdList = useSelector(
+    (state: Store) => state.canvas.view.filterElementIdList,
+  );
+
   const canvasLocked = useSelector(
     (state: Store) => state.canvas.canvas.state.locked,
   );
@@ -244,6 +248,13 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         {/* link drawer */}
         <CanvasLinkSvgLand width="100%" height="100%">
           {values(links).map((link: LinkView) => {
+            if (
+              filterElementIdList
+              && filterElementIdList.length !== 0
+              && filterElementIdList.indexOf(link.state.fromElementId) === -1
+            ) {
+              return <></>;
+            }
             const vProps: LinkContainerProps = {
               elements,
               links,
@@ -268,6 +279,13 @@ const Canvas = (props: CanvasProps): JSX.Element => {
         </CanvasLinkSvgLand>
 
         {values(elements).map((element: ElementView) => {
+          if (
+            filterElementIdList
+            && filterElementIdList.length !== 0
+            && filterElementIdList.indexOf(element.id) === -1
+          ) {
+            return <></>;
+          }
           const linksIn: Pendant[] = [];
           const linksOut: Pendant[] = [];
 

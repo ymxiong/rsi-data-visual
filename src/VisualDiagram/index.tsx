@@ -6,7 +6,9 @@ import {
   createLink,
   deleteElement,
   deleteLink,
+  filterElement,
   refreshCanvasLocked,
+  refreshCanvasOffset,
   refreshElementLocked,
   refreshView,
 } from './store/canvas/actions';
@@ -71,8 +73,18 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         }
         return true;
       },
+      filterElement: (idList: string[]) => {
+        dispatch(filterElement(idList));
+        return true;
+      },
       deleteElement: (elementId: string) => {
         dispatch(deleteElement(elementId));
+        return true;
+      },
+      moveCanvasCenterToElement: (elementId: string) => {
+        const x = 500 - view.elements[elementId].state.x + view.offset.x;
+        const y = 250 - view.elements[elementId].state.y + view.offset.y;
+        dispatch(refreshCanvasOffset({ x, y }));
         return true;
       },
       createLink: (linkState: LinkState) => {

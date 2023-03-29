@@ -27,6 +27,7 @@ type View = {
   };
   offset: Point;
   selectedElementId?: string;
+  filterElementIdList: string[];
 };
 
 const getViewTemplate = (): View => {
@@ -39,6 +40,7 @@ const getViewTemplate = (): View => {
       ...standardOffset,
       // ...zeroOffset,
     },
+    filterElementIdList: [],
   };
 };
 
@@ -98,6 +100,7 @@ const buildViewFromViewState = (
     offset: {
       ...view.offset,
     },
+    filterElementIdList: [],
   };
 };
 

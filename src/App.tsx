@@ -44,9 +44,21 @@ const App: React.ForwardRefRenderFunction<
         }
         return false;
       },
+      filterElement: (idList: string[]) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.filterElement(idList);
+        }
+        return false;
+      },
       deleteElement: (elementId: string) => {
         if (visualDiagramRef.current) {
           return visualDiagramRef.current.deleteElement(elementId);
+        }
+        return false;
+      },
+      moveCanvasCenterToElement: (elementId: string) => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.moveCanvasCenterToElement(elementId);
         }
         return false;
       },

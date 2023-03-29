@@ -213,6 +213,11 @@ const canvasReducer: Reducer<CanvasState, CanvasAction> = (
       refreshState.view.elements[action.payload.id] = action.payload;
       return refreshState;
     }
+    case 'canvas/element/filter': {
+      const refreshState = state;
+      refreshState.view.filterElementIdList = action.payload;
+      return refreshState;
+    }
     case 'canvas/element/delete': {
       const refreshState = state;
       refreshState.view.elements = { ...state.view.elements };

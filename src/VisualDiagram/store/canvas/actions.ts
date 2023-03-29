@@ -58,6 +58,11 @@ export const createElement = (element: ElementView): CanvasAction => ({
   payload: element,
 });
 
+export const filterElement = (idList: string[]): CanvasAction => ({
+  type: 'canvas/element/filter',
+  payload: idList,
+});
+
 export const deleteElement = (elementId: string): CanvasAction => ({
   type: 'canvas/element/delete',
   payload: elementId,
