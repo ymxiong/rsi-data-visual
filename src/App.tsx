@@ -8,6 +8,7 @@ import {
   VisualToolbarConfig,
 } from '../types';
 import VisualDiagram from './VisualDiagram';
+import { Point } from './VisualDiagram/logic/utils/Point';
 import { ViewState } from './VisualDiagram/logic/view/ViewState';
 import { configureStore } from './VisualDiagram/store';
 import { visualCoreContext } from './VisualDiagram/store/context';
@@ -36,6 +37,15 @@ const App: React.ForwardRefRenderFunction<
           id: '',
           elements: [],
           links: [],
+        };
+      },
+      getOffset: (): Point => {
+        if (visualDiagramRef.current) {
+          return visualDiagramRef.current.getOffset();
+        }
+        return {
+          x: 0,
+          y: 0,
         };
       },
       createElement: (elementState: ElementState) => {

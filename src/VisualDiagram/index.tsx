@@ -28,6 +28,7 @@ import {
 } from '../../types';
 import { buildFromElementState } from './logic/element/ElementView';
 import { buildFromLinkState } from './logic/link/LinkView';
+import { Point } from './logic/utils/Point';
 
 const VisualDiagram: React.ForwardRefRenderFunction<
   VisualDiagramHandle,
@@ -36,6 +37,8 @@ const VisualDiagram: React.ForwardRefRenderFunction<
   const dispatch = useDispatch();
 
   const view = useSelector((state: Store) => state.canvas.view);
+
+  const offset = useSelector((state: Store) => state.canvas.canvas.offset);
 
   const [loading, setLoading] = useState(false);
 
@@ -61,6 +64,12 @@ const VisualDiagram: React.ForwardRefRenderFunction<
       },
       getView: (): ViewState => {
         return buildViewStateFromView(view);
+      },
+      getOffset: (): Point => {
+        return {
+          x: view.offset.x - offset.x,
+          y: view.offset.y - offset.y,
+        };
       },
       createElement: (elementState: ElementState) => {
         if (canvasConfig) {
@@ -116,7 +125,7 @@ const VisualDiagram: React.ForwardRefRenderFunction<
         return true;
       },
     }),
-    [dispatch, view, canvasConfig],
+    [dispatch, view, canvasConfig, offset],
   );
 
   return <CanvasContainer canvasConfig={canvasConfig} loading={loading} />;

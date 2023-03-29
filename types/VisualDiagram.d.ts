@@ -6,6 +6,7 @@ import { ElementState } from '../src/VisualDiagram/logic/element/ElementState';
 import { Pendant } from '../src/VisualDiagram/logic/utils/Pendant';
 import { LinkView } from '../src/VisualDiagram/logic/link/LinkView';
 import { LinkState } from '../src/VisualDiagram/logic/link/LinkState';
+import { Point } from '../src/VisualDiagram/logic/utils/Point';
 
 export type VisualElementProps = {
   element: ElementView;
@@ -68,6 +69,7 @@ export type VisualDiagramProps = {
 export type VisualDiagramHandle = {
   setView: (viewState: ViewState) => boolean;
   getView: () => ViewState;
+  getOffset: () => Point;
   createElement: (elementState: ElementState) => boolean;
   filterElement: (idList: string[]) => boolean;
   deleteElement: (elementId: string) => boolean;
