@@ -251,7 +251,8 @@ const Canvas = (props: CanvasProps): JSX.Element => {
             if (
               filterElementIdList
               && filterElementIdList.length !== 0
-              && filterElementIdList.indexOf(link.state.fromElementId) === -1
+              && (filterElementIdList.indexOf(link.state.fromElementId) === -1
+                || filterElementIdList.indexOf(link.state.toElementId) === -1)
             ) {
               return <></>;
             }
