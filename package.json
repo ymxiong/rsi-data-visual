@@ -1,6 +1,6 @@
 {
   "name": "@horsecoder/visual-core",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "可视化核心",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
