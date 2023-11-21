@@ -3,7 +3,7 @@ module.exports = {
     [
       'babel-plugin-styled-components',
       {
-        namespace: 'geek-sdk',
+        namespace: 'visual-core-sdk',
       },
     ],
   ],
