@@ -1,6 +1,6 @@
 {
   "name": "@horsecoder/visual-core",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "可视化核心",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
@@ -45,6 +45,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.2",
     "@typescript-eslint/parser": "^4.15.2",
     "antd": "^4.24.5",
+    "babel-plugin-styled-components": "^2.1.4",
     "core-js": "3",
     "elint": "^2.0.1",
     "eslint-config-airbnb": "^18.2.1",
