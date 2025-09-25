@@ -31,7 +31,7 @@ const ToolbarButton = styled.div`
 
 export const CanvasToolbarItem = (props: VisualToolbarProps): JSX.Element => {
   return (
-    <StyledTooltip overlay={props.tips} placement="right">
+    <StyledTooltip overlay={props.tips} placement="right" id={props.id} builtinPlacements={{}} onPopupAlign={() => {}}>
       <ToolbarButton onClick={props.onClick}>
         <ToolbarIcon src={props.icon}></ToolbarIcon>
       </ToolbarButton>
